@@ -1,0 +1,62 @@
+﻿.publication-card {
+    background-color: #f3e6d5;
+    padding-left: 128px;
+    padding-right: 128px;
+    padding-top: 32px;
+    padding-bottom: 64px;
+    border-radius: 36px;
+}
+
+.publication-text {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+}
+
+.publication-title-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e7dbca;
+}
+
+.publication-date {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: #ada498;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.publication-title {
+    font-family: Micra-Bold;
+    font-size: 24px;
+}
+
+.publication-back-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 128px;
+}
+
+.publication-back-button {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background-color: #121212;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-right: 16px;
+    border-radius: 64px;
+    transition: .3s;
+}
+
+    .publication-back-button:hover {
+        background-color: #bc75ff;
+        color: black;
+    }

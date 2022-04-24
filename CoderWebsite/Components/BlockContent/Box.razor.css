@@ -1,0 +1,17 @@
+﻿.box-layout {
+    display: flex;
+}
+
+.box-title {
+    font-family: Micra-Bold;
+    color: #ccd3ff;
+    font-size: 24px;
+    margin-top: 32px;
+}
+
+.box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

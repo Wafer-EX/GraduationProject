@@ -1,0 +1,18 @@
+﻿@page "/account"
+
+<h3>Account</h3>
+
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        <Authorized>
+            <p>Вы вошли в систему</p>
+        </Authorized>
+        <NotAuthorized>
+            <p>Пожалуйста, войдите в систему</p>
+        </NotAuthorized>
+    </AuthorizeView>
+</CascadingAuthenticationState>
+
+@code {
+
+}

@@ -1,0 +1,24 @@
+﻿<div class="publication-card">
+    @if (Title != null) {
+        <div class="publication-title-container">
+            <span class="publication-date">21.21.21</span>
+            <span class="publication-title">@Title</span>
+        </div>
+    }
+
+    <div class="publication-text">
+        @ChildContent
+    </div>
+
+    <div class="publication-back-button-container">
+        <a class="publication-back-button" href="/news">Назад к новостям</a>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+}

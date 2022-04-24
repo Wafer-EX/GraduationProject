@@ -1,0 +1,20 @@
+﻿<div class="box-item">
+    <div class="box-item-image-container">
+
+    </div>
+    <span class="box-item-title">@Title</span>
+    <span class="box-item-text">
+        @ChildContent
+    </span>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? ImagePath { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+}

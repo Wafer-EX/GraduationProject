@@ -1,0 +1,33 @@
+﻿.box-item {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 32px;
+}
+
+.box-item-image-container {
+    width: 100px;
+    height: 100px;
+    background-color: antiquewhite;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.box-item-title {
+    font-family: Micra-Bold;
+    font-size: 18px;
+    color: #ccd3ff;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.box-item-text {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: #ccd3ff;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    text-align: center;
+}

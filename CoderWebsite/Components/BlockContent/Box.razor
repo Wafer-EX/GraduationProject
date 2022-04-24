@@ -1,0 +1,30 @@
+﻿<div class="box-container">
+    @if (Title != null) {
+        <span class="box-title">@Title</span>    
+    }
+    <div class="box-layout" style="flex-direction: @flexDirection">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    private string flexDirection = "row";
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public string? FlexDirection
+    {
+        get => flexDirection;
+        set
+        {
+            if (value == null)
+                flexDirection = "row";
+            else flexDirection = value;
+        }
+    }
+}

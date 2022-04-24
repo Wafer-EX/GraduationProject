@@ -1,0 +1,20 @@
+﻿@page
+@model CoderWebsite.Pages.ErrorModel
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Произошла ошибка</title>
+        <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+    </head>
+    <body>
+        <h1>Ошибка</h1>
+        <h2>Произошла ошибка при выполнении запроса.</h2>
+        @if (Model.ShowRequestId)
+        {
+            <p>ID запроса: @Model.RequestId</p>
+        }
+    </body>
+</html>

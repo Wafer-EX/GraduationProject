@@ -1,0 +1,54 @@
+﻿<div class="page-block" style="@GetStyle()">
+    <div class="page-block-content-container">
+        @ChildContent
+    </div>
+</div>
+
+@code {
+    private string colorFrom = "#121212";
+    private string? colorTo;
+    private string? gradientRotation;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string ColorFrom
+    {
+        get
+        {
+            if (colorFrom == null)
+                return "#121212";
+            else return colorFrom;
+        }
+        set => colorFrom = value;
+    }
+
+    [Parameter]
+    public string? ColorTo
+    {
+        get
+        {
+            if (colorTo == null)
+                return colorFrom;
+            else return colorTo;
+        }
+        set => colorTo = value;
+    }
+
+    public string GradientRotation
+    {
+        get
+        {
+            if (gradientRotation == null)
+                return "0deg";
+            else return $"{gradientRotation}";
+        }
+        set => gradientRotation = value;
+    }
+
+    private string GetStyle()
+    {
+        return $"background: linear-gradient({GradientRotation}, {ColorFrom} 0%, {ColorTo} 100%);"; 
+    }
+}

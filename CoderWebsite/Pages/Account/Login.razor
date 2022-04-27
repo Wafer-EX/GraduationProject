@@ -1,5 +1,6 @@
 ﻿@page "/login"
 
+@using CoderWebsite.Components
 @using CoderWebsite.Middleware
 @using CoderWebsite.Models
 @using CoderWebsite.Models.Pages.Account
@@ -11,7 +12,7 @@
 @inject UserManager<User> UserManager
 @inject NavigationManager NavigationManager
 
-<CoderWebsite.Components.PageBlock>
+<PageBlock>
     <EditForm Model="@loginModel" OnValidSubmit="Auth">
         <div class="form-block-container">
             <span class="form-block">
@@ -41,7 +42,7 @@
             </span>
         </div>
     </EditForm>
-</CoderWebsite.Components.PageBlock>
+</PageBlock>
 
 @code {
     private LoginModel loginModel = new LoginModel();

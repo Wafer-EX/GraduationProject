@@ -1,0 +1,107 @@
+﻿@page "/register"
+
+@using CoderWebsite.Components
+@using CoderWebsite.Middleware
+@using CoderWebsite.Models
+@using CoderWebsite.Models.Pages.Account
+@using Microsoft.AspNetCore.Identity
+@using System.Text
+@using Microsoft.AspNetCore.WebUtilities
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject NavigationManager NavigationManager
+
+<PageBlock>
+    <EditForm Model="@registerModel" OnValidSubmit="Reg">
+        <div class="form-block-container">
+            <span class="form-block">
+                <span class="form-title">Регистрация</span>
+                <span class="form-errors-container">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <span class="validation-message">@error</span>
+                </span>
+
+                <div class="form-input-field-container">
+                    <span class="form-input-title">Имя</span>
+                    <InputText class="form-input-field" @bind-Value="registerModel.Firstname" />
+                </div>
+
+                <div class="form-input-field-container">
+                    <span class="form-input-title">Фамилия</span>
+                    <InputText class="form-input-field" @bind-Value="registerModel.Lastname" />
+                </div>
+
+                <div class="form-input-field-container">
+                    <span class="form-input-title">Отчество</span>
+                    <InputText class="form-input-field" @bind-Value="registerModel.Middlename" />
+                </div>
+
+                <div class="form-input-field-container">
+                    <span class="form-input-title">Электронная почта</span>
+                    <InputText class="form-input-field" @bind-Value="registerModel.Email" />
+                </div>
+                <div class="form-input-field-container">
+                    <span class="form-input-title">Пароль</span>
+                    <InputText class="form-input-field" @bind-Value="registerModel.Password" />
+                </div>
+                <div class="form-input-field-container">
+                    <span class="form-input-title">Повторите пароль</span>
+                    <InputText class="form-input-field" @bind-Value="registerModel.PasswordConfirmation" />
+                </div>
+                <div class="input-links-container">
+                    <a href="/login">Уже есть аккаунт?</a>
+                </div>
+                <button class="form-input-button" type="submit">Зарегистрироваться</button>
+            </span>
+        </div>
+    </EditForm>
+</PageBlock>
+
+@code {
+    private RegisterModel registerModel = new RegisterModel();
+    private string? error;
+
+    public async void Reg()
+    {
+        var registeredUser = await UserManager.FindByEmailAsync(registerModel.Email);
+        if (registeredUser != null)
+        {
+            error = "Произошла ошибка: пользователь уже существует.";
+        }
+        else
+        {
+            var user = new User()
+            {
+                FirstName = registerModel.Firstname,
+                LastName = registerModel.Lastname,
+                MiddleName = registerModel.Middlename,
+                Email = registerModel.Email,
+                UserName = registerModel.Email
+            };
+
+            var result = await UserManager.CreateAsync(user, registerModel.Password);
+            foreach (var a in result.Errors)
+            {
+                Console.WriteLine(a);
+            }
+
+
+            if (result.Succeeded)
+            {
+                error = "";
+                var loginModel = new LoginModel()
+                {
+                    Email = registerModel.Email,
+                    Password = registerModel.Password,
+                    RememberMe = true
+                };
+                BlazorLoginMiddleware.LoginsData.Add((user, loginModel));
+                NavigationManager.NavigateTo("/login-middleware", true, true);
+            }
+            else error = "Проишошла ошибка регистрации.";
+        }
+        StateHasChanged();
+    }
+}

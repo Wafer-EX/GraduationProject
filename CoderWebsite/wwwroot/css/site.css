@@ -16,8 +16,16 @@ html, body {
     height: 100%;
 }
 
+.validation-errors {
+    padding: 0;
+    margin: 0;
+}
+
 .validation-message {
-    color: red;
+    font-family: NeueMachina-Medium;
+    color: #ff6969;
+    list-style-type: none;
+    margin: 0;
 }
 
 #blazor-error-ui {

@@ -1,0 +1,67 @@
+﻿@page "/login"
+
+@using CoderWebsite.Middleware
+@using CoderWebsite.Models
+@using CoderWebsite.Models.Pages.Account
+@using Microsoft.AspNetCore.Identity
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Mvc
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject NavigationManager NavigationManager
+
+<CoderWebsite.Components.PageBlock>
+    <EditForm Model="@loginModel" OnValidSubmit="Auth">
+        <div class="form-block-container">
+            <span class="form-block">
+                <span class="form-title">Вход</span>
+                <span class="form-errors-container">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <span class="validation-message">@error</span>
+                </span>
+
+                <div class="form-input-field-container">
+                    <span class="form-input-title">Электронная почта</span>
+                    <InputText class="form-input-field" @bind-Value="loginModel.Email" />
+                </div>
+                <div class="form-input-field-container">
+                    <span class="form-input-title">Пароль</span>
+                    <InputText class="form-input-field" @bind-Value="loginModel.Password" />
+                </div>
+                <div class="input-links-container">
+                    <div class="form-input-checkbox-container">
+                        <InputCheckbox @bind-Value="loginModel.RememberMe"/>
+                        <span>Запомнить</span>
+                    </div>
+                    <a href="#">Забыли пароль?</a>
+                </div>
+                <button class="form-input-button" type="submit">Войти</button>
+            </span>
+        </div>
+    </EditForm>
+</CoderWebsite.Components.PageBlock>
+
+@code {
+    private LoginModel loginModel = new LoginModel();
+    private string? error;
+
+    public async void Auth()
+    {
+        var user = await UserManager.FindByEmailAsync(loginModel.Email);
+        if (user != null)
+        {
+            var result = await SignInManager.CheckPasswordSignInAsync(user, loginModel.Password, false);
+            if (result.Succeeded)
+            {
+                BlazorLoginMiddleware.LoginsData.Add((user, loginModel));
+                error = null;
+                NavigationManager.NavigateTo("/login-middleware", true, true);
+            }
+            else error = "Произошла ошибка: пароль введен неверно.";
+        }
+        else error = "Произошла ошибка: пользователь не найден.";
+        StateHasChanged(); 
+    }
+}

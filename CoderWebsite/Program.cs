@@ -1,3 +1,4 @@
+using CoderWebsite.Middleware;
 using CoderWebsite.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,16 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultUI();
+builder.Services.AddIdentity<User, IdentityRole>(opts => {
+        opts.Password.RequiredLength = 1;
+        opts.Password.RequireNonAlphanumeric = false;
+        opts.Password.RequireLowercase = false;
+        opts.Password.RequireUppercase = false;
+        opts.Password.RequireDigit = false;
+    })
+    .AddEntityFrameworkStores<ApplicationContext>()
+    .AddDefaultUI()
+    .AddTokenProvider<DataProtectorTokenProvider<User>>(TokenOptions.DefaultProvider);
 
 var app = builder.Build();
 
@@ -29,6 +39,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<BlazorLoginMiddleware>();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

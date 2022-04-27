@@ -1,4 +1,7 @@
-﻿<header>
+﻿@using CoderWebsite.Models
+@using Microsoft.AspNetCore.Identity
+
+<header>
     <div class="header">
         <span class="header-title">кодер</span>
         <span>
@@ -20,10 +23,10 @@
                 <AuthorizeView>
                     <Authorized>
                         <span class="dropdown">
-                            <a class="header-button header-button-menu" href="/Identity/Account/Register">some_email123@mail.ru</a>
+                            <a class="header-button header-button-menu" href="/Identity/Account/Register">@context.User.Identity.Name</a>
                             <div class="dropdown-menu">
-                                <a href="/">Личный кабинет</a>
-                                <a href="/">Выход</a>
+                                <a href="/account">Личный кабинет</a>
+                                <a href="/Identity/Account/Logout">Выход</a>
                             </div>
                         </span>
                     </Authorized>

@@ -1,1 +1,85 @@
-﻿
+﻿.add-news-container {
+    max-width: 1024px;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-news-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-news-title {
+    color: white;
+    font-size: 22px;
+    font-family: Micra-Bold;
+}
+
+.add-news-form-input-title {
+    font-size: 16px;
+    color: white;
+    font-family: NeueMachina-Medium;
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+::deep .add-news-form-input {
+    height: 32px;
+    font-size: 14px;
+    color: white;
+    font-family: NeueMachina-Medium;
+    background-color: #262626;
+    border: 2px solid #bc75ff;
+    border-radius: 6px;
+    transition: .3s;
+    max-width: 360px;
+}
+
+    ::deep .add-news-form-input:hover {
+        border-color: white;
+        transition: .3s;
+    }
+
+::deep .add-news-form-inputtextarea {
+    padding: 8px;
+    color: white;
+    font-size: 14px;
+    font-family: NeueMachina-Medium;
+    background-color: #262626;
+    border: 2px solid #bc75ff;
+    border-radius: 6px;
+    resize: vertical;
+    min-height: 360px;
+}
+
+    ::deep .add-news-form-inputtextarea:hover {
+        border-color: white;
+        transition: .3s;
+    }
+
+.add-news-form-button {
+    width: 320px;
+    height: 64px;
+    background: linear-gradient(270deg, #7575ff, #bc75ff);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: NeueMachina-Medium;
+    transition: .3s;
+    color: black;
+}
+
+    .add-news-form-button:hover {
+        background: linear-gradient(270deg, #bc75ff, #7575ff);
+        transition: .3s;
+        cursor: pointer;
+    }
+
+.add-news-form-button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 60px;
+}

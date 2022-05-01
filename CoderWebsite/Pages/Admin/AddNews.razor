@@ -1,9 +1,37 @@
 ﻿@page "/admin/add-news"
+@using CoderWebsite.Models.Pages.Admin
 
-<div>
+<div class="add-news-container">
+    @if (EnableTitle)
+    {
+        <div class="add-news-title">Добавить новость</div>
+    }
+    <EditForm Model="@model" OnValidSubmit=Add>
+        <div class="add-news-form-container">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
 
+            <span class="add-news-form-input-title">Заголовок новости</span>
+            <InputText @bind-Value="model.Title" class="add-news-form-input" />
+
+            <span class="add-news-form-input-title">Текст новости</span>
+            <InputTextArea class="add-news-form-inputtextarea" @bind-Value="model.Text" />
+
+            <div class="add-news-form-button-container">
+                <button type="submit" class="add-news-form-button">Добавить новость</button>
+            </div>
+        </div>
+    </EditForm>
 </div>
 
 @code {
+    private AddNewsModel model = new AddNewsModel();
 
+    [Parameter]
+    public bool EnableTitle { get; set; } = true;
+
+    public async Task Add()
+    {
+        
+    }
 }

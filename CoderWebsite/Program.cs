@@ -11,7 +11,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddIdentity<User, IdentityRole>(opts => {
-        opts.Password.RequiredLength = 1;
+        opts.Password.RequiredLength = 8;
         opts.Password.RequireNonAlphanumeric = false;
         opts.Password.RequireLowercase = false;
         opts.Password.RequireUppercase = false;

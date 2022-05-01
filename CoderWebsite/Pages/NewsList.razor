@@ -1,4 +1,17 @@
-﻿<h3>NewsList</h3>
+﻿@page "/news-list"
+@using CoderWebsite.Components
+@using CoderWebsite.Components.BlockContent.NewsList
+
+<PageBlock>
+    <div class="news-list-container">
+        <div class="news-list-title">Новости</div>
+        <div class="news-list-elements-container">
+            <NewsListElement />
+            <NewsListElement />
+            <NewsListElement />
+        </div>
+    </div>
+</PageBlock>
 
 @code {
 

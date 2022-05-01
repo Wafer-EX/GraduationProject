@@ -1,0 +1,15 @@
+﻿.news-list-container {
+    max-width: 1024px;
+    padding: 64px;
+    background-color: #f3e6d5;
+    border-radius: 20px;
+}
+
+.news-list-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 24px;
+    font-family: Micra-Bold;
+}

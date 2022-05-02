@@ -4,11 +4,11 @@ namespace CoderWebsite.Models.Pages.Admin
 {
     public class AddNewsModel
     {
-        [Required]
-        [MaxLength(255)]
+        [Required(ErrorMessage = "Заголовок новости является обязательным.")]
+        [MaxLength(255, ErrorMessage = "Длина заголовка не должна превышать 255 символов.")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Новость должна содержать текст.")]
         public string Text { get; set; }
     }
 }

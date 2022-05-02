@@ -1,5 +1,7 @@
 ﻿@page "/admin/add-news"
+@using CoderWebsite.Models
 @using CoderWebsite.Models.Pages.Admin
+@inject ApplicationContext DbContext
 
 <div class="add-news-container">
     @if (EnableTitle)
@@ -32,6 +34,12 @@
 
     public async Task Add()
     {
-        
+        var newsModel = new News
+        {
+            Title = model.Title,
+            Text = model.Text
+        };
+        DbContext.News.Add(newsModel);
+        DbContext.SaveChanges();
     }
 }

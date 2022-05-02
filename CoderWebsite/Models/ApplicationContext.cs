@@ -5,6 +5,8 @@ namespace CoderWebsite.Models
 {
     public class ApplicationContext : IdentityDbContext<User>
     {
+        public DbSet<News> News { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             Database.EnsureCreated();

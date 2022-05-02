@@ -1,18 +1,36 @@
 ﻿@page "/news-list"
+
 @using CoderWebsite.Components
 @using CoderWebsite.Components.BlockContent.NewsList
+@using CoderWebsite.Models
+
+@inject ApplicationContext DbContext
 
 <PageBlock>
     <div class="news-list-container">
         <div class="news-list-title">Новости</div>
         <div class="news-list-elements-container">
-            <NewsListElement />
-            <NewsListElement />
-            <NewsListElement />
+            @foreach (var news in allNews)
+            {
+                <NewsListElement Style="@($"animation-delay: .{news.Id}s")"
+                    Id="@(news.Id)"
+                    Date="@(news.Date.ToLongDateString())"
+                    Title="@(news.Title)"
+                    Text="@(news.Text)"
+                />
+            }
         </div>
     </div>
 </PageBlock>
 
 @code {
+    private List<News>? allNews;
 
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        allNews = DbContext.News.ToList();
+    }
 }

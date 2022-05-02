@@ -1,14 +1,34 @@
-﻿<div class="news-list-element-container">
+﻿@inject NavigationManager NavigationManager
+
+<div style="@Style" class="news-list-element-container">
     <div class="news-list-element-text-container">
-        <span class="news-list-element-date">01.01.1970</span>
-        <span class="news-list-element-title">Заголовок</span>
-        <span class="news-list-element-text">Текст wrgjiwj wrjg iwjrgfi3 jijw ifjwi f</span>
+        <span class="news-list-element-date">@Date</span>
+        <span class="news-list-element-title">@Title</span>
+        <span class="news-list-element-text">@Text</span>
     </div>
     <div class="news-list-element-button-container">
-        <button class="news-list-element-button">Открыть</button>
+        <button class="news-list-element-button" @onclick="@OpenNews">Открыть</button>
     </div>
 </div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
+    [Parameter]
+    public string? Date { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public string? Text { get; set; }
+
+    [Parameter]
+    public string? Style { get; set; }
+
+    private void OpenNews()
+    {
+        NavigationManager.NavigateTo($"/news/{Id}");
+    }
 }

@@ -5,10 +5,24 @@
     padding-right: 12px;
     margin-top: 16px;
     margin-bottom: 16px;
+    animation-duration: .5s;
+    animation-name: page-slidein;
 }
 
 .page-block-content-container {
     max-width: 1024px;
     margin-left: auto;
     margin-right: auto;
+}
+
+@keyframes page-slidein {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }

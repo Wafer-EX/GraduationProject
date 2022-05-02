@@ -5,6 +5,9 @@
     border-bottom: 2px solid #e7dbca;
     padding-bottom: 16px;
     margin: 32px 0 16px 0;
+    animation-duration: .5s;
+    animation-name: newslistelement-slidein;
+    animation-fill-mode: backwards;
 }
 
 .news-list-element-text-container {
@@ -53,4 +56,16 @@
     color: black;
     background-color: white;
     transition: .3s;
+}
+
+@keyframes newslistelement-slidein {
+    from {
+        transform: translateY(32px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
 }

@@ -6,6 +6,7 @@
 @inject ApplicationContext DbContext
 @inject NavigationManager NavigationManager
 
+<CoderWebsite.Components.PageBlock>
 <div class="add-news-container">
     @if (EnableTitle)
     {
@@ -28,6 +29,7 @@
         </div>
     </EditForm>
 </div>
+</CoderWebsite.Components.PageBlock>
 
 @code {
     private AddNewsModel model = new AddNewsModel();

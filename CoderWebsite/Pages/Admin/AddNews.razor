@@ -1,7 +1,10 @@
 ﻿@page "/admin/add-news"
+
 @using CoderWebsite.Models
 @using CoderWebsite.Models.Pages.Admin
+
 @inject ApplicationContext DbContext
+@inject NavigationManager NavigationManager
 
 <div class="add-news-container">
     @if (EnableTitle)
@@ -37,9 +40,11 @@
         var newsModel = new News
         {
             Title = model.Title,
-            Text = model.Text
+            Text = model.Text,
+            Date = DateTime.Today
         };
         DbContext.News.Add(newsModel);
         DbContext.SaveChanges();
+        NavigationManager.NavigateTo($"/news/{newsModel.Id}", true, true);
     }
 }

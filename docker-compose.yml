@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  coderwebsite:
+    image: coder-website
+    build:
+      context: .
+      dockerfile: CoderWebsite/Dockerfile
+    environment:
+      POSTGRES_CONNECTION_STRING: "Host=host.docker.internal;Port=5432;Database=coderdb;Username=coderuser;Password=pgpwd4coder"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "80:80"
+  
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_DB: "coderdb"
+      POSTGRES_USER: "coderuser"
+      POSTGRES_PASSWORD: "pgpwd4coder"
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"

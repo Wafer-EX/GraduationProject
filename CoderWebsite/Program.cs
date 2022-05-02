@@ -4,12 +4,17 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Add services to the container.
+string? connectionString = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING");
+if (connectionString == null)
+{
+    builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
+}
+else builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddIdentity<User, IdentityRole>(opts => {
         opts.Password.RequiredLength = 8;
         opts.Password.RequireNonAlphanumeric = false;

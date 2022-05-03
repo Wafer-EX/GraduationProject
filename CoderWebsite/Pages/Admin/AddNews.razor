@@ -37,13 +37,13 @@
     [Parameter]
     public bool EnableTitle { get; set; } = true;
 
-    public async Task Add()
+    public void Add()
     {
         var newsModel = new News
         {
             Title = model.Title,
             Text = model.Text,
-            Date = DateTime.Today
+            Date = DateTime.Today.ToLongDateString()
         };
         DbContext.News.Add(newsModel);
         DbContext.SaveChanges();

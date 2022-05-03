@@ -7,7 +7,7 @@
 @inject ApplicationContext DbContext
 
 <PageBlock>
-    <Publication Title="@(news.Title)" Date="@(news.Date.ToLongDateString())">
+    <Publication Title="@(news.Title)" Date="@(news.Date)">
         @(news.Text)
     </Publication>
 </PageBlock>

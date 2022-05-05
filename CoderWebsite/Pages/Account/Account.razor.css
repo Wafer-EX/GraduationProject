@@ -1,5 +1,4 @@
 ﻿.account-container {
-    width: 1024px;
     padding: 64px;
     border: 2px solid #bc75ff;
     margin-left: auto;
@@ -55,4 +54,11 @@
 .account-selected-button {
     color: black;
     background: #bc75ff;
+}
+
+.account-orders-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }

@@ -1,0 +1,34 @@
+﻿<div class="order-container">
+    <span class="order-title">@Name</span>
+    <div class="order-status-container">
+        <span class="order-status-title">Статус</span>
+        <ul>
+            <li class="order-status-text @(getStyle(OrderStatus.RequestAccepted))">Заявка принята</li>
+            <li class="order-status-text @(getStyle(OrderStatus.СontractСoncluded))">Договор заключен</li>
+            <li class="order-status-text @(getStyle(OrderStatus.TermsOfReferenceCompleted))">Техническое задание оформлено</li>
+            <li class="order-status-text @(getStyle(OrderStatus.InWork))">В работе</li>
+            <li class="order-status-text @(getStyle(OrderStatus.Completed))">Заказ завершен</li>
+        </ul>
+    </div>
+    <span class="order-date">@Date</span>
+</div>
+
+@code {
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Date { get; set; }
+
+    [Parameter]
+    public OrderStatus Status { get; set; }
+
+    private string getStyle(OrderStatus status)
+    {
+        if (status == Status)
+            return "order-status-text-current";
+        else if (status < Status)
+            return "order-status-text-completed";
+        else return "";
+    }
+}

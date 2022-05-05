@@ -1,0 +1,60 @@
+﻿.order-container {
+    width: 720px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: #171717;
+    border-radius: 25px;
+    margin-top: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-title {
+    font-size: 24px;
+    color: white;
+    font-family: Micra-Bold;
+    padding: 18px;
+    max-width: 500px;
+}
+
+.order-status-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0e0e0e;
+    width: 520px;
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.order-status-title {
+    font-family: Micra-Bold;
+    color: white;
+    font-size: 18px;
+}
+
+.order-status-text {
+    color: #4f4f4f;
+    font-size: 16px;
+    font-family: NeueMachina-Medium;
+}
+
+.order-status-text-current {
+    color: #bc75ff;
+}
+
+.order-status-text-completed {
+    color: white;
+}
+
+.order-date {
+    font-size: 16px;
+    font-family: NeueMachina-Medium;
+    color: #4f4f4f;
+    padding: 12px;
+}

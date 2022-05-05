@@ -1,21 +1,37 @@
 ﻿@page "/account"
 
+@using CoderWebsite.Components
+@using CoderWebsite.Components.Account
+@using CoderWebsite.Models
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<User> UserManager
+@inject AuthenticationStateProvider AuthenticationState
+
 <PageTitle>Личный кабинет | Кодер</PageTitle>
 
 <CascadingAuthenticationState>
     <AuthorizeView>
         <Authorized>
-            <div class="account-container">
-                <span class="account-name-container">
-                    <span class="account-fio">Иванов Иван Иванович</span>
-                    <span class="account-mail">pochta@mail.ru</span>
-                </span>
-                <span class="account-buttons-bar-container">
-                    <button class="account-button @(getStyle(OrderCategory.All))" @onclick="() => SelectCategory(OrderCategory.All)">все заказы</button>
-                    <button class="account-button @(getStyle(OrderCategory.InWork))" @onclick="() => SelectCategory(OrderCategory.InWork)">в работе</button>
-                    <button class="account-button @(getStyle(OrderCategory.Closed))" @onclick="() => SelectCategory(OrderCategory.Closed)">завершенные</button>
-                </span>
-            </div>
+            <PageBlock ColorFrom="black">
+                <div class="account-container">
+                    <span class="account-name-container">
+                        <span class="account-fio">@($"{user.FirstName} {user.LastName} {user.MiddleName}")</span>
+                        <span class="account-mail">@user.Email</span>
+                    </span>
+                    <span class="account-buttons-bar-container">
+                        <button class="account-button @(GetStyle(OrderCategory.All))" @onclick="() => SelectCategory(OrderCategory.All)">все заказы</button>
+                        <button class="account-button @(GetStyle(OrderCategory.InWork))" @onclick="() => SelectCategory(OrderCategory.InWork)">в работе</button>
+                        <button class="account-button @(GetStyle(OrderCategory.Closed))" @onclick="() => SelectCategory(OrderCategory.Closed)">завершенные</button>
+                    </span>
+
+                    <div class="account-orders-container">
+                        <Order Name="jiefjwifj" Date="qiefjie" Status="OrderStatus.TermsOfReferenceCompleted" />
+                        <Order Name="jiefjwifj" Date="qiefjie" Status="OrderStatus.InWork" />
+                        <Order Name="jiefjwwe ewk kwok wkoge kwoe ko ewifj" Date="qiefjie" Status="OrderStatus.Completed" />
+                    </div>
+                </div>
+            </PageBlock>
         </Authorized>
         <NotAuthorized>
             <p>Пожалуйста, войдите в систему</p>
@@ -26,19 +42,21 @@
 @code {
     private OrderCategory currentCategory = OrderCategory.All;
 
+    private User user;
+
+    protected override void OnInitialized()
+    {
+        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
+        user = UserManager.GetUserAsync(authState.User).Result;
+        base.OnInitialized();
+    }
+
     private void SelectCategory(OrderCategory category) => currentCategory = category;
 
-    private string getStyle(OrderCategory category)
+    private string GetStyle(OrderCategory category)
     {
         if (category == currentCategory)
             return "account-selected-button";
         else return "";
-    }
-
-    enum OrderCategory
-    {
-        All,
-        InWork,
-        Closed
     }
 }

@@ -1,11 +1,21 @@
 ﻿@page "/account"
 
-<h3>Account</h3>
+<PageTitle>Личный кабинет | Кодер</PageTitle>
 
 <CascadingAuthenticationState>
     <AuthorizeView>
         <Authorized>
-            <p>Вы вошли в систему</p>
+            <div class="account-container">
+                <span class="account-name-container">
+                    <span class="account-fio">Иванов Иван Иванович</span>
+                    <span class="account-mail">pochta@mail.ru</span>
+                </span>
+                <span class="account-buttons-bar-container">
+                    <button class="account-button @(getStyle(OrderCategory.All))" @onclick="() => SelectCategory(OrderCategory.All)">все заказы</button>
+                    <button class="account-button @(getStyle(OrderCategory.InWork))" @onclick="() => SelectCategory(OrderCategory.InWork)">в работе</button>
+                    <button class="account-button @(getStyle(OrderCategory.Closed))" @onclick="() => SelectCategory(OrderCategory.Closed)">завершенные</button>
+                </span>
+            </div>
         </Authorized>
         <NotAuthorized>
             <p>Пожалуйста, войдите в систему</p>
@@ -14,5 +24,21 @@
 </CascadingAuthenticationState>
 
 @code {
+    private OrderCategory currentCategory = OrderCategory.All;
 
+    private void SelectCategory(OrderCategory category) => currentCategory = category;
+
+    private string getStyle(OrderCategory category)
+    {
+        if (category == currentCategory)
+            return "account-selected-button";
+        else return "";
+    }
+
+    enum OrderCategory
+    {
+        All,
+        InWork,
+        Closed
+    }
 }

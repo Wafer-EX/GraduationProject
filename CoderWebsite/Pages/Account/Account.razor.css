@@ -1,0 +1,58 @@
+﻿.account-container {
+    width: 1024px;
+    padding: 64px;
+    border: 2px solid #bc75ff;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 25px;
+}
+
+.account-name-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.account-fio {
+    color: white;
+    font-family: Micra-Bold;
+    font-size: 22px;
+}
+
+.account-mail {
+    color: white;
+    font-family: NeueMachina-Medium;
+    font-size: 22px;
+    margin-top: 12px;
+}
+
+.account-buttons-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-button {
+    font-family: NeueMachina-Medium;
+    font-size: 18px;
+    color: white;
+    background: none;
+    border: none;
+    border-radius: 14px;
+    padding: 2px 18px 2px 18px;
+    margin-left: 16px;
+    margin-right: 16px;
+    transition: .3s;
+}
+
+    .account-button:hover {
+        background: white;
+        color: black;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+.account-selected-button {
+    color: black;
+    background: #bc75ff;
+}

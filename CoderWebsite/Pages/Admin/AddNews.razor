@@ -1,12 +1,13 @@
 ﻿@page "/admin/add-news"
 
+@using CoderWebsite.Components
 @using CoderWebsite.Models
 @using CoderWebsite.Models.Pages.Admin
 
 @inject ApplicationContext DbContext
 @inject NavigationManager NavigationManager
 
-<CoderWebsite.Components.PageBlock>
+<PageBlock>
 <div class="add-news-container">
     @if (EnableTitle)
     {
@@ -29,7 +30,7 @@
         </div>
     </EditForm>
 </div>
-</CoderWebsite.Components.PageBlock>
+</PageBlock>
 
 @code {
     private AddNewsModel model = new AddNewsModel();

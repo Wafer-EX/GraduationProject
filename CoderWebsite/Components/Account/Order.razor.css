@@ -11,6 +11,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    animation-duration: .5s;
+    animation-name: account-order-slidein;
+    animation-fill-mode: backwards;
 }
 
 .order-title {
@@ -57,4 +60,16 @@
     font-family: NeueMachina-Medium;
     color: #4f4f4f;
     padding: 12px;
+}
+
+@keyframes account-order-slidein {
+    from {
+        transform: translateY(32px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
 }

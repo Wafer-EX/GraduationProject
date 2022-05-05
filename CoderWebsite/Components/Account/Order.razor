@@ -1,4 +1,4 @@
-﻿<div class="order-container">
+﻿<div style="@Style" class="order-container">
     <span class="order-title">@Name</span>
     <div class="order-status-container">
         <span class="order-status-title">Статус</span>
@@ -19,6 +19,9 @@
 
     [Parameter]
     public string Date { get; set; }
+
+    [Parameter]
+    public string? Style { get; set; }
 
     [Parameter]
     public OrderStatus Status { get; set; }

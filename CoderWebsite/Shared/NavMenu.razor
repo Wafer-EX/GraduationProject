@@ -12,18 +12,18 @@
                 <a class="header-button" href="/">Наши услуги</a>
                 <div class="dropdown-menu">
                     <a href="/services/microservice">Микросервисы gRPC и ZeroC Ice</a>
-                    <a href="/">PWA-приложение</a>
-                    <a href="/">SPA-приложение</a>
+                    <a href="/services/pwa">PWA-приложение</a>
+                    <a href="/services/spa">SPA-приложение</a>
                 </div>
             </span>
 
-            <a class="header-button" href="/">Заказать приложение</a>
+            <a class="header-button" href="/ordering">Заказать приложение</a>
 
             <CascadingAuthenticationState>
                 <AuthorizeView>
                     <Authorized>
                         <span class="dropdown">
-                            <a class="header-button header-button-menu" href="/Identity/Account/Register">@context.User.Identity.Name</a>
+                            <a class="header-button header-button-menu" href="/account">@context.User.Identity.Name</a>
                             <div class="dropdown-menu">
                                 <a href="/account">Личный кабинет</a>
                                 <a href="/Identity/Account/Logout">Выход</a>

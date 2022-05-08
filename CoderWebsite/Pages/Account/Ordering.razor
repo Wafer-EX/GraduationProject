@@ -1,0 +1,62 @@
+﻿@page "/ordering"
+@using CoderWebsite.Components
+@using CoderWebsite.Models.Pages.Account
+
+
+<PageBlock ColorFrom="#121212">
+    <div class="ordering-title">Оформление заказа</div>
+    <EditForm Model="@model" OnValidSubmit="Order">
+        <div class="ordering-container">
+            <div class="ordering-form-title">Тип приложения</div>
+
+            <div class="ordering-type-container">
+                <span class="ordering-type-variant-container">
+                    <span class="ordering-type-variant-title">Веб-сайт PWA</span>
+                    <button class="ordering-type-variant-button">выбрать</button>
+                </span>
+
+                <span class="ordering-type-variant-container">
+                    <span class="ordering-type-variant-title">Веб-сайт SPA</span>
+                    <button class="ordering-type-variant-button">выбрать</button>
+                </span>
+
+                <span class="ordering-type-variant-container">
+                    <span class="ordering-type-variant-title">Микросервис gRPC</span>
+                    <button class="ordering-type-variant-button">выбрать</button>
+                </span>
+
+                <span class="ordering-type-variant-container">
+                    <span class="ordering-type-variant-title">Микросервис ZeroC Ice</span>
+                    <button class="ordering-type-variant-button">выбрать</button>
+                </span>
+            </div>
+
+            <div class="ordering-form-title">Контактные данные</div>
+
+            <div class="ordering-input-container">
+                <div class="ordering-input-field-container">
+                    <span class="ordering-input-title">ФИО</span>
+                    <InputText class="ordering-input-field" @bind-Value="model.FIO" />
+                </div>
+                <div class="ordering-input-field-container">
+                    <span class="ordering-input-title">Номер телефона</span>
+                    <InputText class="ordering-input-field" @bind-Value="model.Phone" />
+                </div>
+                <div class="ordering-input-field-container">
+                    <span class="ordering-input-title">Электронная почта</span>
+                    <InputText class="ordering-input-field" @bind-Value="model.Email" />
+                </div>
+                <button class="ordering-input-button" type="submit">Оформить</button>
+            </div>
+        </div>
+    </EditForm>
+</PageBlock>
+
+@code {
+    private OrderingModel model = new OrderingModel();
+
+    public void Order()
+    {
+        
+    }
+}

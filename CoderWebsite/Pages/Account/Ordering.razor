@@ -1,5 +1,6 @@
 ﻿@page "/ordering"
 @using CoderWebsite.Components
+@using CoderWebsite.Components.Account
 @using CoderWebsite.Models.Pages.Account
 
 
@@ -12,22 +13,35 @@
             <div class="ordering-type-container">
                 <span class="ordering-type-variant-container">
                     <span class="ordering-type-variant-title">Веб-сайт PWA</span>
-                    <button class="ordering-type-variant-button">выбрать</button>
+                    <button class="ordering-type-variant-button
+                        @(GetStyle(OrderAppType.Website_PWA))"
+                        @onclick="() => ChangeSelection(OrderAppType.Website_PWA)">
+                        @(GetSelectText(OrderAppType.Website_PWA))
+                    </button>
                 </span>
-
                 <span class="ordering-type-variant-container">
                     <span class="ordering-type-variant-title">Веб-сайт SPA</span>
-                    <button class="ordering-type-variant-button">выбрать</button>
+                    <button class="ordering-type-variant-button
+                        @(GetStyle(OrderAppType.Website_SPA))"
+                        @onclick="() => ChangeSelection(OrderAppType.Website_SPA)">
+                        @(GetSelectText(OrderAppType.Website_SPA))
+                    </button>
                 </span>
-
                 <span class="ordering-type-variant-container">
                     <span class="ordering-type-variant-title">Микросервис gRPC</span>
-                    <button class="ordering-type-variant-button">выбрать</button>
+                    <button class="ordering-type-variant-button
+                        @(GetStyle(OrderAppType.Microservice_gRPC))"
+                        @onclick="() => ChangeSelection(OrderAppType.Microservice_gRPC)">
+                        @(GetSelectText(OrderAppType.Microservice_gRPC))
+                    </button>
                 </span>
-
                 <span class="ordering-type-variant-container">
                     <span class="ordering-type-variant-title">Микросервис ZeroC Ice</span>
-                    <button class="ordering-type-variant-button">выбрать</button>
+                    <button class="ordering-type-variant-button
+                        @(GetStyle(OrderAppType.Microservice_ZeroC_Ice))"
+                        @onclick="() => ChangeSelection(OrderAppType.Microservice_ZeroC_Ice)">
+                        @(GetSelectText(OrderAppType.Microservice_ZeroC_Ice))
+                    </button>
                 </span>
             </div>
 
@@ -53,9 +67,31 @@
 </PageBlock>
 
 @code {
+    private OrderAppType selectedType = OrderAppType.Website_PWA;
+
     private OrderingModel model = new OrderingModel();
 
-    public void Order()
+    private string GetStyle(OrderAppType type)
+    {
+        if (type == selectedType)
+            return "ordering-input-button-selected";
+        else return "";
+    }
+
+    private string GetSelectText(OrderAppType type)
+    {
+        if (type == selectedType)
+            return "выбрано";
+        else return "выбрать";
+    }
+
+    private void ChangeSelection(OrderAppType type)
+    {
+        selectedType = type;
+        StateHasChanged();
+    }
+
+    private void Order()
     {
         
     }

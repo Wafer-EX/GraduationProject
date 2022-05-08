@@ -7,6 +7,7 @@
 
 @inject UserManager<User> UserManager
 @inject AuthenticationStateProvider AuthenticationState
+@inject ApplicationContext Context
 
 <PageTitle>Личный кабинет | Кодер</PageTitle>
 
@@ -26,9 +27,16 @@
                     </span>
 
                     <div class="account-orders-container">
-                        <Order Style="@($"animation-delay: .1s")" Name="Микросервис gRPC" Date="14.05.2020" Status="OrderStatus.TermsOfReferenceCompleted" />
-                        <Order Style="@($"animation-delay: .2s")" Name="Мультимедийный сервис" Date="15.05.2020" Status="OrderStatus.InWork" />
-                        <Order Style="@($"animation-delay: .3s")" Name="Микросервис ZeroC Ice" Date="11.05.2020" Status="OrderStatus.Completed" />
+                        @for (int i = 0; i < orders.Count(); i++)
+                        {
+                            var loopOrder = orders.ElementAt(i);
+                            <Order
+                                Style="@($"animation-delay: .{i + 1}s")"
+                                Name="@(loopOrder.Name)"
+                                Date="@(loopOrder.Date)"
+                                Status="@(loopOrder.Status)"
+                            />
+                        }
                     </div>
                 </div>
             </PageBlock>
@@ -44,14 +52,33 @@
 
     private User user;
 
+    private IEnumerable<Models.Order> orders;
+
     protected override void OnInitialized()
     {
         var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
         user = UserManager.GetUserAsync(authState.User).Result;
+        orders = Context.Orders.Where(order => order.User == user);
         base.OnInitialized();
     }
 
-    private void SelectCategory(OrderCategory category) => currentCategory = category;
+    private void SelectCategory(OrderCategory category)
+    {
+        currentCategory = category;
+        switch (category)
+        {
+            case OrderCategory.All:
+                orders = user.Orders;
+                break;
+            case OrderCategory.InWork:
+                orders = user.Orders.Where(order => order.Status != OrderStatus.Completed);
+                break;
+            case OrderCategory.Closed:
+                orders = user.Orders.Where(order => order.Status == OrderStatus.Completed);
+                break;
+        }
+        StateHasChanged();
+    }
 
     private string GetStyle(OrderCategory category)
     {

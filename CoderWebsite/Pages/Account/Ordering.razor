@@ -125,7 +125,9 @@
             Email = model.Email,
             Name = model.Name,
             Phone = model.Phone,
-            OrderType = selectedType,
+            Date = DateTime.Today.ToLongDateString(),
+            Type = selectedType,
+            Status = OrderStatus.RequestAccepted,
             User = user
         };
         DbContext.Orders.Add(order);

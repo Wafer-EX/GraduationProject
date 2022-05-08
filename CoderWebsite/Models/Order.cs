@@ -12,7 +12,11 @@ namespace CoderWebsite.Models
 
         public string Phone { get; set; }
 
-        public OrderAppType OrderType { get; set; }
+        public string Date { get; set; }
+
+        public OrderAppType Type { get; set; }
+
+        public OrderStatus Status { get; set; }
 
         public int UserId { get; set; }
 

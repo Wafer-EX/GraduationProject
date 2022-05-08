@@ -10,14 +10,20 @@
     <div class="news-list-container">
         <div class="news-list-title">Новости</div>
         <div class="news-list-elements-container">
-            @foreach (var news in allNews)
+            @if (allNews != null && allNews.Count > 0)
             {
-                <NewsListElement Style="@($"animation-delay: .{news.Id}s")"
+                @foreach (var news in allNews)
+                {
+                    <NewsListElement Style="@($"animation-delay: .{news.Id}s")"
                     Id="@(news.Id)"
                     Date="@(news.Date)"
                     Title="@(news.Title)"
-                    Text="@(news.Text)"
-                />
+                    Text="@(news.Text)"/>
+                }
+            }
+            else
+            {
+                <div class="news-list-no-news-text">На данный момент новостей нет.</div>
             }
         </div>
     </div>

@@ -1,5 +1,6 @@
 ﻿<div style="@Style" class="order-container">
     <span class="order-title">@Name</span>
+    <span class="order-type-phone">@($"{GetAppTypeName()} | {Phone}")</span>
     <div class="order-status-container">
         <span class="order-status-title">Статус</span>
         <ul>
@@ -21,6 +22,12 @@
     public string Date { get; set; }
 
     [Parameter]
+    public string Phone { get; set; }
+
+    [Parameter]
+    public OrderAppType AppType { get; set; }
+
+    [Parameter]
     public string? Style { get; set; }
 
     [Parameter]
@@ -33,5 +40,17 @@
         else if (status < Status)
             return "order-status-text-completed";
         else return "";
+    }
+
+    private string GetAppTypeName()
+    {
+        switch (AppType)
+        {
+            case OrderAppType.Website_PWA: return "Веб-сайт PWA";
+            case OrderAppType.Website_SPA: return "Веб-сайт SPA";
+            case OrderAppType.Microservice_gRPC: return "Микросервис gRPC";
+            case OrderAppType.Microservice_ZeroC_Ice: return "Микросервис ZeroC Ice";
+        }
+        return "Веб-приложение";
     }
 }

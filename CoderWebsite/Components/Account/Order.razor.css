@@ -62,6 +62,13 @@
     padding: 12px;
 }
 
+.order-type-phone {
+    font-size: 16px;
+    font-family: NeueMachina-Medium;
+    color: #4f4f4f;
+    padding-bottom: 12px;
+}
+
 @keyframes account-order-slidein {
     from {
         transform: translateY(32px);

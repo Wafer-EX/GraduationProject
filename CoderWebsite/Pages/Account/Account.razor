@@ -27,15 +27,22 @@
                     </span>
 
                     <div class="account-orders-container">
-                        @for (int i = 0; i < orders.Count(); i++)
+                        @if (orders.Count() > 0)
                         {
-                            var loopOrder = orders.ElementAt(i);
-                            <Order
-                                Style="@($"animation-delay: .{i + 1}s")"
-                                Name="@(loopOrder.Name)"
-                                Date="@(loopOrder.Date)"
-                                Status="@(loopOrder.Status)"
-                            />
+                            @for (int i = 0; i < orders.Count(); i++)
+                            {
+                                var loopOrder = orders.ElementAt(i);
+                                <Order
+                                    Style="@($"animation-delay: .{i + 1}s")"
+                                    Name="@(loopOrder.Name)"
+                                    Date="@(loopOrder.Date)"
+                                    Status="@(loopOrder.Status)"
+                                />
+                            }
+                        }
+                        else
+                        {
+                            <div class="account-no-orders-text">На данный момент заказов нет.</div>
                         }
                     </div>
                 </div>

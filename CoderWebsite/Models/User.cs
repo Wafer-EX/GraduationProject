@@ -9,5 +9,7 @@ namespace CoderWebsite.Models
         public string? LastName { get; set; }
 
         public string? MiddleName { get; set; }
+
+        public List<Order> Orders { get; set; } = new List<Order>();
     }
 }

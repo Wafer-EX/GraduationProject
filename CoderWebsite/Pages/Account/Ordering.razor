@@ -1,8 +1,15 @@
 ﻿@page "/ordering"
+
 @using CoderWebsite.Components
 @using CoderWebsite.Components.Account
+@using CoderWebsite.Models
 @using CoderWebsite.Models.Pages.Account
+@using Microsoft.AspNetCore.Identity
 
+@inject ApplicationContext DbContext
+@inject UserManager<User> UserManager
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationState
 
 <PageBlock ColorFrom="#121212">
     <div class="ordering-title">Оформление заказа</div>
@@ -58,6 +65,10 @@
                     <InputText class="ordering-input-field" @bind-Value="model.FIO" />
                 </div>
                 <div class="ordering-input-field-container">
+                    <span class="ordering-input-title">Название заказа</span>
+                    <InputText class="ordering-input-field" @bind-Value="model.Name" />
+                </div>
+                <div class="ordering-input-field-container">
                     <span class="ordering-input-title">Номер телефона</span>
                     <InputText class="ordering-input-field" @bind-Value="model.Phone" />
                 </div>
@@ -75,6 +86,17 @@
     private OrderAppType selectedType = OrderAppType.Website_PWA;
 
     private OrderingModel model = new OrderingModel();
+
+    private User user;
+
+    protected override void OnInitialized()
+    {
+        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
+        user = UserManager.GetUserAsync(authState.User).Result;
+        model.FIO = $"{user.FirstName} {user.LastName} {user.MiddleName}";
+        model.Email = $"{user.Email}";
+        base.OnInitialized();
+    }
 
     private string GetStyle(OrderAppType type)
     {
@@ -98,6 +120,16 @@
 
     private void Order()
     {
-        
+        var order = new Models.Order
+        {
+            Email = model.Email,
+            Name = model.Name,
+            Phone = model.Phone,
+            OrderType = selectedType,
+            User = user
+        };
+        DbContext.Orders.Add(order);
+        DbContext.SaveChanges();
+        NavigationManager.NavigateTo($"/account", true, true);
     }
 }

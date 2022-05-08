@@ -7,6 +7,8 @@ namespace CoderWebsite.Models
     {
         public DbSet<News> News { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             Database.EnsureCreated();

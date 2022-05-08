@@ -7,6 +7,9 @@ namespace CoderWebsite.Models.Pages.Account
         [Required(ErrorMessage = "Поле ФИО должно быть заполнено.")]
         public string FIO { get; set; }
 
+        [Required(ErrorMessage = "Поле название заказа должно быть заполнено.")]
+        public string Name { get; set; }
+
         [Required(ErrorMessage = "Поле номер телефона должно быть заполнено.")]
         [Phone(ErrorMessage = "Данные в поле номер телефона не являются номером телефона.")]
         public string Phone { get; set; }

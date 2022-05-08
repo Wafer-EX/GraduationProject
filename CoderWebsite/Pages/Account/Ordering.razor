@@ -48,6 +48,11 @@
             <div class="ordering-form-title">Контактные данные</div>
 
             <div class="ordering-input-container">
+                <span class="form-errors-container">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                </span>
+
                 <div class="ordering-input-field-container">
                     <span class="ordering-input-title">ФИО</span>
                     <InputText class="ordering-input-field" @bind-Value="model.FIO" />

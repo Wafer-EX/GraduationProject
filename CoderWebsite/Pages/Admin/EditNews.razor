@@ -1,4 +1,4 @@
-﻿@page "/admin/add-news"
+﻿@page "/admin/edit-news/{Id:int}"
 
 @using CoderWebsite.Components
 @using CoderWebsite.Models
@@ -7,15 +7,15 @@
 @inject ApplicationContext DbContext
 @inject NavigationManager NavigationManager
 
-<PageTitle>Добавить новость | Кодер</PageTitle>
+<PageTitle>Изменить новость | Кодер</PageTitle>
 
 <PageBlock>
     <div class="add-news-container">
         @if (EnableTitle)
         {
-            <div class="add-news-title">Добавить новость</div>
+            <div class="add-news-title">Изменить новость</div>
         }
-        <EditForm Model="@model" OnValidSubmit=Add>
+        <EditForm Model="@model" OnValidSubmit=Edit>
             <div class="add-news-form-container">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
@@ -27,7 +27,7 @@
                 <InputTextArea class="add-news-form-inputtextarea" @bind-Value="model.Text" />
 
                 <div class="add-news-form-button-container">
-                    <button type="submit" class="add-news-form-button">Добавить новость</button>
+                    <button type="submit" class="add-news-form-button">Изменить новость</button>
                 </div>
             </div>
         </EditForm>
@@ -35,21 +35,28 @@
 </PageBlock>
 
 @code {
-    private AddNewsModel model = new AddNewsModel();
+    private News news;
 
     [Parameter]
     public bool EnableTitle { get; set; } = true;
 
-    public void Add()
+    [Parameter]
+    public int Id { get; set; }
+
+    private AddNewsModel model = new AddNewsModel();
+
+    protected override void OnInitialized()
     {
-        var newsModel = new News
-        {
-            Title = model.Title,
-            Text = model.Text,
-            Date = DateTime.Today.ToLongDateString()
-        };
-        DbContext.News.Add(newsModel);
+        news = DbContext.News.Where(obj => obj.Id == Id).First();
+        model.Title = news.Title;
+        model.Text = news.Text;
+    }
+
+    private void Edit()
+    {
+        news.Title = model.Title;
+        news.Text = model.Text;
         DbContext.SaveChanges();
-        NavigationManager.NavigateTo($"/news/{newsModel.Id}", true, true);
+        NavigationManager.NavigateTo($"/news/{Id}", true, true);
     }
 }

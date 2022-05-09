@@ -6,6 +6,8 @@
 
 @inject ApplicationContext DbContext
 
+<PageTitle>@(news.Title) | Кодер</PageTitle>
+
 <PageBlock>
     <Publication Title="@(news.Title)" Date="@(news.Date)">
         @(news.Text)

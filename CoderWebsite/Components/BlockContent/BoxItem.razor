@@ -1,8 +1,14 @@
 ﻿<div class="box-item">
-    <div class="box-item-image-container">
-        <img class="box-item-image" src="@ImagePath" />
-    </div>
-    <span class="box-item-title">@Title</span>
+    @if (ImagePath != null)
+    {
+        <div class="box-item-image-container">
+            <img class="box-item-image" src="@ImagePath" />
+        </div>    
+    }
+    @if (Title != null)
+    {
+        <span class="box-item-title">@Title</span>
+    }
     <span class="box-item-text">
         @ChildContent
     </span>

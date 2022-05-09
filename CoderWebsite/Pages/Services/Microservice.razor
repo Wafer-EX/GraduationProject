@@ -1,41 +1,39 @@
-﻿@using CoderWebsite.Components
+﻿@page "/services/microservice"
+
+@using CoderWebsite.Components
 @using CoderWebsite.Components.BlockContent
-@page "/services/microservice"
 
 <PageTitle>Микросервисы gRPC и ZeroC Ice | Кодер</PageTitle>
+<PageBlock>
+    <CallText Title="Микросервисная архитектура" ButtonText="Заказать микросервис" ButtonRedirect="/ordering">
+        <BoxItem ImagePath="/icons/microservice-logo-white.png">
+            Микросервисная архитектура решает главную задачу программистов на масштабных 
+            проектах: превращает сложную и объёмную программу в набор простых деталей, 
+            которые работают вместе.
+        </BoxItem>
+    </CallText>
+</PageBlock>
 
-<PageBlock ColorFrom="#0a1415" ColorTo="#241631">
-    <Box FlexDirection="row" Title="jwefiwjfi">
-        <Box FlexDirection="column">
-            <BoxItem Title="jfjwiefjiweifj">
-                fwefweofj iwejifwe qgegwrth bthtrhtrhwqfw fgwregwrgq
-                wgkwqo fkqowrgf
-                rgw qkogrkwoqgko qwkrgofwrkgf
-                qwrgowqrjgwr jigjwrigjiwr
-            </BoxItem>
+<PageBlock>
+    <CallText Title="Микросервисы gRPC">
+        <BoxItem ImagePath="/icons/grpc-logo-white.png">
+            gRPC — это система удалённого вызова процедур с открытым исходным кодом, 
+            первоначально разработанная в Google в 2015 году. gRPC простой в использовании, 
+            отлично подходит для создания распределенных систем (микросервисов) и API. Имеет 
+            встроенную поддержку для балансировки нагрузки, трассировки, аутентификации и 
+            проверки жизнеспособности сервисов.
+        </BoxItem>
+    </CallText>
+</PageBlock>
 
-            <BoxItem Title="jfjwiefjiweifj">
-                fwefweofj iwejifwe qgegwrth bthtrhtrhwqfw fgwregwrgq
-                wgkwqo fkqowrgf
-                rgw qkogrkwoqgko qwkrgofwrkgf
-                qwrgowqrjgwr jigjwrigjiwr
-            </BoxItem>
-        </Box>
-
-        <Box FlexDirection="column">
-            <BoxItem Title="jfjwiefjiweifj">
-                fwefweofj iwejifwe qgegwrth bthtrhtrhwqfw fgwregwrgq
-                wgkwqo fkqowrgf
-                rgw qkogrkwoqgko qwkrgofwrkgf
-                qwrgowqrjgwr jigjwrigjiwr
-            </BoxItem>
-
-            <BoxItem Title="jfjwiefjiweifj">
-                fwefweofj iwejifwe qgegwrth bthtrhtrhwqfw fgwregwrgq
-                wgkwqo fkqowrgf
-                rgw qkogrkwoqgko qwkrgofwrkgf
-                qwrgowqrjgwr jigjwrigjiwr
-            </BoxItem>
-        </Box>
-    </Box>
+<PageBlock>
+    <CallText Title="Микросервисы ZeroC Ice">
+        <BoxItem ImagePath="/icons/zeroc-ice-logo-white.png">
+            Ice - это объектно-ориентированная среда RPC, которая может помочь легко создавать 
+            распределенные приложения. Используя Ice, пользователи могут больше сосредоточиться 
+            на логике своих приложений. Используя Ice, больше не нужно беспокоиться о некоторых 
+            деталях, таких как открытые сетевые соединения, сериализация и десериализация сетевой 
+            передачи, а также проблемы повторной передачи при сбое соединения.
+        </BoxItem>
+    </CallText>
 </PageBlock>

@@ -48,9 +48,10 @@
 
 @code {
     private LoginModel loginModel = new LoginModel();
+
     private string? error;
 
-    public async void Auth()
+    private async void Auth()
     {
         var user = await UserManager.FindByEmailAsync(loginModel.Email);
         if (user != null)

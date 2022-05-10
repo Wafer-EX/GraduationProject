@@ -13,18 +13,11 @@
 
 @code {
     private string text;
-
-    [Parameter]
-    public int Id { get; set; }
-
-    [Parameter]
-    public string? Date { get; set; }
-
-    [Parameter]
-    public string? Title { get; set; }
-
-    [Parameter]
-    public string? Text
+    [Parameter] public int Id { get; set; }
+    [Parameter] public string? Date { get; set; }
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public string? Style { get; set; }
+    [Parameter] public string? Text
     {
         get => text;
         set
@@ -35,11 +28,5 @@
         }
     }
 
-    [Parameter]
-    public string? Style { get; set; }
-
-    private void OpenNews()
-    {
-        NavigationManager.NavigateTo($"/news/{Id}");
-    }
+    private void OpenNews() => NavigationManager.NavigateTo($"/news/{Id}");
 }

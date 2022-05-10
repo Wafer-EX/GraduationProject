@@ -15,30 +15,22 @@
 </div>
 
 @code {
-    [Parameter]
-    public string Name { get; set; }
+    [Parameter] public string Name { get; set; }
 
-    [Parameter]
-    public string Date { get; set; }
+    [Parameter] public string Date { get; set; }
 
-    [Parameter]
-    public string Phone { get; set; }
+    [Parameter] public string Phone { get; set; }
 
-    [Parameter]
-    public OrderAppType AppType { get; set; }
+    [Parameter] public OrderAppType AppType { get; set; }
 
-    [Parameter]
-    public string? Style { get; set; }
+    [Parameter] public string? Style { get; set; }
 
-    [Parameter]
-    public OrderStatus Status { get; set; }
+    [Parameter] public OrderStatus Status { get; set; }
 
     private string getStyle(OrderStatus status)
     {
-        if (status == Status)
-            return "order-status-text-current";
-        else if (status < Status)
-            return "order-status-text-completed";
+        if (status == Status) return "order-status-text-current";
+        else if (status < Status) return "order-status-text-completed";
         else return "";
     }
 

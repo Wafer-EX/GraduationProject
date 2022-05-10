@@ -63,15 +63,14 @@
 
 @code {
     private RegisterModel registerModel = new RegisterModel();
+
     private string? error;
 
-    public async void Reg()
+    private async void Reg()
     {
         var registeredUser = await UserManager.FindByEmailAsync(registerModel.Email);
         if (registeredUser != null)
-        {
             error = "Произошла ошибка: пользователь уже существует.";
-        }
         else
         {
             var user = new User()
@@ -84,12 +83,6 @@
             };
 
             var result = await UserManager.CreateAsync(user, registerModel.Password);
-            foreach (var a in result.Errors)
-            {
-                Console.WriteLine(a);
-            }
-
-
             if (result.Succeeded)
             {
                 error = "";

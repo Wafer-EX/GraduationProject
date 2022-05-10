@@ -102,15 +102,13 @@
 
     private string GetStyle(OrderAppType type)
     {
-        if (type == selectedType)
-            return "ordering-input-button-selected";
+        if (type == selectedType) return "ordering-input-button-selected";
         else return "";
     }
 
     private string GetSelectText(OrderAppType type)
     {
-        if (type == selectedType)
-            return "выбрано";
+        if (type == selectedType) return "выбрано";
         else return "выбрать";
     }
 

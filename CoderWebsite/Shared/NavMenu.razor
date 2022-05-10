@@ -17,11 +17,10 @@
                 </div>
             </span>
 
-            <a class="header-button" href="/ordering">Заказать приложение</a>
-
             <CascadingAuthenticationState>
                 <AuthorizeView>
                     <Authorized>
+                        <a class="header-button" href="/ordering">Заказать приложение</a>
                         <span class="dropdown">
                             <a class="header-button header-button-menu" href="/account">@context.User.Identity.Name</a>
                             <div class="dropdown-menu">

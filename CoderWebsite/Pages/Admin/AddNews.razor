@@ -37,10 +37,9 @@
 @code {
     private AddNewsModel model = new AddNewsModel();
 
-    [Parameter]
-    public bool EnableTitle { get; set; } = true;
+    [Parameter] public bool EnableTitle { get; set; } = true;
 
-    public void Add()
+    private void Add()
     {
         var newsModel = new News
         {

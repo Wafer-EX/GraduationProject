@@ -1,6 +1,9 @@
 ﻿@using CoderWebsite.Models
 @using Microsoft.AspNetCore.Identity
 
+@inject SignInManager<User> SignInManager
+@inject NavigationManager NavigationManager
+
 <header>
     <div class="header">
         <span class="header-title">кодер</span>
@@ -25,7 +28,7 @@
                             <a class="header-button header-button-menu" href="/account">@context.User.Identity.Name</a>
                             <div class="dropdown-menu">
                                 <a href="/account">Личный кабинет</a>
-                                <a href="/Identity/Account/Logout">Выход</a>
+                                <a href="/logout-middleware">Выход</a>
                             </div>
                         </span>
                     </Authorized>
@@ -38,3 +41,11 @@
         </span>
     </div>
 </header>
+
+@code {
+    private async void Logout()
+    {
+        await SignInManager.SignOutAsync();
+        NavigationManager.NavigateTo("/", true, true);
+    }
+}

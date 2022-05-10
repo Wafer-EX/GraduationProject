@@ -46,6 +46,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseMiddleware<BlazorLoginMiddleware>();
+app.UseMiddleware<BlazorLogoutMiddleware>();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");

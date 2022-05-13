@@ -1,36 +1,46 @@
-﻿<div class="news-manager-container">
+﻿@using CoderWebsite.Models
+@inject ApplicationContext DbContext
+
+<div class="news-manager-container">
     <a class="news-manager-add-button" href="/admin/add-news">Добавить новость</a>
-    <div class="news-manager-list-container">
-        <div class="news-manager-list-element">
-            <span class="news-manager-list-element-title">Заголовок новости</span>
-            <span>
-                <a class="news-manager-list-element-button" href="/admin/edit-news/1">Изменить</a>
-                <a class="news-manager-list-element-button">Удалить</a>
-            </span>
+    @if (allNews.Count > 0)
+    {
+        <div class="news-manager-list-container">
+            @foreach (var news in allNews)
+            {
+                <div class="news-manager-list-element">
+                    <span class="news-manager-list-element-title">@CutTitle(news.Title)</span>
+                    <span>
+                        <a class="news-manager-list-element-button" href="/admin/edit-news/@news.Id">Изменить</a>
+                        <a class="news-manager-list-element-button" @onclick="() => DeleteNews(news.Id)">Удалить</a>
+                    </span>
+                </div>
+            }
         </div>
-
-
-        <div class="news-manager-list-element">
-            <span class="news-manager-list-element-title">Заголовок новости</span>
-            <span>
-                <a class="news-manager-list-element-button" href="/admin/edit-news/1">Изменить</a>
-                <a class="news-manager-list-element-button">Удалить</a>
-            </span>
-        </div>
-        <div class="news-manager-list-element">
-            <span class="news-manager-list-element-title">Заголовок новости</span>
-            <span>
-                <a class="news-manager-list-element-button" href="/admin/edit-news/1">Изменить</a>
-                <a class="news-manager-list-element-button">Удалить</a>
-            </span>
-        </div>
-        <div class="news-manager-list-element">
-            <span class="news-manager-list-element-title">Заголовок новости</span>
-            <span>
-                <a class="news-manager-list-element-button" href="/admin/edit-news/1">Изменить</a>
-                <a class="news-manager-list-element-button">Удалить</a>
-            </span>
-        </div>
-
-    </div>
+    }
+    else
+    {
+        <span class="news-manager-no-elements-text">На данный момент новостей не добавлено.</span>
+    }
 </div>
+
+@code {
+    private List<News> allNews;
+
+    protected override void OnInitialized() => allNews = DbContext.News.ToList();
+
+    private string CutTitle(string title)
+    {
+        if (title.Length > 32)
+            return title.Substring(0, 32) + "...";
+        else return title;
+    }
+
+    private void DeleteNews(int id)
+    {
+        DbContext.News.Remove(allNews.Where(news => news.Id == id).First());
+        DbContext.SaveChanges();
+        allNews = DbContext.News.ToList();
+        StateHasChanged();
+    }
+}

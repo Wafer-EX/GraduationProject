@@ -34,7 +34,7 @@
     transition: .3s;
     padding: 2px 24px 2px 24px;
     border-radius: 14px;
-    margin: 16px;
+    margin: 0 8px 32px 8px;
 }
 
     .admin-panel-tab:hover {

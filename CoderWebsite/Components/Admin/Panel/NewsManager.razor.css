@@ -66,3 +66,10 @@
         background: linear-gradient(90deg, #7575ff 0%, #bc75ff 100%);
         cursor: pointer;
     }
+
+.news-manager-no-elements-text {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: white;
+    margin-top: 32px;
+}

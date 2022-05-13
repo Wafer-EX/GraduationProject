@@ -12,11 +12,27 @@
 </div>
 
 @code {
+    private string title;
+
     private string text;
+
     [Parameter] public int Id { get; set; }
+
     [Parameter] public string? Date { get; set; }
-    [Parameter] public string? Title { get; set; }
+
+    [Parameter] public string? Title
+    {
+        get => title;
+        set
+        {
+            if (value.Length > 32)
+                title = value.Substring(0, 32) + "...";
+            else title = value;
+        }
+    }
+
     [Parameter] public string? Style { get; set; }
+
     [Parameter] public string? Text
     {
         get => text;

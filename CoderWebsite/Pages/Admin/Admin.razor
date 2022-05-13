@@ -1,8 +1,51 @@
 ﻿@page "/admin"
+@using CoderWebsite.Components
 
-<!--Список новостей с кнопками изменения и удаления. И большая кнопка добавить-->
-<!--Список пользователей с возможностью перехода на страницу просмотра заказов определенного пользователя-->
+<PageBlock>
+    <div class="admin-panel-title-container">
+        <span class="admin-panel-title">Панель администратора</span>
+        <span class="admin-panel-title-mail">pochta@mail.ru</span>
+    </div>
+    <div class="admin-panel-tabs-container">
+        <button class="admin-panel-tab @(GetStyle(AdminPanelSelection.NewsControl))"
+            @onclick="() => ChangeSelection(AdminPanelSelection.NewsControl)">
+            Управление новостями
+        </button>
+        <button class="admin-panel-tab @(GetStyle(AdminPanelSelection.UserList))"
+            @onclick="() => ChangeSelection(AdminPanelSelection.UserList)">
+            Список пользователей
+        </button>
+    </div>
+    <div>
+        <div style="@(GetDisplay(AdminPanelSelection.NewsControl))">News control</div>
+        <div style="@(GetDisplay(AdminPanelSelection.UserList))">User list</div>
+    </div>
+</PageBlock>
 
 @code {
+    private AdminPanelSelection tabSelection = AdminPanelSelection.NewsControl;
 
+    private void ChangeSelection(AdminPanelSelection selection)
+    {
+        tabSelection = selection;
+        StateHasChanged();
+    }
+
+    private string GetStyle(AdminPanelSelection selection)
+    {
+        if (selection == tabSelection) return "admin-panel-tab-selected";
+        else return "";
+    }
+
+    private string GetDisplay(AdminPanelSelection selection)
+    {
+        if (selection != tabSelection) return "display: none;";
+        else return "";
+    }
+
+    private enum AdminPanelSelection
+    {
+        NewsControl,
+        UserList
+    }
 }

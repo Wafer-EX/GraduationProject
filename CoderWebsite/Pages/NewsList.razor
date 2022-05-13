@@ -14,13 +14,13 @@
         <div class="news-list-elements-container">
             @if (allNews != null && allNews.Count > 0)
             {
-                @foreach (var news in allNews)
+                @for (int i = 0; i < allNews.Count; i++)
                 {
-                    <NewsListElement Style="@($"animation-delay: .{news.Id}s")"
-                    Id="@(news.Id)"
-                    Date="@(news.Date)"
-                    Title="@(news.Title)"
-                    Text="@(news.Text)"/>
+                    <NewsListElement Style="@($"animation-delay: .{i}s")"
+                        Id="@(allNews[i].Id)"
+                        Date="@(allNews[i].Date)"
+                        Title="@(allNews[i].Title)"
+                        Text="@(allNews[i].Text)"/>
                 }
             }
             else

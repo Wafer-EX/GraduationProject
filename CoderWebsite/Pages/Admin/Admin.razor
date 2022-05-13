@@ -1,5 +1,6 @@
 ﻿@page "/admin"
 @using CoderWebsite.Components
+@using CoderWebsite.Components.Admin.Panel
 
 <PageBlock>
     <div class="admin-panel-title-container">
@@ -17,7 +18,9 @@
         </button>
     </div>
     <div>
-        <div style="@(GetDisplay(AdminPanelSelection.NewsControl))">News control</div>
+        <div style="@(GetDisplay(AdminPanelSelection.NewsControl))">
+            <NewsManager />
+        </div>
         <div style="@(GetDisplay(AdminPanelSelection.UserList))">User list</div>
     </div>
 </PageBlock>

@@ -36,8 +36,5 @@
 
     [Parameter] public int Id { get; set; }
 
-    protected override void OnInitialized()
-    {
-        allNews = DbContext.News.ToList();
-    }
+    protected override void OnInitialized() => allNews = DbContext.News.ToList();
 }

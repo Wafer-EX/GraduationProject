@@ -1,0 +1,27 @@
+﻿@using CoderWebsite.Models
+@inject ApplicationContext DbContext
+
+<div class="user-manager-container">
+    @if (allUsers.Count > 0)
+    {
+        <div class="user-manager-list-container">
+            @foreach (var user in allUsers)
+            {
+                <div class="user-manager-list-element">
+                    <span class="user-manager-list-element-title">@user.Email</span>
+                    <a class="user-manager-list-element-button" href="#">Посмотреть заказы</a>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <span class="user-manager-no-elements-text">На данный момент новостей не добавлено.</span>
+    }
+</div>
+
+@code {
+    private List<User> allUsers;
+
+    protected override void OnInitialized() => allUsers = DbContext.Users.ToList();
+}

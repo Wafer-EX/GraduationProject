@@ -1,0 +1,55 @@
+﻿.user-manager-container {
+    background-color: #0e0e0e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 42px;
+    border-radius: 24px;
+}
+
+.user-manager-list-container {
+    background-color: #171717;
+    width: 640px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.user-manager-list-element {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #121212;
+}
+
+.user-manager-list-element-title {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: white;
+}
+
+.user-manager-list-element-button {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 14px;
+    color: white;
+    background-color: #171717;
+    padding: 2px 16px 2px 16px;
+    transition: .3s;
+}
+
+    .user-manager-list-element-button:hover {
+        color: black;
+        background-color: #bc75ff;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+.user-manager-no-elements-text {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: white;
+    margin-top: 32px;
+}

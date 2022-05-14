@@ -75,6 +75,7 @@
     .dropdown-menu a {
         font-family: NeueMachina-Medium;
         font-size: 16px;
+        text-align: center;
         padding: 20px;
         width: calc(100% - 40px);
         display: flex;

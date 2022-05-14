@@ -23,12 +23,23 @@
             <CascadingAuthenticationState>
                 <AuthorizeView>
                     <Authorized>
-                        <a class="header-button" href="/ordering">Заказать приложение</a>
+                        <AuthorizeView Roles="admin" Context="adminContext">
+                            <NotAuthorized>
+                                <a class="header-button" href="/ordering">Заказать приложение</a>
+                            </NotAuthorized>
+                        </AuthorizeView>
+
                         <span class="dropdown">
                             <a class="header-button header-button-menu" href="/account">@context.User.Identity.Name</a>
                             <div class="dropdown-menu">
-                                <a href="/account">Личный кабинет</a>
-                                <a href="/admin">Панель администратора</a>
+                                <AuthorizeView Roles="admin" Context="adminContext">
+                                    <Authorized>
+                                        <a href="/admin">Панель администратора</a>
+                                    </Authorized>
+                                    <NotAuthorized>
+                                        <a href="/account">Личный кабинет</a>
+                                    </NotAuthorized>
+                                </AuthorizeView>
                                 <a href="/logout-middleware">Выход</a>
                             </div>
                         </span>

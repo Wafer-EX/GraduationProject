@@ -9,6 +9,8 @@
 
 @inject ApplicationContext DbContext
 @inject UserManager<User> UserManager
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationState
 
 <PageBlock>
     <div class="user-orders-title-container">
@@ -33,6 +35,9 @@
 
     protected override void OnInitialized()
     {
+        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
+        var user = UserManager.GetUserAsync(authState.User).Result;
+        if (user == null) NavigationManager.NavigateTo("/login");
         checkedUser = DbContext.Users.Where(user => user.Id == Id).Include(user => user.Orders).First();
     }
 }

@@ -15,26 +15,35 @@
 <PageTitle>Заказы пользователя | Кодер</PageTitle>
 
 <PageBlock>
-    @if (checkedUser != null)
-    {
-        <div class="user-orders-title-container">
-            <span class="user-orders-title">Заказы пользователя @($"{checkedUser.LastName} {checkedUser.FirstName} {checkedUser.MiddleName}")</span>
-            <span class="user-orders-title-fio">@checkedUser.Email</span>
-        </div>
-
-        <div class="user-orders-container">
-            <div class="user-orders-list-container">
-                @foreach (var order in checkedUser.Orders)
+    <CascadingAuthenticationState>
+        <AuthorizeView Roles="admin">
+            <Authorized>
+                @if (checkedUser != null)
                 {
-                    <OrderLine Order="order" />
+                    <div class="user-orders-title-container">
+                        <span class="user-orders-title">Заказы пользователя @($"{checkedUser.LastName} {checkedUser.FirstName} {checkedUser.MiddleName}")</span>
+                        <span class="user-orders-title-fio">@checkedUser.Email</span>
+                    </div>
+
+                    <div class="user-orders-container">
+                        <div class="user-orders-list-container">
+                            @foreach (var order in checkedUser.Orders)
+                            {
+                                <OrderLine Order="order" />
+                            }
+                        </div>
+                    </div>
                 }
-            </div>
-        </div>
-    }
-    else
-    {
-        <div class="user-orders-no-user-message">Пользователь не найден.</div>
-    }
+                else
+                {
+                    <div class="user-orders-no-user-message">Пользователь не найден.</div>
+                }
+            </Authorized>
+            <NotAuthorized>
+                <div class="access-error-message">Только администратор имеет доступ к данному разделу.</div>
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
 </PageBlock>
 
 @code {

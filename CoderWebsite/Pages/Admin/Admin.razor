@@ -13,28 +13,37 @@
 <PageTitle>Панель администратора | Кодер</PageTitle>
 
 <PageBlock>
-    <div class="admin-panel-title-container">
-        <span class="admin-panel-title">Панель администратора</span>
-        <span class="admin-panel-title-mail">@user.Email</span>
-    </div>
-    <div class="admin-panel-tabs-container">
-        <button class="admin-panel-tab @(GetStyle(AdminPanelSelection.NewsControl))"
-            @onclick="() => ChangeSelection(AdminPanelSelection.NewsControl)">
-            Управление новостями
-        </button>
-        <button class="admin-panel-tab @(GetStyle(AdminPanelSelection.UserList))"
-            @onclick="() => ChangeSelection(AdminPanelSelection.UserList)">
-            Список пользователей
-        </button>
-    </div>
-    <div>
-        <div style="@(GetDisplay(AdminPanelSelection.NewsControl))">
-            <NewsManager />
-        </div>
-        <div style="@(GetDisplay(AdminPanelSelection.UserList))">
-            <UserControl />
-        </div>
-    </div>
+    <CascadingAuthenticationState>
+        <AuthorizeView Roles="admin">
+            <Authorized>
+                <div class="admin-panel-title-container">
+                    <span class="admin-panel-title">Панель администратора</span>
+                    <span class="admin-panel-title-mail">@user.Email</span>
+                </div>
+                <div class="admin-panel-tabs-container">
+                    <button class="admin-panel-tab @(GetStyle(AdminPanelSelection.NewsControl))"
+                        @onclick="() => ChangeSelection(AdminPanelSelection.NewsControl)">
+                        Управление новостями
+                    </button>
+                    <button class="admin-panel-tab @(GetStyle(AdminPanelSelection.UserList))"
+                        @onclick="() => ChangeSelection(AdminPanelSelection.UserList)">
+                        Список пользователей
+                    </button>
+                </div>
+                <div>
+                    <div style="@(GetDisplay(AdminPanelSelection.NewsControl))">
+                        <NewsManager />
+                    </div>
+                    <div style="@(GetDisplay(AdminPanelSelection.UserList))">
+                        <UserControl />
+                    </div>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="access-error-message">Только администратор имеет доступ к данному разделу.</div>
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
 </PageBlock>
 
 @code {

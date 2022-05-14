@@ -13,35 +13,44 @@
 <PageTitle>Изменить новость | Кодер</PageTitle>
 
 <PageBlock>
-    @if (news != null)
-    {
-        <div class="edit-news-container">
-            @if (EnableTitle)
-            {
-                <div class="edit-news-title">Изменить новость</div>
-            }
-            <EditForm Model="@model" OnValidSubmit=Edit>
-                <div class="edit-news-form-container">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
+    <CascadingAuthenticationState>
+        <AuthorizeView Roles="admin">
+            <Authorized>
+                @if (news != null)
+                {
+                    <div class="edit-news-container">
+                        @if (EnableTitle)
+                        {
+                            <div class="edit-news-title">Изменить новость</div>
+                        }
+                        <EditForm Model="@model" OnValidSubmit=Edit Context="editNewsContext">
+                            <div class="edit-news-form-container">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary />
 
-                    <span class="edit-news-form-input-title">Заголовок новости</span>
-                    <InputText @bind-Value="model.Title" class="edit-news-form-input" />
+                                <span class="edit-news-form-input-title">Заголовок новости</span>
+                                <InputText @bind-Value="model.Title" class="edit-news-form-input" />
 
-                    <span class="edit-news-form-input-title">Текст новости</span>
-                    <InputTextArea class="edit-news-form-inputtextarea" @bind-Value="model.Text" />
+                                <span class="edit-news-form-input-title">Текст новости</span>
+                                <InputTextArea class="edit-news-form-inputtextarea" @bind-Value="model.Text" />
 
-                    <div class="edit-news-form-button-container">
-                        <button type="submit" class="edit-news-form-button">Изменить новость</button>
+                                <div class="edit-news-form-button-container">
+                                    <button type="submit" class="edit-news-form-button">Изменить новость</button>
+                                </div>
+                            </div>
+                        </EditForm>
                     </div>
-                </div>
-            </EditForm>
-        </div>
-    }
-    else
-    {
-        <div class="edit-news-no-news-message">Новость по данному адресу не найдена.</div>
-    }
+                }
+                else
+                {
+                    <div class="edit-news-no-news-message">Новость по данному адресу не найдена.</div>
+                }
+            </Authorized>
+            <NotAuthorized>
+                <div class="access-error-message">Только администратор имеет доступ к данному разделу.</div>
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
 </PageBlock>
 
 @code {

@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>fba0a85e-9930-4c9c-b6bd-73f39732a403</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceUrl>{Scheme}://localhost:80</DockerServiceUrl>
     <DockerServiceName>coderwebsite</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

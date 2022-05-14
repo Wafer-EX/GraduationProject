@@ -55,7 +55,7 @@
     {
         var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
         user = UserManager.GetUserAsync(authState.User).Result;
-        if (user == null) NavigationManager.NavigateTo("/login");
+        if (user == null) NavigationManager.NavigateTo("/login", true, true);
     }
 
     private void ChangeSelection(AdminPanelSelection selection)

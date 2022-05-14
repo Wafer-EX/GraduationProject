@@ -62,7 +62,7 @@
     {
         var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
         var user = UserManager.GetUserAsync(authState.User).Result;
-        if (user == null) NavigationManager.NavigateTo("/login");
+        if (user == null) NavigationManager.NavigateTo("/login", true, true);
 
         var dbCheckedUser = DbContext.Users.Where(user => user.Id == Id).Include(user => user.Orders);
         if (dbCheckedUser.Count() > 0)

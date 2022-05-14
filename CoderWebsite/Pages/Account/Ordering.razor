@@ -106,7 +106,7 @@
         user = UserManager.GetUserAsync(authState.User).Result;
 
         if (user == null)
-            NavigationManager.NavigateTo("login");
+            NavigationManager.NavigateTo("login", true, true);
 
         model.FIO = $"{user.FirstName} {user.LastName} {user.MiddleName}";
         model.Email = $"{user.Email}";

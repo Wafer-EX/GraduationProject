@@ -68,7 +68,7 @@
     {
         var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
         var user = UserManager.GetUserAsync(authState.User).Result;
-        if (user == null) NavigationManager.NavigateTo("/login");
+        if (user == null) NavigationManager.NavigateTo("/login", true, true);
 
         var dbNews = DbContext.News.Where(obj => obj.Id == Id);
         if (dbNews.Count() != 0)

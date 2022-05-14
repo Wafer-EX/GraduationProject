@@ -1,5 +1,6 @@
 ﻿using CoderWebsite.Models;
 using CoderWebsite.Models.Pages.Account;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 
 namespace CoderWebsite.Middleware
@@ -12,7 +13,7 @@ namespace CoderWebsite.Middleware
 
         public BlazorLoginMiddleware(RequestDelegate next) => this.next = next;
 
-        public async Task Invoke(HttpContext context, UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
+        public async Task Invoke(HttpContext context, UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, NavigationManager navigationManager)
         {
             if (context.Request.Path == "/login-middleware")
             {
@@ -22,10 +23,11 @@ namespace CoderWebsite.Middleware
                 if (result.Succeeded)
                 {
                     bool isAdmin = await userManager.IsInRoleAsync(user, "admin");
-                    if (isAdmin) context.Response.Redirect("/admin");
-                    else context.Response.Redirect("/account");
+                    if (isAdmin) context.Response.Redirect("/admin", true);
+                    else context.Response.Redirect("/account", true);
+
                 }
-                else context.Response.Redirect("/error");
+                else context.Response.Redirect("/error", true);
 
                 if (LoginsData.Count > 0)
                     LoginsData.Remove(LoginsData.Last());

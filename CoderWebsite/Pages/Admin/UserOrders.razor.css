@@ -1,0 +1,39 @@
+﻿.user-orders-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    min-height: 60px;
+}
+
+.user-orders-title {
+    font-family: Micra-Bold;
+    font-size: 22px;
+    color: white;
+}
+
+.user-orders-title-fio {
+    font-family: NeueMachina-Medium;
+    font-size: 20px;
+    color: white;
+}
+
+.user-orders-container {
+    background-color: #0e0e0e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 42px;
+    border-radius: 24px;
+    animation-duration: .5s;
+    animation-name: slidein;
+}
+
+.user-orders-list-container {
+    background-color: #171717;
+    width: 640px;
+    border-radius: 20px;
+    margin-top: 32px;
+    overflow: hidden;
+}

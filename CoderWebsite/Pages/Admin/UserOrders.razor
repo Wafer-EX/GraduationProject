@@ -1,5 +1,38 @@
-﻿@page "/admin/user-orders/{Id:int}"
+﻿@page "/admin/user-orders/{Id}"
+
+@using CoderWebsite.Components
+@using CoderWebsite.Components.Account
+@using CoderWebsite.Components.Admin.UserOrders
+@using CoderWebsite.Models
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+
+@inject ApplicationContext DbContext
+@inject UserManager<User> UserManager
+
+<PageBlock>
+    <div class="user-orders-title-container">
+        <span class="user-orders-title">Заказы пользователя @($"{checkedUser.LastName} {checkedUser.FirstName} {checkedUser.MiddleName}")</span>
+        <span class="user-orders-title-fio">@checkedUser.Email</span>
+    </div>
+
+    <div class="user-orders-container">
+        <div class="user-orders-list-container">
+            @foreach (var order in checkedUser.Orders)
+            {
+                <OrderLine Order="order" />
+            }
+        </div>
+    </div>
+</PageBlock>
 
 @code {
-    [Parameter] public int Id { get; set; }
+    private User checkedUser;
+
+    [Parameter] public string Id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        checkedUser = DbContext.Users.Where(user => user.Id == Id).Include(user => user.Orders).First();
+    }
 }

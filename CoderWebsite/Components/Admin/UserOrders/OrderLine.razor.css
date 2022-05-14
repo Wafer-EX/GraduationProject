@@ -1,0 +1,30 @@
+﻿.order-line-container {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #121212;
+}
+
+.order-line-title {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: white;
+}
+
+.order-line-select {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: white;
+    background-color: #0e0e0e;
+    padding: 4px;
+    border: 2px solid #bc75ff;
+    border-radius: 8px;
+    transition: .3s;
+}
+
+    .order-line-select:hover {
+        border-color: white;
+        cursor: pointer;
+        transition: .3s;
+    }

@@ -1,11 +1,18 @@
 ﻿@page "/admin"
+
 @using CoderWebsite.Components
 @using CoderWebsite.Components.Admin.Panel
+@using CoderWebsite.Models
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<User> UserManager
+@inject AuthenticationStateProvider AuthenticationState
+@inject ApplicationContext Context
 
 <PageBlock>
     <div class="admin-panel-title-container">
         <span class="admin-panel-title">Панель администратора</span>
-        <span class="admin-panel-title-mail">pochta@mail.ru</span>
+        <span class="admin-panel-title-mail">@user.Email</span>
     </div>
     <div class="admin-panel-tabs-container">
         <button class="admin-panel-tab @(GetStyle(AdminPanelSelection.NewsControl))"
@@ -22,13 +29,22 @@
             <NewsManager />
         </div>
         <div style="@(GetDisplay(AdminPanelSelection.UserList))">
-            <UserManager />
+            <UserControl />
         </div>
     </div>
 </PageBlock>
 
 @code {
     private AdminPanelSelection tabSelection = AdminPanelSelection.NewsControl;
+
+    private User user;
+
+    protected override void OnInitialized()
+    {
+        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
+        user = UserManager.GetUserAsync(authState.User).Result;
+        base.OnInitialized();
+    }
 
     private void ChangeSelection(AdminPanelSelection selection)
     {

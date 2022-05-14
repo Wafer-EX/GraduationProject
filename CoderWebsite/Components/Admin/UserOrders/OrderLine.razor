@@ -1,0 +1,16 @@
+﻿@using CoderWebsite.Models
+
+<div class="order-line-container">
+    <span class="order-line-title">@Order.Name</span>
+    <select class="order-line-select">
+        <option>Заявка принята</option>
+        <option>Договор заключен</option>
+        <option>Техническое задание оформлено</option>
+        <option>В работе</option>
+        <option>Заказ завершен</option>
+    </select>
+</div>
+
+@code {
+    [Parameter] public Order Order { get; set; }
+}

@@ -1,4 +1,6 @@
 ﻿@using CoderWebsite.Models
+@using Microsoft.AspNetCore.Identity
+
 @inject ApplicationContext DbContext
 
 <div class="user-manager-container">
@@ -9,7 +11,7 @@
             {
                 <div class="user-manager-list-element">
                     <span class="user-manager-list-element-title">@user.Email</span>
-                    <a class="user-manager-list-element-button" href="#">Посмотреть заказы</a>
+                    <a class="user-manager-list-element-button" href="/admin/user-orders/@user.Id">Посмотреть заказы</a>
                 </div>
             }
         </div>

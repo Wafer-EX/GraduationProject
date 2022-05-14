@@ -15,35 +15,44 @@
 <PageTitle>Вход | Кодер</PageTitle>
 
 <PageBlock>
-    <EditForm Model="@loginModel" OnValidSubmit="Auth">
-        <div class="form-block-container">
-            <span class="form-block">
-                <span class="form-title">Вход</span>
-                <span class="form-errors-container">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                    <span class="validation-message">@error</span>
-                </span>
+    <CascadingAuthenticationState>
+        <AuthorizeView>
+            <Authorized>
+                <div class="access-error-message">Вы уже авторизованы.</div>
+            </Authorized>
+            <NotAuthorized>
+                <EditForm Model="@loginModel" OnValidSubmit="Auth" Context="authContext">
+                    <div class="form-block-container">
+                        <span class="form-block">
+                            <span class="form-title">Вход</span>
+                            <span class="form-errors-container">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary />
+                                <span class="validation-message">@error</span>
+                            </span>
 
-                <div class="form-input-field-container">
-                    <span class="form-input-title">Электронная почта</span>
-                    <InputText class="form-input-field" @bind-Value="loginModel.Email" />
-                </div>
-                <div class="form-input-field-container">
-                    <span class="form-input-title">Пароль</span>
-                    <InputText class="form-input-field" @bind-Value="loginModel.Password" />
-                </div>
-                <div class="input-links-container">
-                    <div class="form-input-checkbox-container">
-                        <InputCheckbox @bind-Value="loginModel.RememberMe"/>
-                        <span>Запомнить</span>
+                            <div class="form-input-field-container">
+                                <span class="form-input-title">Электронная почта</span>
+                                <InputText class="form-input-field" @bind-Value="loginModel.Email" />
+                            </div>
+                            <div class="form-input-field-container">
+                                <span class="form-input-title">Пароль</span>
+                                <InputText class="form-input-field" @bind-Value="loginModel.Password" />
+                            </div>
+                            <div class="input-links-container">
+                                <div class="form-input-checkbox-container">
+                                    <InputCheckbox @bind-Value="loginModel.RememberMe"/>
+                                    <span>Запомнить</span>
+                                </div>
+                                <a href="#">Забыли пароль?</a>
+                            </div>
+                            <button class="form-input-button" type="submit">Войти</button>
+                        </span>
                     </div>
-                    <a href="#">Забыли пароль?</a>
-                </div>
-                <button class="form-input-button" type="submit">Войти</button>
-            </span>
-        </div>
-    </EditForm>
+                </EditForm>
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
 </PageBlock>
 
 @code {

@@ -15,50 +15,59 @@
 <PageTitle>Регистрация | Кодер</PageTitle>
 
 <PageBlock>
-    <EditForm Model="@registerModel" OnValidSubmit="Reg">
-        <div class="form-block-container">
-            <span class="form-block">
-                <span class="form-title">Регистрация</span>
-                <span class="form-errors-container">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                    <span class="validation-message">@error</span>
-                </span>
+    <CascadingAuthenticationState>
+        <AuthorizeView>
+            <Authorized>
+                <div class="access-error-message">Вы уже авторизованы.</div>
+            </Authorized>
+            <NotAuthorized>
+                <EditForm Model="@registerModel" OnValidSubmit="Reg" Context="registerContext">
+                    <div class="form-block-container">
+                        <span class="form-block">
+                            <span class="form-title">Регистрация</span>
+                            <span class="form-errors-container">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary />
+                                <span class="validation-message">@error</span>
+                            </span>
 
-                <div class="form-input-field-container">
-                    <span class="form-input-title">Имя</span>
-                    <InputText class="form-input-field" @bind-Value="registerModel.Firstname" />
-                </div>
+                            <div class="form-input-field-container">
+                                <span class="form-input-title">Имя</span>
+                                <InputText class="form-input-field" @bind-Value="registerModel.Firstname" />
+                            </div>
 
-                <div class="form-input-field-container">
-                    <span class="form-input-title">Фамилия</span>
-                    <InputText class="form-input-field" @bind-Value="registerModel.Lastname" />
-                </div>
+                            <div class="form-input-field-container">
+                                <span class="form-input-title">Фамилия</span>
+                                <InputText class="form-input-field" @bind-Value="registerModel.Lastname" />
+                            </div>
 
-                <div class="form-input-field-container">
-                    <span class="form-input-title">Отчество</span>
-                    <InputText class="form-input-field" @bind-Value="registerModel.Middlename" />
-                </div>
+                            <div class="form-input-field-container">
+                                <span class="form-input-title">Отчество</span>
+                                <InputText class="form-input-field" @bind-Value="registerModel.Middlename" />
+                            </div>
 
-                <div class="form-input-field-container">
-                    <span class="form-input-title">Электронная почта</span>
-                    <InputText class="form-input-field" @bind-Value="registerModel.Email" />
-                </div>
-                <div class="form-input-field-container">
-                    <span class="form-input-title">Пароль</span>
-                    <InputText class="form-input-field" @bind-Value="registerModel.Password" />
-                </div>
-                <div class="form-input-field-container">
-                    <span class="form-input-title">Повторите пароль</span>
-                    <InputText class="form-input-field" @bind-Value="registerModel.PasswordConfirmation" />
-                </div>
-                <div class="input-links-container">
-                    <a href="/login">Уже есть аккаунт?</a>
-                </div>
-                <button class="form-input-button" type="submit">Зарегистрироваться</button>
-            </span>
-        </div>
-    </EditForm>
+                            <div class="form-input-field-container">
+                                <span class="form-input-title">Электронная почта</span>
+                                <InputText class="form-input-field" @bind-Value="registerModel.Email" />
+                            </div>
+                            <div class="form-input-field-container">
+                                <span class="form-input-title">Пароль</span>
+                                <InputText class="form-input-field" @bind-Value="registerModel.Password" />
+                            </div>
+                            <div class="form-input-field-container">
+                                <span class="form-input-title">Повторите пароль</span>
+                                <InputText class="form-input-field" @bind-Value="registerModel.PasswordConfirmation" />
+                            </div>
+                            <div class="input-links-container">
+                                <a href="/login">Уже есть аккаунт?</a>
+                            </div>
+                            <button class="form-input-button" type="submit">Зарегистрироваться</button>
+                        </span>
+                    </div>
+                </EditForm>
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
 </PageBlock>
 
 @code {

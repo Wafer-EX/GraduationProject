@@ -8,14 +8,11 @@ namespace CoderWebsite.Middleware
     {
         public static List<(User, LoginModel)> LoginsData { get; private set; } = new List<(User, LoginModel)>();
 
-        private readonly RequestDelegate _next;
+        private readonly RequestDelegate next;
 
-        public BlazorLoginMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
+        public BlazorLoginMiddleware(RequestDelegate next) => this.next = next;
 
-        public async Task Invoke(HttpContext context, SignInManager<User> signInManager)
+        public async Task Invoke(HttpContext context, UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
         {
             if (context.Request.Path == "/login-middleware")
             {
@@ -23,14 +20,17 @@ namespace CoderWebsite.Middleware
                 var loginData = LoginsData.Last().Item2;
                 var result = await signInManager.PasswordSignInAsync(user, loginData.Password, loginData.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
-                    context.Response.Redirect("/account");
-                else
-                    context.Response.Redirect("/error");
+                {
+                    bool isAdmin = await userManager.IsInRoleAsync(user, "admin");
+                    if (isAdmin) context.Response.Redirect("/admin");
+                    else context.Response.Redirect("/account");
+                }
+                else context.Response.Redirect("/error");
 
                 if (LoginsData.Count > 0)
                     LoginsData.Remove(LoginsData.Last());
             }
-            else await _next.Invoke(context);
+            else await next.Invoke(context);
         }
     }
 }

@@ -46,3 +46,12 @@
     justify-content: center;
     align-items: center;
 }
+
+.user-orders-no-orders-message {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -26,12 +26,19 @@
                     </div>
 
                     <div class="user-orders-container">
-                        <div class="user-orders-list-container">
+                        @if (checkedUser.Orders.Count > 0)
+                        {
+                            <div class="user-orders-list-container">
                             @foreach (var order in checkedUser.Orders)
                             {
                                 <OrderLine Order="order" />
                             }
-                        </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="user-orders-no-orders-message">Заказы пользователя не найдены.</div>
+                        }
                     </div>
                 }
                 else

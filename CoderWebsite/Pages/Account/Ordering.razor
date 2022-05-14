@@ -14,74 +14,83 @@
 <PageTitle>Оформление заказа | Кодер</PageTitle>
 
 <PageBlock ColorFrom="#121212">
-    <div class="ordering-title">Оформление заказа</div>
-    <EditForm Model="@model" OnValidSubmit="Order">
-        <div class="ordering-container">
-            <div class="ordering-form-title">Тип приложения</div>
+    <CascadingAuthenticationState>
+        <AuthorizeView Roles="admin">
+            <Authorized>
+                <div class="access-error-message">Только обычный пользователь имеет доступ к данной странице.</div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="ordering-title">Оформление заказа</div>
+                <EditForm Model="@model" OnValidSubmit="Order" Context="orderingContext">
+                    <div class="ordering-container">
+                        <div class="ordering-form-title">Тип приложения</div>
 
-            <div class="ordering-type-container">
-                <span class="ordering-type-variant-container">
-                    <span class="ordering-type-variant-title">Веб-сайт PWA</span>
-                    <button class="ordering-type-variant-button
-                        @(GetStyle(OrderAppType.Website_PWA))"
-                        @onclick="() => ChangeSelection(OrderAppType.Website_PWA)">
-                        @(GetSelectText(OrderAppType.Website_PWA))
-                    </button>
-                </span>
-                <span class="ordering-type-variant-container">
-                    <span class="ordering-type-variant-title">Веб-сайт SPA</span>
-                    <button class="ordering-type-variant-button
-                        @(GetStyle(OrderAppType.Website_SPA))"
-                        @onclick="() => ChangeSelection(OrderAppType.Website_SPA)">
-                        @(GetSelectText(OrderAppType.Website_SPA))
-                    </button>
-                </span>
-                <span class="ordering-type-variant-container">
-                    <span class="ordering-type-variant-title">Микросервис gRPC</span>
-                    <button class="ordering-type-variant-button
-                        @(GetStyle(OrderAppType.Microservice_gRPC))"
-                        @onclick="() => ChangeSelection(OrderAppType.Microservice_gRPC)">
-                        @(GetSelectText(OrderAppType.Microservice_gRPC))
-                    </button>
-                </span>
-                <span class="ordering-type-variant-container">
-                    <span class="ordering-type-variant-title">Микросервис ZeroC Ice</span>
-                    <button class="ordering-type-variant-button
-                        @(GetStyle(OrderAppType.Microservice_ZeroC_Ice))"
-                        @onclick="() => ChangeSelection(OrderAppType.Microservice_ZeroC_Ice)">
-                        @(GetSelectText(OrderAppType.Microservice_ZeroC_Ice))
-                    </button>
-                </span>
-            </div>
+                        <div class="ordering-type-container">
+                            <span class="ordering-type-variant-container">
+                                <span class="ordering-type-variant-title">Веб-сайт PWA</span>
+                                <button class="ordering-type-variant-button
+                                    @(GetStyle(OrderAppType.Website_PWA))"
+                                    @onclick="() => ChangeSelection(OrderAppType.Website_PWA)">
+                                    @(GetSelectText(OrderAppType.Website_PWA))
+                                </button>
+                            </span>
+                            <span class="ordering-type-variant-container">
+                                <span class="ordering-type-variant-title">Веб-сайт SPA</span>
+                                <button class="ordering-type-variant-button
+                                    @(GetStyle(OrderAppType.Website_SPA))"
+                                    @onclick="() => ChangeSelection(OrderAppType.Website_SPA)">
+                                    @(GetSelectText(OrderAppType.Website_SPA))
+                                </button>
+                            </span>
+                            <span class="ordering-type-variant-container">
+                                <span class="ordering-type-variant-title">Микросервис gRPC</span>
+                                <button class="ordering-type-variant-button
+                                    @(GetStyle(OrderAppType.Microservice_gRPC))"
+                                    @onclick="() => ChangeSelection(OrderAppType.Microservice_gRPC)">
+                                    @(GetSelectText(OrderAppType.Microservice_gRPC))
+                                </button>
+                            </span>
+                            <span class="ordering-type-variant-container">
+                                <span class="ordering-type-variant-title">Микросервис ZeroC Ice</span>
+                                <button class="ordering-type-variant-button
+                                    @(GetStyle(OrderAppType.Microservice_ZeroC_Ice))"
+                                    @onclick="() => ChangeSelection(OrderAppType.Microservice_ZeroC_Ice)">
+                                    @(GetSelectText(OrderAppType.Microservice_ZeroC_Ice))
+                                </button>
+                            </span>
+                        </div>
 
-            <div class="ordering-form-title">Контактные данные</div>
+                        <div class="ordering-form-title">Контактные данные</div>
 
-            <div class="ordering-input-container">
-                <span class="form-errors-container">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-                </span>
+                        <div class="ordering-input-container">
+                            <span class="form-errors-container">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary />
+                            </span>
 
-                <div class="ordering-input-field-container">
-                    <span class="ordering-input-title">ФИО</span>
-                    <InputText class="ordering-input-field" @bind-Value="model.FIO" />
-                </div>
-                <div class="ordering-input-field-container">
-                    <span class="ordering-input-title">Название заказа</span>
-                    <InputText class="ordering-input-field" @bind-Value="model.Name" />
-                </div>
-                <div class="ordering-input-field-container">
-                    <span class="ordering-input-title">Номер телефона</span>
-                    <InputText class="ordering-input-field" @bind-Value="model.Phone" />
-                </div>
-                <div class="ordering-input-field-container">
-                    <span class="ordering-input-title">Электронная почта</span>
-                    <InputText class="ordering-input-field" @bind-Value="model.Email" />
-                </div>
-                <button class="ordering-input-button" type="submit">Оформить</button>
-            </div>
-        </div>
-    </EditForm>
+                            <div class="ordering-input-field-container">
+                                <span class="ordering-input-title">ФИО</span>
+                                <InputText class="ordering-input-field" @bind-Value="model.FIO" />
+                            </div>
+                            <div class="ordering-input-field-container">
+                                <span class="ordering-input-title">Название заказа</span>
+                                <InputText class="ordering-input-field" @bind-Value="model.Name" />
+                            </div>
+                            <div class="ordering-input-field-container">
+                                <span class="ordering-input-title">Номер телефона</span>
+                                <InputText class="ordering-input-field" @bind-Value="model.Phone" />
+                            </div>
+                            <div class="ordering-input-field-container">
+                                <span class="ordering-input-title">Электронная почта</span>
+                                <InputText class="ordering-input-field" @bind-Value="model.Email" />
+                            </div>
+                            <button class="ordering-input-button" type="submit">Оформить</button>
+                        </div>
+                    </div>
+                </EditForm>
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
 </PageBlock>
 
 @code {

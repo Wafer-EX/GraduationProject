@@ -6,12 +6,19 @@
 
 @inject ApplicationContext DbContext
 
-<PageTitle>@(news.Title) | Кодер</PageTitle>
+<PageTitle>@(news != null ? news.Title : "Новость не найдена") | Кодер</PageTitle>
 
 <PageBlock>
-    <Publication Title="@(news.Title)" Date="@(news.Date)">
-        @(news.Text)
-    </Publication>
+    @if (news != null)
+    {
+        <Publication Title="@(news.Title)" Date="@(news.Date)">
+            @(news.Text)
+        </Publication>
+    }
+    else
+    {
+        <div class="news-text-no-news">Новость не найдена.</div>
+    }
 </PageBlock>
 
 @code {
@@ -21,6 +28,8 @@
 
     protected override void OnInitialized()
     {
-        news = DbContext.News.Where(obj => obj.Id == Id).First();
+        var dbNews = DbContext.News.Where(obj => obj.Id == Id);
+        if (dbNews.Count() > 0)
+            news = dbNews.First();
     }
 }

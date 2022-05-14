@@ -3,9 +3,12 @@
 @using CoderWebsite.Components
 @using CoderWebsite.Models
 @using CoderWebsite.Models.Pages.Admin
+@using Microsoft.AspNetCore.Identity
 
+@inject UserManager<User> UserManager
 @inject ApplicationContext DbContext
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationState
 
 <PageTitle>Добавить новость | Кодер</PageTitle>
 
@@ -38,6 +41,13 @@
     private AddNewsModel model = new AddNewsModel();
 
     [Parameter] public bool EnableTitle { get; set; } = true;
+
+    protected override void OnInitialized()
+    {
+        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
+        var user = UserManager.GetUserAsync(authState.User).Result;
+        if (user == null) NavigationManager.NavigateTo("/login");
+    }
 
     private void Add()
     {

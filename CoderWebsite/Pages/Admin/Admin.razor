@@ -8,6 +8,7 @@
 @inject UserManager<User> UserManager
 @inject AuthenticationStateProvider AuthenticationState
 @inject ApplicationContext Context
+@inject NavigationManager NavigationManager
 
 <PageBlock>
     <div class="admin-panel-title-container">
@@ -43,7 +44,7 @@
     {
         var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
         user = UserManager.GetUserAsync(authState.User).Result;
-        base.OnInitialized();
+        if (user == null) NavigationManager.NavigateTo("/login");
     }
 
     private void ChangeSelection(AdminPanelSelection selection)

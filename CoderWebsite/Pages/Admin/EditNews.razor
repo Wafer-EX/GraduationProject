@@ -3,35 +3,45 @@
 @using CoderWebsite.Components
 @using CoderWebsite.Models
 @using CoderWebsite.Models.Pages.Admin
+@using Microsoft.AspNetCore.Identity
 
 @inject ApplicationContext DbContext
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationState
+@inject UserManager<User> UserManager
 
 <PageTitle>Изменить новость | Кодер</PageTitle>
 
 <PageBlock>
-    <div class="add-news-container">
-        @if (EnableTitle)
-        {
-            <div class="add-news-title">Изменить новость</div>
-        }
-        <EditForm Model="@model" OnValidSubmit=Edit>
-            <div class="add-news-form-container">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+    @if (news != null)
+    {
+        <div class="edit-news-container">
+            @if (EnableTitle)
+            {
+                <div class="edit-news-title">Изменить новость</div>
+            }
+            <EditForm Model="@model" OnValidSubmit=Edit>
+                <div class="edit-news-form-container">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
 
-                <span class="add-news-form-input-title">Заголовок новости</span>
-                <InputText @bind-Value="model.Title" class="add-news-form-input" />
+                    <span class="edit-news-form-input-title">Заголовок новости</span>
+                    <InputText @bind-Value="model.Title" class="edit-news-form-input" />
 
-                <span class="add-news-form-input-title">Текст новости</span>
-                <InputTextArea class="add-news-form-inputtextarea" @bind-Value="model.Text" />
+                    <span class="edit-news-form-input-title">Текст новости</span>
+                    <InputTextArea class="edit-news-form-inputtextarea" @bind-Value="model.Text" />
 
-                <div class="add-news-form-button-container">
-                    <button type="submit" class="add-news-form-button">Изменить новость</button>
+                    <div class="edit-news-form-button-container">
+                        <button type="submit" class="edit-news-form-button">Изменить новость</button>
+                    </div>
                 </div>
-            </div>
-        </EditForm>
-    </div>
+            </EditForm>
+        </div>
+    }
+    else
+    {
+        <div class="edit-news-no-news-message">Новость по данному адресу не найдена.</div>
+    }
 </PageBlock>
 
 @code {
@@ -45,9 +55,17 @@
 
     protected override void OnInitialized()
     {
-        news = DbContext.News.Where(obj => obj.Id == Id).First();
-        model.Title = news.Title;
-        model.Text = news.Text;
+        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
+        var user = UserManager.GetUserAsync(authState.User).Result;
+        if (user == null) NavigationManager.NavigateTo("/login");
+
+        var dbNews = DbContext.News.Where(obj => obj.Id == Id);
+        if (dbNews.Count() != 0)
+        {
+            news = dbNews.First();
+            model.Title = news.Title;
+            model.Text = news.Text;
+        }
     }
 
     private void Edit()

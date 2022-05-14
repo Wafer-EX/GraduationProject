@@ -95,6 +95,10 @@
     {
         var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
         user = UserManager.GetUserAsync(authState.User).Result;
+
+        if (user == null)
+            NavigationManager.NavigateTo("login");
+
         model.FIO = $"{user.FirstName} {user.LastName} {user.MiddleName}";
         model.Email = $"{user.Email}";
         base.OnInitialized();

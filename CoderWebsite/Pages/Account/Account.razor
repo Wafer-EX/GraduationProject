@@ -6,55 +6,46 @@
 @using Microsoft.AspNetCore.Identity
 
 @inject UserManager<User> UserManager
+@inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationState
 @inject ApplicationContext Context
 
 <PageTitle>Личный кабинет | Кодер</PageTitle>
 
-<CascadingAuthenticationState>
-    <AuthorizeView>
-        <Authorized>
-            <PageBlock ColorFrom="black">
-                <div class="account-container">
-                    <span class="account-name-container">
-                        <span class="account-fio">@($"{user.FirstName} {user.LastName} {user.MiddleName}")</span>
-                        <span class="account-mail">@user.Email</span>
-                    </span>
-                    <span class="account-buttons-bar-container">
-                        <button class="account-button @(GetStyle(OrderCategory.All))" @onclick="() => SelectCategory(OrderCategory.All)">все заказы</button>
-                        <button class="account-button @(GetStyle(OrderCategory.InWork))" @onclick="() => SelectCategory(OrderCategory.InWork)">в работе</button>
-                        <button class="account-button @(GetStyle(OrderCategory.Closed))" @onclick="() => SelectCategory(OrderCategory.Closed)">завершенные</button>
-                    </span>
+<PageBlock ColorFrom="black">
+    <div class="account-container">
+        <span class="account-name-container">
+            <span class="account-fio">@($"{user.FirstName} {user.LastName} {user.MiddleName}")</span>
+            <span class="account-mail">@user.Email</span>
+        </span>
+        <span class="account-buttons-bar-container">
+            <button class="account-button @(GetStyle(OrderCategory.All))" @onclick="() => SelectCategory(OrderCategory.All)">все заказы</button>
+            <button class="account-button @(GetStyle(OrderCategory.InWork))" @onclick="() => SelectCategory(OrderCategory.InWork)">в работе</button>
+            <button class="account-button @(GetStyle(OrderCategory.Closed))" @onclick="() => SelectCategory(OrderCategory.Closed)">завершенные</button>
+        </span>
 
-                    <div class="account-orders-container">
-                        @if (orders.Count() > 0)
-                        {
-                            @for (int i = 0; i < orders.Count(); i++)
-                            {
-                                var loopOrder = orders.ElementAt(i);
-                                <Order
-                                    Style="@($"animation-delay: .{i + 1}s")"
-                                    Name="@(loopOrder.Name)"
-                                    Date="@(loopOrder.Date)"
-                                    Phone="@(loopOrder.Phone)"
-                                    AppType="@(loopOrder.Type)"
-                                    Status="@(loopOrder.Status)"
-                                />
-                            }
-                        }
-                        else
-                        {
-                            <div class="account-no-orders-text">На данный момент заказов нет.</div>
-                        }
-                    </div>
-                </div>
-            </PageBlock>
-        </Authorized>
-        <NotAuthorized>
-            <p>Пожалуйста, войдите в систему</p>
-        </NotAuthorized>
-    </AuthorizeView>
-</CascadingAuthenticationState>
+        <div class="account-orders-container">
+            @if (orders.Count() > 0)
+            {
+                @for (int i = 0; i < orders.Count(); i++)
+                {
+                    var loopOrder = orders.ElementAt(i);
+                    <Order
+                        Style="@($"animation-delay: .{i + 1}s")"
+                        Name="@(loopOrder.Name)"
+                        Date="@(loopOrder.Date)"
+                        Phone="@(loopOrder.Phone)"
+                        AppType="@(loopOrder.Type)"
+                        Status="@(loopOrder.Status)"/>
+                }
+            }
+            else
+            {
+                <div class="account-no-orders-text">На данный момент заказов нет.</div>
+            }
+        </div>
+    </div>
+</PageBlock>
 
 @code {
     private OrderCategory currentCategory = OrderCategory.All;
@@ -67,6 +58,10 @@
     {
         var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
         user = UserManager.GetUserAsync(authState.User).Result;
+
+        if (user == null)
+            NavigationManager.NavigateTo("login");
+
         orders = Context.Orders.Where(order => order.User == user);
         base.OnInitialized();
     }

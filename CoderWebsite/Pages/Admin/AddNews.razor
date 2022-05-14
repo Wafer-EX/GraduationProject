@@ -13,28 +13,37 @@
 <PageTitle>Добавить новость | Кодер</PageTitle>
 
 <PageBlock>
-    <div class="add-news-container">
-        @if (EnableTitle)
-        {
-            <div class="add-news-title">Добавить новость</div>
-        }
-        <EditForm Model="@model" OnValidSubmit=Add>
-            <div class="add-news-form-container">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+    <CascadingAuthenticationState>
+        <AuthorizeView Roles="admin">
+            <Authorized>
+                <div class="add-news-container">
+                    @if (EnableTitle)
+                    {
+                        <div class="add-news-title">Добавить новость</div>
+                    }
+                    <EditForm Model="@model" OnValidSubmit=Add Context="addNewsContext">
+                        <div class="add-news-form-container">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
 
-                <span class="add-news-form-input-title">Заголовок новости</span>
-                <InputText @bind-Value="model.Title" class="add-news-form-input" />
+                            <span class="add-news-form-input-title">Заголовок новости</span>
+                            <InputText @bind-Value="model.Title" class="add-news-form-input" />
 
-                <span class="add-news-form-input-title">Текст новости</span>
-                <InputTextArea class="add-news-form-inputtextarea" @bind-Value="model.Text" />
+                            <span class="add-news-form-input-title">Текст новости</span>
+                            <InputTextArea class="add-news-form-inputtextarea" @bind-Value="model.Text" />
 
-                <div class="add-news-form-button-container">
-                    <button type="submit" class="add-news-form-button">Добавить новость</button>
+                            <div class="add-news-form-button-container">
+                                <button type="submit" class="add-news-form-button">Добавить новость</button>
+                            </div>
+                        </div>
+                    </EditForm>
                 </div>
-            </div>
-        </EditForm>
-    </div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="access-error-message">Только администратор имеет доступ к данному разделу.</div>
+            </NotAuthorized>
+        </AuthorizeView>
+    </CascadingAuthenticationState>
 </PageBlock>
 
 @code {

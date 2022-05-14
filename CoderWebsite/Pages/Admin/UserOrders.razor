@@ -15,19 +15,26 @@
 <PageTitle>Заказы пользователя | Кодер</PageTitle>
 
 <PageBlock>
-    <div class="user-orders-title-container">
-        <span class="user-orders-title">Заказы пользователя @($"{checkedUser.LastName} {checkedUser.FirstName} {checkedUser.MiddleName}")</span>
-        <span class="user-orders-title-fio">@checkedUser.Email</span>
-    </div>
-
-    <div class="user-orders-container">
-        <div class="user-orders-list-container">
-            @foreach (var order in checkedUser.Orders)
-            {
-                <OrderLine Order="order" />
-            }
+    @if (checkedUser != null)
+    {
+        <div class="user-orders-title-container">
+            <span class="user-orders-title">Заказы пользователя @($"{checkedUser.LastName} {checkedUser.FirstName} {checkedUser.MiddleName}")</span>
+            <span class="user-orders-title-fio">@checkedUser.Email</span>
         </div>
-    </div>
+
+        <div class="user-orders-container">
+            <div class="user-orders-list-container">
+                @foreach (var order in checkedUser.Orders)
+                {
+                    <OrderLine Order="order" />
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="user-orders-no-user-message">Пользователь не найден.</div>
+    }
 </PageBlock>
 
 @code {
@@ -40,6 +47,9 @@
         var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
         var user = UserManager.GetUserAsync(authState.User).Result;
         if (user == null) NavigationManager.NavigateTo("/login");
-        checkedUser = DbContext.Users.Where(user => user.Id == Id).Include(user => user.Orders).First();
+
+        var dbCheckedUser = DbContext.Users.Where(user => user.Id == Id).Include(user => user.Orders);
+        if (dbCheckedUser.Count() > 0)
+            checkedUser = dbCheckedUser.First();
     }
 }

@@ -83,3 +83,7 @@
     align-items: center;
     margin-top: 60px;
 }
+
+.add-news-validation-errors {
+    margin-top: 20px;
+}

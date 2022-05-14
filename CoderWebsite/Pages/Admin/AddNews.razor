@@ -23,8 +23,10 @@
                     }
                     <EditForm Model="@model" OnValidSubmit=Add Context="addNewsContext">
                         <div class="add-news-form-container">
-                            <DataAnnotationsValidator />
-                            <ValidationSummary />
+                            <div class="add-news-validation-errors">
+                                <DataAnnotationsValidator />
+                                <ValidationSummary />
+                            </div>
 
                             <span class="add-news-form-input-title">Заголовок новости</span>
                             <InputText @bind-Value="model.Title" class="add-news-form-input" />

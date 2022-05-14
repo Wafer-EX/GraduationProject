@@ -123,3 +123,8 @@
     background-color: #bc75ff;
     color: black;
 }
+
+.ordering-errors-container {
+    display: block;
+    padding-top: 20px;
+}

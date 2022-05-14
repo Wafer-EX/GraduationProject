@@ -92,3 +92,7 @@
     justify-content: center;
     align-items: center;
 }
+
+.edit-news-validation-errors {
+    margin-top: 20px;
+}

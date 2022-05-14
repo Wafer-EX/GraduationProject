@@ -8,6 +8,8 @@ services:
       dockerfile: CoderWebsite/Dockerfile
     environment:
       POSTGRES_CONNECTION_STRING: "Host=host.docker.internal;Port=5432;Database=coderdb;Username=coderuser;Password=pgpwd4coder"
+      ADMIN_EMAIL: "admin@coder.ru"
+      ADMIN_PASSWORD: "passwd_935806"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:

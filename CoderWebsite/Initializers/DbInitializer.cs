@@ -7,8 +7,13 @@ namespace CoderWebsite.Initializers
     {
         public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            string adminEmail = "admin@coder.ru";
-            string password = "passwd_935806";
+            string? adminEmail = Environment.GetEnvironmentVariable("ADMIN_EMAIL");
+            if (adminEmail == null)
+                adminEmail = "admin@coder.ru";
+
+            string? adminPassword = Environment.GetEnvironmentVariable("ADMIN_PASSWORD");
+            if (adminPassword == null)
+                adminPassword = "passwd_935806";
 
             if (await roleManager.FindByNameAsync("admin") == null)
                 await roleManager.CreateAsync(new IdentityRole("admin"));
@@ -21,7 +26,7 @@ namespace CoderWebsite.Initializers
                     UserName = adminEmail
                 };
 
-                IdentityResult result = await userManager.CreateAsync(admin, password);
+                IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
                 if (result.Succeeded)
                     await userManager.AddToRoleAsync(admin, "admin");
             }

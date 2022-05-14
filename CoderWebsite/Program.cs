@@ -1,3 +1,4 @@
+using CoderWebsite.Initializers;
 using CoderWebsite.Middleware;
 using CoderWebsite.Models;
 using Microsoft.AspNetCore.Identity;
@@ -8,11 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 string? connectionString = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING");
 if (connectionString == null)
-{
-    builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
-}
+    builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 else builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddIdentity<User, IdentityRole>(opts => {
@@ -28,12 +27,18 @@ builder.Services.AddIdentity<User, IdentityRole>(opts => {
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using (var scope = scopeFactory.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+    await DbInitializer.InitializeAsync(userManager, roleManager);
 }
 
 app.UseHttpsRedirection();

@@ -7,8 +7,8 @@
 
 @inject UserManager<User> UserManager
 @inject NavigationManager NavigationManager
-@inject AuthenticationStateProvider AuthenticationState
-@inject ApplicationContext Context
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ApplicationContext DbContext
 
 <PageTitle>Личный кабинет | Кодер</PageTitle>
 
@@ -63,16 +63,13 @@
 
     private IEnumerable<Models.Order> orders;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
-        user = UserManager.GetUserAsync(authState.User).Result;
-
-        if (user == null)
-            NavigationManager.NavigateTo("login", true, true);
-
-        orders = Context.Orders.Where(order => order.User == user);
-        base.OnInitialized();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authUser = authState.User;
+        if (!authUser.Identity.IsAuthenticated) NavigationManager.NavigateTo("/login", true, true);
+        user = DbContext.Users.Where(user => user.Email == authUser.Identity.Name).First();
+        orders = DbContext.Orders.Where(order => order.User == user);
     }
 
     private void SelectCategory(OrderCategory category)

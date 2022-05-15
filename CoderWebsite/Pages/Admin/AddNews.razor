@@ -65,7 +65,7 @@
         {
             Title = model.Title,
             Text = model.Text,
-            Date = DateTime.Today.ToLongDateString()
+            Date = $"{DateTime.Today.Day}.{DateTime.Today.Month}.{DateTime.Today.Year}"
         };
         DbContext.News.Add(newsModel);
         DbContext.SaveChanges();

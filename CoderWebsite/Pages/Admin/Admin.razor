@@ -4,10 +4,10 @@
 @using CoderWebsite.Components.Admin.Panel
 @using CoderWebsite.Models
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 
-@inject UserManager<User> UserManager
-@inject AuthenticationStateProvider AuthenticationState
-@inject ApplicationContext Context
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IDbContextFactory<ApplicationContext> ContextFactory
 @inject NavigationManager NavigationManager
 
 <PageTitle>Панель администратора | Кодер</PageTitle>
@@ -51,11 +51,15 @@
 
     private User user;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
-        user = UserManager.GetUserAsync(authState.User).Result;
-        if (user == null) NavigationManager.NavigateTo("/login", true, true);
+        using (var DbContext = ContextFactory.CreateDbContext())
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var authUser = authState.User;
+            if (!authUser.Identity.IsAuthenticated) NavigationManager.NavigateTo("/login", true, true);
+            user = DbContext.Users.Where(user => user.Email == authUser.Identity.Name).First();
+        }
     }
 
     private void ChangeSelection(AdminPanelSelection selection)

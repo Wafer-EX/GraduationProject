@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 string? connectionString = Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING");
 if (connectionString == null)
-    builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-else builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
+    builder.Services.AddDbContextFactory<ApplicationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+else builder.Services.AddDbContextFactory<ApplicationContext>(options => options.UseNpgsql(connectionString));
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();

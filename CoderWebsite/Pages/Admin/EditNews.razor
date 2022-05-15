@@ -7,8 +7,7 @@
 
 @inject ApplicationContext DbContext
 @inject NavigationManager NavigationManager
-@inject AuthenticationStateProvider AuthenticationState
-@inject UserManager<User> UserManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Изменить новость | Кодер</PageTitle>
 
@@ -64,11 +63,11 @@
 
     private AddNewsModel model = new AddNewsModel();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
-        var user = UserManager.GetUserAsync(authState.User).Result;
-        if (user == null) NavigationManager.NavigateTo("/login", true, true);
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authUser = authState.User;
+        if (!authUser.Identity.IsAuthenticated) NavigationManager.NavigateTo("/login", true, true);
 
         var dbNews = DbContext.News.Where(obj => obj.Id == Id);
         if (dbNews.Count() != 0)

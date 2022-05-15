@@ -1,5 +1,6 @@
 ﻿@using CoderWebsite.Models
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 
 @inject ApplicationContext DbContext
 
@@ -18,12 +19,20 @@
     }
     else
     {
-        <span class="user-manager-no-elements-text">На данный момент новостей не добавлено.</span>
+        <span class="user-manager-no-elements-text">На данный момент пользователей нет.</span>
     }
 </div>
 
 @code {
     private List<User> allUsers;
 
-    protected override void OnInitialized() => allUsers = DbContext.Users.ToList();
+    protected override void OnInitialized()
+    {
+        allUsers = DbContext.Users.Except(DbContext.Users
+            .Join(
+                inner: DbContext.UserRoles,
+                outerKeySelector: user => user.Id, innerKeySelector: role => role.UserId,
+                resultSelector: (user, role) => user)
+            ).ToList();
+    }
 }

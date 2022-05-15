@@ -7,9 +7,8 @@
 @using Microsoft.AspNetCore.Identity
 
 @inject ApplicationContext DbContext
-@inject UserManager<User> UserManager
 @inject NavigationManager NavigationManager
-@inject AuthenticationStateProvider AuthenticationState
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Оформление заказа | Кодер</PageTitle>
 
@@ -100,17 +99,15 @@
 
     private User user;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        var authState = AuthenticationState.GetAuthenticationStateAsync().Result;
-        user = UserManager.GetUserAsync(authState.User).Result;
-
-        if (user == null)
-            NavigationManager.NavigateTo("login", true, true);
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authUser = authState.User;
+        if (!authUser.Identity.IsAuthenticated) NavigationManager.NavigateTo("/login", true, true);
+        user = DbContext.Users.Where(user => user.Email == authUser.Identity.Name).First();
 
         model.FIO = $"{user.FirstName} {user.LastName} {user.MiddleName}";
         model.Email = $"{user.Email}";
-        base.OnInitialized();
     }
 
     private string GetStyle(OrderAppType type)

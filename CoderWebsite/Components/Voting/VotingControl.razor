@@ -11,8 +11,6 @@
         <PercentageScale Name="Проект 1" Percent="GetPercent(VoringVariants.Variant1)" />
         <PercentageScale Name="Проект 2" Percent="GetPercent(VoringVariants.Variant2)" />
         <PercentageScale Name="Проект 3" Percent="GetPercent(VoringVariants.Variant3)" />
-        <PercentageScale Name="Проект 4" Percent="GetPercent(VoringVariants.Variant4)" />
-        <PercentageScale Name="Проект 5" Percent="GetPercent(VoringVariants.Variant5)" />
     }
     else
     {
@@ -29,14 +27,6 @@
                 <div class="votingcontrol-vote-variant-cont">
                     <InputRadio Value="VoringVariants.Variant3" />
                     <span class="votingcontrol-vote-variant-text">Вариант 3</span>
-                </div>
-                <div class="votingcontrol-vote-variant-cont">
-                    <InputRadio Value="VoringVariants.Variant4" />
-                    <span class="votingcontrol-vote-variant-text">Вариант 4</span>
-                </div>
-                <div class="votingcontrol-vote-variant-cont">
-                    <InputRadio Value="VoringVariants.Variant5" />
-                    <span class="votingcontrol-vote-variant-text">Вариант 5</span>
                 </div>
             </InputRadioGroup>
 
@@ -70,7 +60,7 @@
         if (votingData == null)
         {
             votingData = new Dictionary<VoringVariants, int>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
                 votingData.Add((VoringVariants) i, 0);
         }
         if (votedUsersIds == null) votedUsersIds = new List<string>();

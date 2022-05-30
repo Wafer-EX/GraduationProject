@@ -5,13 +5,14 @@
 
 <div class="votingcontrol-cont">
     <div class="votingcontrol-title">Голосование за лучший проект</div>
-    @if (voted || !isAuth)
+    
+    @if ((voted || !isAuth) || (user != null && votedUsersIds.Contains(user.Id)))
     {
-        <PercentageScale Name="wkfeiewfiw" Percent="GetPercent(VoringVariants.Variant1)" />
-        <PercentageScale Name="eryerttyes" Percent="GetPercent(VoringVariants.Variant2)" />
-        <PercentageScale Name="rhehehrehh" Percent="GetPercent(VoringVariants.Variant3)" />
-        <PercentageScale Name="fhd57hdh5h" Percent="GetPercent(VoringVariants.Variant4)" />
-        <PercentageScale Name="32352f3626" Percent="GetPercent(VoringVariants.Variant5)" />
+        <PercentageScale Name="Проект 1" Percent="GetPercent(VoringVariants.Variant1)" />
+        <PercentageScale Name="Проект 2" Percent="GetPercent(VoringVariants.Variant2)" />
+        <PercentageScale Name="Проект 3" Percent="GetPercent(VoringVariants.Variant3)" />
+        <PercentageScale Name="Проект 4" Percent="GetPercent(VoringVariants.Variant4)" />
+        <PercentageScale Name="Проект 5" Percent="GetPercent(VoringVariants.Variant5)" />
     }
     else
     {
@@ -49,7 +50,7 @@
 @code {
     private static Dictionary<VoringVariants, int> votingData;
 
-    private static List<User> votedUsers;
+    private static List<string> votedUsersIds;
 
     private bool voted = false;
 
@@ -72,9 +73,7 @@
             for (int i = 0; i < 5; i++)
                 votingData.Add((VoringVariants) i, 0);
         }
-        if (votedUsers == null) {
-            votedUsers = new List<User>();
-        }
+        if (votedUsersIds == null) votedUsersIds = new List<string>();
     }
 
     private int GetPercent(VoringVariants variant)
@@ -85,6 +84,7 @@
     private void Vote()
     {
         votingData[model.Value] += 1;
+        votedUsersIds.Add(user.Id);
         voted = true;
     }
 

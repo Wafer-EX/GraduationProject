@@ -8,9 +8,9 @@
     
     @if ((voted || !isAuth) || (user != null && votedUsersIds.Contains(user.Id)))
     {
-        <PercentageScale Name="Проект 1" Percent="GetPercent(VoringVariants.Variant1)" />
-        <PercentageScale Name="Проект 2" Percent="GetPercent(VoringVariants.Variant2)" />
-        <PercentageScale Name="Проект 3" Percent="GetPercent(VoringVariants.Variant3)" />
+        <PercentageScale Name="Микросервис Система аккаунтов" Percent="GetPercent(VoringVariants.Variant1)" />
+        <PercentageScale Name="Микросервис Система кеширования" Percent="GetPercent(VoringVariants.Variant2)" />
+        <PercentageScale Name="Микросервис Обработчик изображений" Percent="GetPercent(VoringVariants.Variant3)" />
     }
     else
     {
@@ -18,15 +18,15 @@
             <InputRadioGroup @bind-Value="@model.Value">
                 <div class="votingcontrol-vote-variant-cont">
                     <InputRadio Value="VoringVariants.Variant1" />
-                    <span class="votingcontrol-vote-variant-text">Вариант 1</span>
+                    <span class="votingcontrol-vote-variant-text">Микросервис Система аккаунтов</span>
                 </div>
                 <div class="votingcontrol-vote-variant-cont">
                     <InputRadio Value="VoringVariants.Variant2" />
-                    <span class="votingcontrol-vote-variant-text">Вариант 2</span>
+                    <span class="votingcontrol-vote-variant-text">Микросервис Система кеширования</span>
                 </div>
                 <div class="votingcontrol-vote-variant-cont">
                     <InputRadio Value="VoringVariants.Variant3" />
-                    <span class="votingcontrol-vote-variant-text">Вариант 3</span>
+                    <span class="votingcontrol-vote-variant-text">Микросервис Обработчик изображений</span>
                 </div>
             </InputRadioGroup>
 

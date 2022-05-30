@@ -4,8 +4,8 @@
     {
         public int Id { get; set; }
 
-        public string PageName { get; set; }
+        public string? PageName { get; set; }
 
-        public string MetaTags { get; set; }
+        public string? MetaTags { get; set; }
     }
 }

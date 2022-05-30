@@ -62,3 +62,14 @@
     align-items: center;
     padding: 24px;
 }
+
+.seo-control-data-was-saved-cont {
+    background: linear-gradient(90deg, #7575ff 0%, #bc75ff 100%);
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}

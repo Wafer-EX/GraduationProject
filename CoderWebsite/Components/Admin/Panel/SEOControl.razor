@@ -5,7 +5,7 @@
 
 <div class="seo-control-container">
     <div class="seo-control-list-container">
-        <EditForm Model="@model">
+        <EditForm Model="@model" OnSubmit="UpdateData">
             <div class="seo-control-list-element">
                 <span class="seo-control-list-element-title">Мета-теги страницы "Главная страница"</span>
                 <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.MainPageMeta" />
@@ -46,6 +46,13 @@
                 <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.ContactDataMeta" />
             </div>
 
+            @if (saved)
+            {
+                <div class="seo-control-data-was-saved-cont">
+                    Данные были сохранены.
+                </div>   
+            }
+
             <div class="seo-control-update-data-button-cont">
                 <input class="seo-control-update-data-button" type="submit" value="Обновить данные" />
             </div>
@@ -57,7 +64,55 @@
 @code {
     private SEOControlModel model = new SEOControlModel();
 
-    protected override void OnInitialized() { }
+    private bool saved = false;
+
+    protected override void OnInitialized()
+    {
+        model.MainPageMeta = GetField("MainPage");
+        model.OurProductsMeta = GetField("OurProductsPage");
+        model.NewsMeta = GetField("NewsPage");
+        model.MicroservicesMeta = GetField("MicroservicesPage");
+        model.PWAAppsMeta = GetField("PWAAppsPage");
+        model.SPAAppsMeta = GetField("SPAAppsPage");
+        model.AboutUsMeta = GetField("AboutUsPage");
+        model.ContactDataMeta = GetField("ContactDataPage");
+    }
+
+    private void UpdateData()
+    {
+        UpdateField("MainPage", model.MainPageMeta);
+        UpdateField("OurProductsPage", model.OurProductsMeta);
+        UpdateField("NewsPage", model.NewsMeta);
+        UpdateField("MicroservicesPage", model.MicroservicesMeta);
+        UpdateField("PWAAppsPage", model.PWAAppsMeta);
+        UpdateField("SPAAppsPage", model.SPAAppsMeta);
+        UpdateField("AboutUsPage", model.AboutUsMeta);
+        UpdateField("ContactDataPage", model.ContactDataMeta);
+        saved = true;
+    }
+
+    private void UpdateField(string pageName, string meta)
+    {
+        var result = DbContext.MetaPageDescriptions.Where(data => data.PageName == pageName);
+        if (result.Count() > 0)
+            result.First().MetaTags = meta;
+        else DbContext.MetaPageDescriptions.Add(new MetaPageDescription
+            {
+                PageName = pageName,
+                MetaTags = meta
+            }
+        );
+        DbContext.SaveChanges();
+        StateHasChanged();
+    }
+
+    private string GetField(string pageName)
+    {
+        var result = DbContext.MetaPageDescriptions.Where(data => data.PageName == pageName);
+        if (result.Count() > 0)
+            return result.First().MetaTags;
+        else return "";
+    }
 
     private class SEOControlModel
     {

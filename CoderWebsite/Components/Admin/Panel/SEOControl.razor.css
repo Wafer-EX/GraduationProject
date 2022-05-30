@@ -1,0 +1,37 @@
+﻿.seo-control-container {
+    background-color: #0e0e0e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 42px;
+    border-radius: 24px;
+    animation-duration: .5s;
+    animation-name: slidein;
+}
+
+.seo-control-list-container {
+    background-color: #171717;
+    width: 840px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.seo-control-list-element {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #121212;
+}
+
+.seo-control-list-element-title {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: white;
+}
+
+::deep .seo-control-list-element-textarea {
+    min-width: 520px;
+    min-height: 120px;
+}

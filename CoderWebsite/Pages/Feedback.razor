@@ -9,34 +9,43 @@
 <PageBlock>
     <div class="feedback-container">
         <div class="feedback-title">Обратная связь</div>
-        <div class="feedback-desc">Оставьте ваше сообщение, и мы ответим вам как можно скорее.</div>
+        @if (!isSended)
+        {
+            <div class="feedback-desc">Оставьте ваше сообщение, и мы ответим вам как можно скорее.</div>
+            <EditForm Model="@model" OnValidSubmit=Send Context="feedbackContext">
+                <div class="feedback-form-container">
+                    <div class="feedback-validation-errors">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                    </div>
 
-        <EditForm Model="@model" OnValidSubmit=Send Context="feedbackContext">
-            <div class="feedback-form-container">
-                <div class="feedback-validation-errors">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
+                    <span class="feedback-form-input-title">Электронная почта</span>
+                    <InputText @bind-Value="model.Email" class="feedback-form-input" />
+
+                    <span class="feedback-form-input-title">Сообщение</span>
+                    <InputTextArea class="feedback-form-inputtextarea" @bind-Value="model.Message" />
+
+                    <div class="feedback-form-button-container">
+                        <button type="submit" class="feedback-form-button">Отправить сообщение</button>
+                    </div>
                 </div>
-
-                <span class="feedback-form-input-title">Электронная почта</span>
-                <InputText @bind-Value="model.Email" class="feedback-form-input" />
-
-                <span class="feedback-form-input-title">Сообщение</span>
-                <InputTextArea class="feedback-form-inputtextarea" @bind-Value="model.Message" />
-
-                <div class="feedback-form-button-container">
-                    <button type="submit" class="feedback-form-button">Отправить сообщение</button>
-                </div>
-            </div>
-        </EditForm>
+            </EditForm>
+        }
+        else
+        {
+            <div class="feedback-result-message">Ваше сообщение было доставлено!</div>
+        }
     </div>
 </PageBlock>
 
 @code {
     private FeedbackModel model = new FeedbackModel();
 
+    private bool isSended = false;
+
     private void Send()
     {
-        
+        isSended = true;
+        StateHasChanged();
     }
 }

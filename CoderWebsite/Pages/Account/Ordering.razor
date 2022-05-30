@@ -253,6 +253,28 @@
 
     private int CalcPrice()
     {
-        return 0;
+        int price = 0;
+        switch (selectedType)
+        {
+            case OrderAppType.Website_PWA:
+                price += 5500;
+                break;
+            case OrderAppType.Website_SPA:
+                price += 2350;
+                break;
+            case OrderAppType.Microservice_ZeroC_Ice:
+            case OrderAppType.Microservice_gRPC:
+                price += 1250;
+                break;
+        }
+
+        if (additions.Contains(OrderAdditions.AccountSystem)) price += 3200;
+        if (additions.Contains(OrderAdditions.OnlineConsultantModule)) price += 2000;
+        if (additions.Contains(OrderAdditions.VoteSystem)) price += 1000;
+        if (additions.Contains(OrderAdditions.Search)) price += 900;
+        if (additions.Contains(OrderAdditions.FeedbackModule)) price += 700;
+        if (additions.Contains(OrderAdditions.OrderSystem)) price += 1500;
+
+        return price;
     }
 }

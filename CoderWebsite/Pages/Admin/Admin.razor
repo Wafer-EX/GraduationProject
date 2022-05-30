@@ -33,6 +33,10 @@
                         @onclick="() => ChangeSelection(AdminPanelSelection.Feedback)">
                         Обратная связь
                     </button>
+                    <button class="admin-panel-tab @(GetStyle(AdminPanelSelection.SEO))"
+                        @onclick="() => ChangeSelection(AdminPanelSelection.SEO)">
+                        SEO
+                    </button>
                 </div>
                 <div>
                     <div style="@(GetDisplay(AdminPanelSelection.NewsControl))">
@@ -43,6 +47,9 @@
                     </div>
                     <div style="@(GetDisplay(AdminPanelSelection.Feedback))">
                         <FeedbackMessagesManager />
+                    </div>
+                    <div style="@(GetDisplay(AdminPanelSelection.SEO))">
+                        <SEOControl />
                     </div>
                 </div>
             </Authorized>
@@ -91,6 +98,7 @@
     {
         NewsControl,
         UserList,
-        Feedback
+        Feedback,
+        SEO
     }
 }

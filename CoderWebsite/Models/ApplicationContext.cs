@@ -11,9 +11,8 @@ namespace CoderWebsite.Models
 
         public DbSet<FeedbackMessage> FeedbackMessages { get; set; }
 
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
-        {
-            Database.EnsureCreated();
-        }
+        public DbSet<MetaPageDescription> MetaPageDescriptions { get; set; }
+
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) => Database.EnsureCreated();
     }
 }

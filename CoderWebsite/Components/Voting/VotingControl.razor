@@ -1,6 +1,11 @@
-﻿<div class="votingcontrol-cont">
+﻿@using CoderWebsite.Models
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ApplicationContext DbContext
+
+<div class="votingcontrol-cont">
     <div class="votingcontrol-title">Голосование за лучший проект</div>
-    @if (voted)
+    @if (voted || !isAuth)
     {
         <PercentageScale Name="wkfeiewfiw" Percent="GetPercent(VoringVariants.Variant1)" />
         <PercentageScale Name="eryerttyes" Percent="GetPercent(VoringVariants.Variant2)" />
@@ -33,6 +38,7 @@
                     <span class="votingcontrol-vote-variant-text">Вариант 5</span>
                 </div>
             </InputRadioGroup>
+
             <div class="votingcontrol-vote-button-cont">
                 <button type="submit" class="votingcontrol-vote-button">Проголосовать</button>
             </div>
@@ -43,19 +49,31 @@
 @code {
     private static Dictionary<VoringVariants, int> votingData;
 
+    private static List<User> votedUsers;
+
     private bool voted = false;
 
     private VotingModel model = new VotingModel();
 
-    protected override void OnInitialized()
+    private bool isAuth;
+
+    private User user;
+
+    protected override async Task OnInitializedAsync()
     {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authUser = authState.User;
+        isAuth = authUser.Identity.IsAuthenticated;
+        if (isAuth) user = DbContext.Users.Where(user => user.Email == authUser.Identity.Name).First();
+
         if (votingData == null)
         {
             votingData = new Dictionary<VoringVariants, int>();
             for (int i = 0; i < 5; i++)
-            {
                 votingData.Add((VoringVariants) i, 0);
-            }
+        }
+        if (votedUsers == null) {
+            votedUsers = new List<User>();
         }
     }
 

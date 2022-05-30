@@ -71,5 +71,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 16px;
+    animation-duration: .5s;
+    animation-name: vertsizein;
+    overflow: hidden;
+    height: 48px;
+}
+
+@keyframes vertsizein {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 48px;
+    }
 }

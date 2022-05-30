@@ -3,7 +3,13 @@
         <div class="footer-button-container">
             <a class="footer-button" href="/about-us">О нас</a>
             <a class="footer-button" href="/contact-info">Контактная информация</a>
-            <a class="footer-button" href="/feedback">Обратная связь</a>
+            <CascadingAuthenticationState>
+                <AuthorizeView Roles="admin" Context="adminFooterContext">
+                    <NotAuthorized>
+                        <a class="footer-button" href="/feedback">Обратная связь</a>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </CascadingAuthenticationState>
         </div>
         <span class="footer-title">кодер</span>
     </div>

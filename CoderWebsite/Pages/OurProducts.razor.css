@@ -1,0 +1,10 @@
+﻿.our-products-page-title {
+    color: white;
+    font-size: 22px;
+    font-family: Micra-Bold;
+    margin-top: 32px;
+    margin-bottom: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

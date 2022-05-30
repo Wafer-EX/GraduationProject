@@ -175,3 +175,38 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.ordering-table-add-button {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    background: #0e0e0e;
+    color: white;
+    padding: 2px 32px 2px 32px;
+    border-radius: 24px;
+    transition: .3s;
+    border: none;
+}
+
+    .ordering-table-add-button:hover {
+        background: white;
+        color: black;
+        transition: .3s;
+        cursor: pointer;
+    }
+
+.ordering-table-add-button-selected {
+    background: #bc75ff;
+    color: black;
+    transition: .3s;
+}
+
+.ordering-table-total-price-text {
+    font-family: NeueMachina-Medium;
+    font-size: 20px;
+    color: white;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

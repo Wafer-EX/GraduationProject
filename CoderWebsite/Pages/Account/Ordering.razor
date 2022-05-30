@@ -74,32 +74,70 @@
                                 <tr>
                                     <td class="ordering-table-column-text">Система учетных записей</td>
                                     <td class="ordering-table-column-text">3200 руб.</td>
-                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.AccountSystem))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.AccountSystem)">
+                                            @(AdditionGetText(OrderAdditions.AccountSystem))
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="ordering-table-column-text">Модуль онлайн-консультанта</td>
                                     <td class="ordering-table-column-text">2000 руб.</td>
-                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.OnlineConsultantModule))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.OnlineConsultantModule)">
+                                            @(AdditionGetText(OrderAdditions.OnlineConsultantModule))
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="ordering-table-column-text">Система голосования</td>
                                     <td class="ordering-table-column-text">1000 руб.</td>
-                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.VoteSystem))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.VoteSystem)">
+                                            @(AdditionGetText(OrderAdditions.VoteSystem))
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="ordering-table-column-text">Поиск информации по сайту</td>
                                     <td class="ordering-table-column-text">900 руб.</td>
-                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.Search))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.Search)">
+                                            @(AdditionGetText(OrderAdditions.Search))
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="ordering-table-column-text">Модуль обратной связи</td>
                                     <td class="ordering-table-column-text">700 руб.</td>
-                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.FeedbackModule))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.FeedbackModule)">
+                                            @(AdditionGetText(OrderAdditions.FeedbackModule))
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="ordering-table-column-text">Система заказов</td>
                                     <td class="ordering-table-column-text">1500 руб.</td>
-                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.OrderSystem))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.OrderSystem)">
+                                            @(AdditionGetText(OrderAdditions.OrderSystem))
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="ordering-table-total-price-text">
+                                        Итого: @(CalcPrice()) руб.
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -142,6 +180,8 @@
     private OrderingModel model = new OrderingModel();
 
     private User user;
+
+    private HashSet<OrderAdditions> additions = new HashSet<OrderAdditions>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -187,5 +227,32 @@
         DbContext.Orders.Add(order);
         DbContext.SaveChanges();
         NavigationManager.NavigateTo($"/account", true, true);
+    }
+
+    private void ChangeAddition(OrderAdditions addition)
+    {
+        if (additions.Contains(addition))
+            additions.Remove(addition);
+        else additions.Add(addition);
+        StateHasChanged();
+    }
+
+    private string AdditionGetText(OrderAdditions addition)
+    {
+        if (additions.Contains(addition))
+            return "Добавлено";
+        else return "Добавить";
+    }
+
+    private string AdditionGetStyle(OrderAdditions addition)
+    {
+        if (additions.Contains(addition))
+            return "ordering-table-add-button-selected";
+        else return "";
+    }
+
+    private int CalcPrice()
+    {
+        return 0;
     }
 }

@@ -69,6 +69,14 @@
     padding-bottom: 12px;
 }
 
+.order-additions {
+    font-size: 16px;
+    font-family: NeueMachina-Medium;
+    color: white;
+    max-width: 520px;
+    margin-bottom: 12px;
+}
+
 @keyframes account-order-slidein {
     from {
         transform: translateY(32px);

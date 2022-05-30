@@ -1,5 +1,6 @@
 ﻿<div style="@Style" class="order-container">
     <span class="order-title">@Name</span>
+    <span class="order-additions">Дополнения: @Additions</span>
     <span class="order-type-phone">@($"{GetAppTypeName()} | {Phone}")</span>
     <div class="order-status-container">
         <span class="order-status-title">Статус</span>
@@ -26,6 +27,8 @@
     [Parameter] public string? Style { get; set; }
 
     [Parameter] public OrderStatus Status { get; set; }
+
+    [Parameter] public string Additions { get; set; }
 
     private string getStyle(OrderStatus status)
     {

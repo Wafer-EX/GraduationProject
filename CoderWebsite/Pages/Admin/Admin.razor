@@ -29,6 +29,10 @@
                         @onclick="() => ChangeSelection(AdminPanelSelection.UserList)">
                         Список пользователей
                     </button>
+                    <button class="admin-panel-tab @(GetStyle(AdminPanelSelection.Feedback))"
+                        @onclick="() => ChangeSelection(AdminPanelSelection.Feedback)">
+                        Обратная связь
+                    </button>
                 </div>
                 <div>
                     <div style="@(GetDisplay(AdminPanelSelection.NewsControl))">
@@ -36,6 +40,9 @@
                     </div>
                     <div style="@(GetDisplay(AdminPanelSelection.UserList))">
                         <UserControl />
+                    </div>
+                    <div style="@(GetDisplay(AdminPanelSelection.Feedback))">
+                        <div>Обратная связь</div>
                     </div>
                 </div>
             </Authorized>
@@ -83,6 +90,7 @@
     private enum AdminPanelSelection
     {
         NewsControl,
-        UserList
+        UserList,
+        Feedback
     }
 }

@@ -87,3 +87,10 @@
 .feedback-validation-errors {
     margin-top: 20px;
 }
+
+.feedback-desc {
+    font-size: 16px;
+    font-family: NeueMachina-Medium;
+    color: white;
+    margin-top: 32px;
+}

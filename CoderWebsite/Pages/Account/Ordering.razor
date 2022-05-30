@@ -27,6 +27,7 @@
                         <div class="ordering-type-container">
                             <span class="ordering-type-variant-container">
                                 <span class="ordering-type-variant-title">Веб-сайт PWA</span>
+                                <span class="ordering-type-variant-price">5500 руб.</span>
                                 <button class="ordering-type-variant-button
                                     @(GetStyle(OrderAppType.Website_PWA))"
                                     @onclick="() => ChangeSelection(OrderAppType.Website_PWA)">
@@ -35,6 +36,7 @@
                             </span>
                             <span class="ordering-type-variant-container">
                                 <span class="ordering-type-variant-title">Веб-сайт SPA</span>
+                                <span class="ordering-type-variant-price">2350 руб.</span>
                                 <button class="ordering-type-variant-button
                                     @(GetStyle(OrderAppType.Website_SPA))"
                                     @onclick="() => ChangeSelection(OrderAppType.Website_SPA)">
@@ -43,6 +45,7 @@
                             </span>
                             <span class="ordering-type-variant-container">
                                 <span class="ordering-type-variant-title">Микросервис gRPC</span>
+                                <span class="ordering-type-variant-price">1250 руб.</span>
                                 <button class="ordering-type-variant-button
                                     @(GetStyle(OrderAppType.Microservice_gRPC))"
                                     @onclick="() => ChangeSelection(OrderAppType.Microservice_gRPC)">
@@ -51,6 +54,7 @@
                             </span>
                             <span class="ordering-type-variant-container">
                                 <span class="ordering-type-variant-title">Микросервис ZeroC Ice</span>
+                                <span class="ordering-type-variant-price">1250 руб.</span>
                                 <button class="ordering-type-variant-button
                                     @(GetStyle(OrderAppType.Microservice_ZeroC_Ice))"
                                     @onclick="() => ChangeSelection(OrderAppType.Microservice_ZeroC_Ice)">
@@ -59,8 +63,48 @@
                             </span>
                         </div>
 
-                        <div class="ordering-form-title">Контактные данные</div>
+                        <div class="ordering-additions-container">
+                            <div class="ordering-additions-title">Дополнительные функции</div>
+                            <table class="ordering-table">
+                                <tr>
+                                    <td class="ordering-table-column-title">Название</td>
+                                    <td class="ordering-table-column-title">Цена</td>
+                                    <td class="ordering-table-column-title ordering-table-column-add">Добавление</td>
+                                </tr>
+                                <tr>
+                                    <td class="ordering-table-column-text">Система учетных записей</td>
+                                    <td class="ordering-table-column-text">3200 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                </tr>
+                                <tr>
+                                    <td class="ordering-table-column-text">Модуль онлайн-консультанта</td>
+                                    <td class="ordering-table-column-text">2000 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                </tr>
+                                <tr>
+                                    <td class="ordering-table-column-text">Система голосования</td>
+                                    <td class="ordering-table-column-text">1000 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                </tr>
+                                <tr>
+                                    <td class="ordering-table-column-text">Поиск информации по сайту</td>
+                                    <td class="ordering-table-column-text">900 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                </tr>
+                                <tr>
+                                    <td class="ordering-table-column-text">Модуль обратной связи</td>
+                                    <td class="ordering-table-column-text">700 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                </tr>
+                                <tr>
+                                    <td class="ordering-table-column-text">Система заказов</td>
+                                    <td class="ordering-table-column-text">1500 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">Добавить</td>
+                                </tr>
+                            </table>
+                        </div>
 
+                        <div class="ordering-form-title">Контактные данные</div>
                         <div class="ordering-input-container">
                             <span class="ordering-errors-container">
                                 <DataAnnotationsValidator />

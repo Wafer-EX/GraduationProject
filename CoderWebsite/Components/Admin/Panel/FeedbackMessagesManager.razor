@@ -2,6 +2,7 @@
 @using Microsoft.EntityFrameworkCore
 
 @inject ApplicationContext DbContext
+@inject NavigationManager NavigationManager
 
 <div class="feedback-manager-container">
     @if (allMessages.Count > 0)
@@ -14,7 +15,7 @@
                         <span class="feedback-manager-list-element-title">Почта: @feedbackMessage.Email</span>
                         <span class="feedback-manager-list-element-title" style="margin-top: 12px;">Сообщение: @feedbackMessage.Message</span>
                     </div>
-                    <a class="feedback-manager-list-element-button">Ответить</a>
+                    <a class="feedback-manager-list-element-button" @onclick="() => SendMail(feedbackMessage.Email)">Ответить</a>
                 </div>
             }
         </div>
@@ -31,5 +32,12 @@
     protected override void OnInitialized()
     {
         allMessages = DbContext.FeedbackMessages.ToList();
+    }
+
+    private void SendMail(string message)
+    {
+        string filtered = message.Replace("@", "%40");
+        string link = "mailto:{filtered}";
+        NavigationManager.NavigateTo(link, true, true);
     }
 }

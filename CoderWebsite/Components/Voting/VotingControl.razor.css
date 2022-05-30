@@ -1,0 +1,49 @@
+﻿.votingcontrol-cont {
+    padding: 24px;
+    background: black;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 8px;
+}
+
+.votingcontrol-vote-variant-text {
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    color: white;
+}
+
+.votingcontrol-vote-variant-cont {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.votingcontrol-title {
+    font-family: Micra-Bold;
+    color: white;
+    font-size: 18px;
+}
+
+.votingcontrol-vote-button {
+    width: 200px;
+    height: 48px;
+    background: linear-gradient(270deg, #7575ff, #bc75ff);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: NeueMachina-Medium;
+    transition: .3s;
+    color: black;
+}
+
+    .votingcontrol-vote-button:hover {
+        background: linear-gradient(270deg, #bc75ff, #7575ff);
+        transition: .3s;
+        cursor: pointer;
+    }
+
+.votingcontrol-vote-button-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

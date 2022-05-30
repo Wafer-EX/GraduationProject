@@ -1,4 +1,5 @@
-﻿<div>
+﻿<div class="votingcontrol-cont">
+    <div class="votingcontrol-title">Голосование за лучший проект</div>
     @if (voted)
     {
         <PercentageScale Name="wkfeiewfiw" Percent="GetPercent(VoringVariants.Variant1)" />
@@ -9,31 +10,32 @@
     }
     else
     {
-
-        <EditForm Model="model">
+        <EditForm Model="model" OnValidSubmit=Vote>
             <InputRadioGroup @bind-Value="@model.Value">
-                <div>
-                    <span>Вариант 1</span>
+                <div class="votingcontrol-vote-variant-cont">
                     <InputRadio Value="VoringVariants.Variant1" />
+                    <span class="votingcontrol-vote-variant-text">Вариант 1</span>
                 </div>
-                <div>
-                    <span>Вариант 2</span>
+                <div class="votingcontrol-vote-variant-cont">
                     <InputRadio Value="VoringVariants.Variant2" />
+                    <span class="votingcontrol-vote-variant-text">Вариант 2</span>
                 </div>
-                <div>
-                    <span>Вариант 3</span>
+                <div class="votingcontrol-vote-variant-cont">
                     <InputRadio Value="VoringVariants.Variant3" />
+                    <span class="votingcontrol-vote-variant-text">Вариант 3</span>
                 </div>
-                <div>
-                    <span>Вариант 4</span>
+                <div class="votingcontrol-vote-variant-cont">
                     <InputRadio Value="VoringVariants.Variant4" />
+                    <span class="votingcontrol-vote-variant-text">Вариант 4</span>
                 </div>
-                <div>
-                    <span>Вариант 5</span>
+                <div class="votingcontrol-vote-variant-cont">
                     <InputRadio Value="VoringVariants.Variant5" />
+                    <span class="votingcontrol-vote-variant-text">Вариант 5</span>
                 </div>
             </InputRadioGroup>
-            <button type="submit">Проголосовать</button>
+            <div class="votingcontrol-vote-button-cont">
+                <button type="submit" class="votingcontrol-vote-button">Проголосовать</button>
+            </div>
         </EditForm>
     }
 </div>
@@ -52,7 +54,7 @@
             votingData = new Dictionary<VoringVariants, int>();
             for (int i = 0; i < 5; i++)
             {
-                votingData.Add((VoringVariants) i, 0);
+                votingData.Add((VoringVariants) i, 50);
             }
         }
     }
@@ -60,6 +62,11 @@
     private int GetPercent(VoringVariants variant)
     {
         return votingData[variant];
+    }
+
+    private void Vote()
+    {
+        voted = true;
     }
 
     private class VotingModel

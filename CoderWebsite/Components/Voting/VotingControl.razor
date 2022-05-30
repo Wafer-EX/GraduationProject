@@ -8,9 +8,9 @@
     
     @if ((voted || !isAuth) || (user != null && votedUsersIds.Contains(user.Id)))
     {
-        <PercentageScale Name="Микросервис Система аккаунтов" Percent="GetPercent(VoringVariants.Variant1)" />
-        <PercentageScale Name="Микросервис Система кеширования" Percent="GetPercent(VoringVariants.Variant2)" />
-        <PercentageScale Name="Микросервис Обработчик изображений" Percent="GetPercent(VoringVariants.Variant3)" />
+        <PercentageScale Name="Микросервис Система аккаунтов" Percent="GetPercent(VoringVariants.Variant1)" Delay="1" />
+        <PercentageScale Name="Микросервис Система кеширования" Percent="GetPercent(VoringVariants.Variant2)" Delay="2" />
+        <PercentageScale Name="Микросервис Обработчик изображений" Percent="GetPercent(VoringVariants.Variant3)" Delay="3" />
     }
     else
     {

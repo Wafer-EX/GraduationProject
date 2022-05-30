@@ -1,6 +1,6 @@
 ﻿<div class="scale-container">
     <div class="scale-name">@Name (@(Percent)%)</div>
-    <div class="scale-line">
+    <div class="scale-line" style="animation-delay: .@(Delay)s">
         <div class="scale-line-filled" style="width: @(Percent)%;"></div>
     </div>
 </div>
@@ -20,4 +20,6 @@
             else percent = value;
         }
     }
+
+    [Parameter] public int Delay { get; set; }
 }

@@ -18,6 +18,8 @@ namespace CoderWebsite.Models
 
         public OrderStatus Status { get; set; }
 
+        public string Additions { get; set; }
+
         public int UserId { get; set; }
 
         public User User { get; set; }

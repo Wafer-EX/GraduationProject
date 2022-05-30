@@ -259,6 +259,19 @@
 
     private void Order()
     {
+        string additionsText = "";
+        if (additions.Contains(OrderAdditions.AccountSystem)) additionsText += ", " + GetAdditionName(OrderAdditions.AccountSystem);
+        if (additions.Contains(OrderAdditions.OnlineConsultantModule)) additionsText += ", " + GetAdditionName(OrderAdditions.OnlineConsultantModule);
+        if (additions.Contains(OrderAdditions.VoteSystem)) additionsText += ", " + GetAdditionName(OrderAdditions.VoteSystem);
+        if (additions.Contains(OrderAdditions.Search)) additionsText += ", " + GetAdditionName(OrderAdditions.Search);
+        if (additions.Contains(OrderAdditions.FeedbackModule)) additionsText += ", " + GetAdditionName(OrderAdditions.FeedbackModule);
+        if (additions.Contains(OrderAdditions.OrderSystem)) additionsText += ", " + GetAdditionName(OrderAdditions.OrderSystem);
+        if (additions.Contains(OrderAdditions.Docker)) additionsText += ", " + GetAdditionName(OrderAdditions.Docker);
+        if (additions.Contains(OrderAdditions.Encryption)) additionsText += ", " + GetAdditionName(OrderAdditions.Encryption);
+        if (additions.Contains(OrderAdditions.PostgreSQL)) additionsText += ", " + GetAdditionName(OrderAdditions.PostgreSQL);
+        if (additions.Contains(OrderAdditions.Caching)) additionsText += ", " + GetAdditionName(OrderAdditions.Caching);
+        additionsText = additionsText.Substring(2);
+
         var order = new Models.Order
         {
             Email = model.Email,
@@ -267,11 +280,30 @@
             Date = DateTime.Today.ToLongDateString(),
             Type = selectedType,
             Status = OrderStatus.RequestAccepted,
-            User = user
+            User = user,
+            Additions = additionsText
         };
         DbContext.Orders.Add(order);
         DbContext.SaveChanges();
         NavigationManager.NavigateTo($"/account", true, true);
+    }
+
+    private string GetAdditionName(OrderAdditions addition)
+    {
+        switch (addition)
+        {
+            case OrderAdditions.AccountSystem: return "Система учетных записей";
+            case OrderAdditions.OnlineConsultantModule: return "Модуль онлайн-консультанта";
+            case OrderAdditions.VoteSystem: return "Система голосования";
+            case OrderAdditions.Search: return "Поиск информации по сайту";
+            case OrderAdditions.FeedbackModule: return "Модуль обратной связи";
+            case OrderAdditions.OrderSystem: return "Система заказов";
+            case OrderAdditions.Docker: return "Настройка для Docker";
+            case OrderAdditions.Encryption: return "Шифрование данных";
+            case OrderAdditions.PostgreSQL: return "Интеграция с базой данных PostgreSQL";
+            case OrderAdditions.Caching: return "Кеширование данных с помощью Redis";
+            default: return "";
+        }
     }
 
     private void ChangeAddition(OrderAdditions addition)

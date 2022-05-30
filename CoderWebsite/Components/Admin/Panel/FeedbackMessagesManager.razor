@@ -37,7 +37,7 @@
     private void SendMail(string message)
     {
         string filtered = message.Replace("@", "%40");
-        string link = "mailto:{filtered}";
+        string link = $"mailto:{filtered}";
         NavigationManager.NavigateTo(link, true, true);
     }
 }

@@ -7,6 +7,11 @@
         VoteSystem,
         Search,
         FeedbackModule,
-        OrderSystem
+        OrderSystem,
+
+        Docker,
+        Encryption,
+        PostgreSQL,
+        Caching
     }
 }

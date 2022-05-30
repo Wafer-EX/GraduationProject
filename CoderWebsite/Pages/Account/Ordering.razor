@@ -71,7 +71,7 @@
                                     <td class="ordering-table-column-title">Цена</td>
                                     <td class="ordering-table-column-title ordering-table-column-add">Добавление</td>
                                 </tr>
-                                <tr>
+                                <tr style="@(hideForMicroservice())">
                                     <td class="ordering-table-column-text">Система учетных записей</td>
                                     <td class="ordering-table-column-text">3200 руб.</td>
                                     <td class="ordering-table-column-text ordering-table-column-add">
@@ -81,7 +81,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr style="@(hideForMicroservice())">
                                     <td class="ordering-table-column-text">Модуль онлайн-консультанта</td>
                                     <td class="ordering-table-column-text">2000 руб.</td>
                                     <td class="ordering-table-column-text ordering-table-column-add">
@@ -91,7 +91,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr style="@(hideForMicroservice())">
                                     <td class="ordering-table-column-text">Система голосования</td>
                                     <td class="ordering-table-column-text">1000 руб.</td>
                                     <td class="ordering-table-column-text ordering-table-column-add">
@@ -101,7 +101,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr style="@(hideForMicroservice())">
                                     <td class="ordering-table-column-text">Поиск информации по сайту</td>
                                     <td class="ordering-table-column-text">900 руб.</td>
                                     <td class="ordering-table-column-text ordering-table-column-add">
@@ -111,7 +111,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr style="@(hideForMicroservice())">
                                     <td class="ordering-table-column-text">Модуль обратной связи</td>
                                     <td class="ordering-table-column-text">700 руб.</td>
                                     <td class="ordering-table-column-text ordering-table-column-add">
@@ -121,13 +121,57 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr style="@(hideForMicroservice())">
                                     <td class="ordering-table-column-text">Система заказов</td>
                                     <td class="ordering-table-column-text">1500 руб.</td>
                                     <td class="ordering-table-column-text ordering-table-column-add">
                                         <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.OrderSystem))"
                                             @onclick="() => ChangeAddition(OrderAdditions.OrderSystem)">
                                             @(AdditionGetText(OrderAdditions.OrderSystem))
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr style="@(hideForSite())">
+                                    <td class="ordering-table-column-text">Настройка для Docker</td>
+                                    <td class="ordering-table-column-text">500 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.Docker))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.Docker)">
+                                            @(AdditionGetText(OrderAdditions.Docker))
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr style="@(hideForSite())">
+                                    <td class="ordering-table-column-text">Шифрование данных</td>
+                                    <td class="ordering-table-column-text">3000 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.Encryption))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.Encryption)">
+                                            @(AdditionGetText(OrderAdditions.Encryption))
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr style="@(hideForSite())">
+                                    <td class="ordering-table-column-text">Интеграция с базой данных PostgreSQL</td>
+                                    <td class="ordering-table-column-text">1000 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.PostgreSQL))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.PostgreSQL)">
+                                            @(AdditionGetText(OrderAdditions.PostgreSQL))
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <tr style="@(hideForSite())">
+                                    <td class="ordering-table-column-text">Кеширование данных с помощью Redis</td>
+                                    <td class="ordering-table-column-text">2000 руб.</td>
+                                    <td class="ordering-table-column-text ordering-table-column-add">
+                                        <a class="ordering-table-add-button @(AdditionGetStyle(OrderAdditions.Caching))"
+                                            @onclick="() => ChangeAddition(OrderAdditions.Caching)">
+                                            @(AdditionGetText(OrderAdditions.Caching))
                                         </a>
                                     </td>
                                 </tr>
@@ -209,6 +253,7 @@
     private void ChangeSelection(OrderAppType type)
     {
         selectedType = type;
+        additions.Clear();
         StateHasChanged();
     }
 
@@ -276,5 +321,19 @@
         if (additions.Contains(OrderAdditions.OrderSystem)) price += 1500;
 
         return price;
+    }
+
+    private string hideForMicroservice()
+    {
+        if (selectedType == OrderAppType.Microservice_gRPC || selectedType == OrderAppType.Microservice_ZeroC_Ice)
+            return "display: none;";
+        else return "";
+    }
+
+        private string hideForSite()
+    {
+        if (selectedType == OrderAppType.Website_PWA || selectedType == OrderAppType.Website_SPA)
+            return "display: none;";
+        else return "";
     }
 }

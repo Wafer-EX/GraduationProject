@@ -46,6 +46,13 @@
     private void Send()
     {
         isSended = true;
+        var feedbackMessageModel = new FeedbackMessage
+        {
+            Email = model.Email,
+            Message = model.Message
+        };
+        DbContext.FeedbackMessages.Add(feedbackMessageModel);
+        DbContext.SaveChanges();
         StateHasChanged();
     }
 }

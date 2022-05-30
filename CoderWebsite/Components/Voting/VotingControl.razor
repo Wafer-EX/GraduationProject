@@ -54,19 +54,30 @@
             votingData = new Dictionary<VoringVariants, int>();
             for (int i = 0; i < 5; i++)
             {
-                votingData.Add((VoringVariants) i, 50);
+                votingData.Add((VoringVariants) i, 0);
             }
         }
     }
 
     private int GetPercent(VoringVariants variant)
     {
-        return votingData[variant];
+        return (int) CalcPercent(variant);
     }
 
     private void Vote()
     {
+        votingData[model.Value] += 1;
         voted = true;
+    }
+
+    private double CalcPercent(VoringVariants variant)
+    {
+        double sum = 0;
+        foreach (double value in votingData.Values)
+            sum += value;
+
+        double percent = votingData[variant] / sum * 100;
+        return percent;
     }
 
     private class VotingModel

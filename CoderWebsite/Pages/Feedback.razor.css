@@ -1,0 +1,89 @@
+﻿.feedback-container {
+    max-width: 1024px;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feedback-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-title {
+    color: white;
+    font-size: 22px;
+    font-family: Micra-Bold;
+}
+
+.feedback-form-input-title {
+    font-size: 16px;
+    color: white;
+    font-family: NeueMachina-Medium;
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+::deep .feedback-form-input {
+    height: 32px;
+    font-size: 14px;
+    color: white;
+    font-family: NeueMachina-Medium;
+    background-color: #262626;
+    border: 2px solid #bc75ff;
+    border-radius: 6px;
+    transition: .3s;
+    max-width: 360px;
+}
+
+    ::deep .feedback-form-input:hover {
+        border-color: white;
+        transition: .3s;
+    }
+
+::deep .feedback-form-inputtextarea {
+    padding: 8px;
+    color: white;
+    font-size: 14px;
+    font-family: NeueMachina-Medium;
+    background-color: #262626;
+    border: 2px solid #bc75ff;
+    border-radius: 6px;
+    resize: vertical;
+    min-height: 240px;
+}
+
+    ::deep .feedback-form-inputtextarea:hover {
+        border-color: white;
+        transition: .3s;
+    }
+
+.feedback-form-button {
+    width: 320px;
+    height: 64px;
+    background: linear-gradient(270deg, #7575ff, #bc75ff);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: NeueMachina-Medium;
+    transition: .3s;
+    color: black;
+}
+
+    .feedback-form-button:hover {
+        background: linear-gradient(270deg, #bc75ff, #7575ff);
+        transition: .3s;
+        cursor: pointer;
+    }
+
+.feedback-form-button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.feedback-validation-errors {
+    margin-top: 20px;
+}

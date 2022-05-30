@@ -1,0 +1,40 @@
+﻿@page "/feedback"
+
+@using CoderWebsite.Components
+@using CoderWebsite.Models
+@using CoderWebsite.Models.Pages
+
+@inject ApplicationContext DbContext
+
+<PageBlock>
+    <div class="feedback-container">
+        <div class="feedback-title">Обратная связь</div>
+        <EditForm Model="@model" OnValidSubmit=Send Context="feedbackContext">
+            <div class="feedback-form-container">
+                <div class="feedback-validation-errors">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                </div>
+
+                <span class="feedback-form-input-title">Электронная почта</span>
+                <InputText @bind-Value="model.Email" class="feedback-form-input" />
+
+                <span class="feedback-form-input-title">Сообщение</span>
+                <InputTextArea class="feedback-form-inputtextarea" @bind-Value="model.Message" />
+
+                <div class="feedback-form-button-container">
+                    <button type="submit" class="feedback-form-button">Отправить сообщение</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</PageBlock>
+
+@code {
+    private FeedbackModel model = new FeedbackModel();
+
+    private void Send()
+    {
+        
+    }
+}

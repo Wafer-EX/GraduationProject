@@ -1,0 +1,33 @@
+﻿.scale-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.scale-name {
+    color: white;
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.scale-line {
+    width: 100%;
+    height: 20px;
+    background-color: #323232;
+}
+
+.scale-line-filled {
+    height: 100%;
+    background-color: #bc75ff;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.scale-percent-value {
+    position: absolute;
+    color: white;
+    margin-right: 12px;
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+}

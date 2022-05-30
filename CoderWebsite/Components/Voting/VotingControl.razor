@@ -1,0 +1,69 @@
+﻿<div>
+    @if (voted)
+    {
+        <PercentageScale Name="wkfeiewfiw" Percent="GetPercent(VoringVariants.Variant1)" />
+        <PercentageScale Name="eryerttyes" Percent="GetPercent(VoringVariants.Variant2)" />
+        <PercentageScale Name="rhehehrehh" Percent="GetPercent(VoringVariants.Variant3)" />
+        <PercentageScale Name="fhd57hdh5h" Percent="GetPercent(VoringVariants.Variant4)" />
+        <PercentageScale Name="32352f3626" Percent="GetPercent(VoringVariants.Variant5)" />
+    }
+    else
+    {
+
+        <EditForm Model="model">
+            <InputRadioGroup @bind-Value="@model.Value">
+                <div>
+                    <span>Вариант 1</span>
+                    <InputRadio Value="VoringVariants.Variant1" />
+                </div>
+                <div>
+                    <span>Вариант 2</span>
+                    <InputRadio Value="VoringVariants.Variant2" />
+                </div>
+                <div>
+                    <span>Вариант 3</span>
+                    <InputRadio Value="VoringVariants.Variant3" />
+                </div>
+                <div>
+                    <span>Вариант 4</span>
+                    <InputRadio Value="VoringVariants.Variant4" />
+                </div>
+                <div>
+                    <span>Вариант 5</span>
+                    <InputRadio Value="VoringVariants.Variant5" />
+                </div>
+            </InputRadioGroup>
+            <button type="submit">Проголосовать</button>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private static Dictionary<VoringVariants, int> votingData;
+
+    private bool voted = false;
+
+    private VotingModel model = new VotingModel();
+
+    protected override void OnInitialized()
+    {
+        if (votingData == null)
+        {
+            votingData = new Dictionary<VoringVariants, int>();
+            for (int i = 0; i < 5; i++)
+            {
+                votingData.Add((VoringVariants) i, 0);
+            }
+        }
+    }
+
+    private int GetPercent(VoringVariants variant)
+    {
+        return votingData[variant];
+    }
+
+    private class VotingModel
+    {
+        public VoringVariants Value { get; set; }
+    }
+}

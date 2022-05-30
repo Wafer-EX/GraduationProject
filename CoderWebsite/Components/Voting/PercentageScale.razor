@@ -1,0 +1,25 @@
+﻿<div class="scale-container">
+    <div class="scale-name">@Name</div>
+    <div class="scale-line">
+        <div class="scale-line-filled" style="width: @(Percent)%;">
+            <span class="scale-percent-value">@(Percent)%</span>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int percent;
+
+    [Parameter] public string Name { get; set; }
+
+    [Parameter] public int Percent
+    {
+        get => percent;
+        set
+        {
+            if (value > 100) percent = 100;
+            else if (value < 0) percent = 0;
+            else percent = value;
+        }
+    }
+}

@@ -1,0 +1,89 @@
+﻿.slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-content-cont {
+    width: 640px;
+    height: 350px;
+    background: black;
+    overflow: hidden;
+}
+
+.slider-button {
+    width: 50px;
+    height: 350px;
+    background-color: #0e0e0e;
+    color: white;
+    font-size: 24px;
+    font-family: NeueMachina-Medium;
+    border: none;
+    transition: .3s;
+}
+
+    .slider-button:hover {
+        background-color: #bc75ff;
+        color: black;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+.slider-left-button {
+    border-radius: 16px 0 0 16px;
+}
+
+.slider-right-button {
+    border-radius: 0 16px 16px 0;
+}
+
+.slider-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    animation-name: showimage;
+    animation-duration: .6s;
+}
+
+.slider-content {
+    position: absolute;
+    padding: 24px;
+    width: calc(640px - 48px);
+    backdrop-filter: blur(32px);
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 222px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 15;
+}
+
+.slider-title {
+    font-size: 24px;
+    font-family: NeueMachina-Medium;
+    margin-left: 80px;
+}
+
+.slider-text {
+    font-size: 16px;
+    font-family: NeueMachina-Medium;
+    margin-left: 80px;
+}
+
+.slider-icon {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+}
+
+@keyframes showimage {
+    from {
+        transform: scale(1.2);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}

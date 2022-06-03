@@ -7,6 +7,12 @@
 @inject ApplicationContext DbContext
 
 <PageTitle>@(news != null ? news.Title : "Новость не найдена") | Кодер</PageTitle>
+@if (news != null)
+{
+    <HeadContent>
+        <meta name="description" content="@news.Text" />
+    </HeadContent>   
+}
 
 <PageBlock>
     @if (news != null)

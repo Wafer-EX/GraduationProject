@@ -2,8 +2,14 @@
 
 @using CoderWebsite.Components
 @using CoderWebsite.Components.BlockContent
+@using CoderWebsite.Models
 
-<PageTitle>О нас | Кодер</PageTitle>
+@inject ApplicationContext DbContext
+
+<PageTitle>@(string.IsNullOrEmpty(metaTitle) ? "О нас | Кодер" : $"{metaTitle} | Кодер")</PageTitle>
+<HeadContent>
+    @if (!string.IsNullOrEmpty(metaDesc)) { <meta name="description" content="@metaDesc"> }
+</HeadContent>
 
 <PageBlock>
     <CallText Title="О нас">
@@ -20,3 +26,19 @@
         чтобы создавать продукты быстрее, лучше и легче.
     </CallText>
 </PageBlock>
+
+@code {
+    private string metaTitle;
+
+    private string metaDesc;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var elements = DbContext.MetaPageDescriptions.Where(meta => meta.PageName == "AboutUsPage");
+        if (elements.Count() > 0)
+        {
+            metaTitle = elements.First().Title;
+            metaDesc = elements.First().Description;
+        }
+    }
+}

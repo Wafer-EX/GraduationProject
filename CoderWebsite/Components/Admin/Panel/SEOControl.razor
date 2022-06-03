@@ -8,42 +8,66 @@
         <EditForm Model="@model" OnSubmit="UpdateData">
             <div class="seo-control-list-element">
                 <span class="seo-control-list-element-title">Мета-теги страницы "Главная страница"</span>
-                <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.MainPageMeta" />
+                <span class="seo-control-list-element-input-cont">
+                    <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.MainPageTitle" />
+                    <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.MainPageDesc" />
+                </span>
             </div>
 
             <div class="seo-control-list-element">
                 <span class="seo-control-list-element-title">Мета-теги страницы "Наши продукты"</span>
-                <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.OurProductsMeta" />
+                <span class="seo-control-list-element-input-cont">
+                    <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.OurProductsTitle" />
+                    <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.OurProductsDesc" />
+                </span>
             </div>
 
             <div class="seo-control-list-element">
                 <span class="seo-control-list-element-title">Мета-теги страницы "Новости"</span>
-                <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.NewsMeta" />
+                <span class="seo-control-list-element-input-cont">
+                    <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.NewsTitle" />
+                    <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.NewsDesc" />
+                </span>
             </div>
 
             <div class="seo-control-list-element">
                 <span class="seo-control-list-element-title">Мета-теги страницы "Микросервисы gRPC и ZeroC Ice"</span>
-                <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.MicroservicesMeta" />
+                <span class="seo-control-list-element-input-cont">
+                    <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.MicroservicesTitle" />
+                    <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.MicroservicesDesc" />
+                </span>
             </div>
 
             <div class="seo-control-list-element">
                 <span class="seo-control-list-element-title">Мета-теги страницы "PWA-приложения"</span>
-                <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.PWAAppsMeta" />
+                <span class="seo-control-list-element-input-cont">
+                    <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.PWAAppsTitle" />
+                    <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.PWAAppsDesc" />
+                </span>
             </div>
 
             <div class="seo-control-list-element">
                 <span class="seo-control-list-element-title">Мета-теги страницы "SPA-приложения"</span>
-                <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.SPAAppsMeta" />
+                <span class="seo-control-list-element-input-cont">
+                    <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.SPAAppsTitle" />
+                    <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.SPAAppsDesc" />
+                </span>
             </div>
 
             <div class="seo-control-list-element">
                 <span class="seo-control-list-element-title">Мета-теги страницы "О нас"</span>
-                <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.AboutUsMeta" />
+                <span class="seo-control-list-element-input-cont">
+                    <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.AboutUsTitle" />
+                    <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.AboutUsDesc" />
+                </span>
             </div>
 
             <div class="seo-control-list-element">
                 <span class="seo-control-list-element-title">Мета-теги страницы "Контактная информация"</span>
-                <InputTextArea class="seo-control-list-element-textarea" placeholder="Введите необходимые теги здесь." @bind-Value="model.ContactDataMeta" />
+                <span class="seo-control-list-element-input-cont">
+                    <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.ContactDataTitle" />
+                    <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.ContactDataDesc" />
+                </span>
             </div>
 
             @if (saved)
@@ -68,68 +92,97 @@
 
     protected override void OnInitialized()
     {
-        model.MainPageMeta = GetField("MainPage");
-        model.OurProductsMeta = GetField("OurProductsPage");
-        model.NewsMeta = GetField("NewsPage");
-        model.MicroservicesMeta = GetField("MicroservicesPage");
-        model.PWAAppsMeta = GetField("PWAAppsPage");
-        model.SPAAppsMeta = GetField("SPAAppsPage");
-        model.AboutUsMeta = GetField("AboutUsPage");
-        model.ContactDataMeta = GetField("ContactDataPage");
+        model.MainPageTitle = GetTitle("MainPage");
+        model.OurProductsTitle = GetTitle("OurProductsPage");
+        model.NewsTitle = GetTitle("NewsPage");
+        model.MicroservicesTitle = GetTitle("MicroservicesPage");
+        model.PWAAppsTitle = GetTitle("PWAAppsPage");
+        model.SPAAppsTitle = GetTitle("SPAAppsPage");
+        model.AboutUsTitle = GetTitle("AboutUsPage");
+        model.ContactDataTitle = GetTitle("ContactDataPage");
+
+        model.MainPageDesc = GetDesc("MainPage");
+        model.OurProductsDesc = GetDesc("OurProductsPage");
+        model.NewsDesc = GetDesc("NewsPage");
+        model.MicroservicesDesc = GetDesc("MicroservicesPage");
+        model.PWAAppsDesc = GetDesc("PWAAppsPage");
+        model.SPAAppsDesc = GetDesc("SPAAppsPage");
+        model.AboutUsDesc = GetDesc("AboutUsPage");
+        model.ContactDataDesc = GetDesc("ContactDataPage");
     }
 
     private void UpdateData()
     {
-        UpdateField("MainPage", model.MainPageMeta);
-        UpdateField("OurProductsPage", model.OurProductsMeta);
-        UpdateField("NewsPage", model.NewsMeta);
-        UpdateField("MicroservicesPage", model.MicroservicesMeta);
-        UpdateField("PWAAppsPage", model.PWAAppsMeta);
-        UpdateField("SPAAppsPage", model.SPAAppsMeta);
-        UpdateField("AboutUsPage", model.AboutUsMeta);
-        UpdateField("ContactDataPage", model.ContactDataMeta);
+        UpdateField("MainPage", model.MainPageTitle, model.MainPageDesc);
+        UpdateField("OurProductsPage", model.OurProductsTitle, model.OurProductsDesc);
+        UpdateField("NewsPage", model.NewsTitle, model.NewsDesc);
+        UpdateField("MicroservicesPage", model.MicroservicesTitle, model.MicroservicesDesc);
+        UpdateField("PWAAppsPage", model.PWAAppsTitle, model.PWAAppsDesc);
+        UpdateField("SPAAppsPage", model.SPAAppsTitle, model.SPAAppsDesc);
+        UpdateField("AboutUsPage", model.AboutUsTitle, model.AboutUsDesc);
+        UpdateField("ContactDataPage", model.ContactDataTitle, model.ContactDataDesc);
         saved = true;
     }
 
-    private void UpdateField(string pageName, string meta)
+    private void UpdateField(string pageName, string title, string desc)
     {
         var result = DbContext.MetaPageDescriptions.Where(data => data.PageName == pageName);
         if (result.Count() > 0)
-            result.First().MetaTags = meta;
+        {
+            result.First().Title = title;
+            result.First().Description = desc;
+        }
         else DbContext.MetaPageDescriptions.Add(new MetaPageDescription
             {
                 PageName = pageName,
-                MetaTags = meta
+                Title = title,
+                Description = desc
             }
         );
         DbContext.SaveChanges();
         StateHasChanged();
     }
 
-    private string GetField(string pageName)
+    private string GetTitle(string pageName)
     {
         var result = DbContext.MetaPageDescriptions.Where(data => data.PageName == pageName);
         if (result.Count() > 0)
-            return result.First().MetaTags;
+            return result.First().Title;
+        else return "";
+    }
+
+    private string GetDesc(string pageName)
+    {
+        var result = DbContext.MetaPageDescriptions.Where(data => data.PageName == pageName);
+        if (result.Count() > 0)
+            return result.First().Description;
         else return "";
     }
 
     private class SEOControlModel
     {
-        public string MainPageMeta { get; set; }
+        public string MainPageTitle { get; set; }
+        public string MainPageDesc { get; set; }
         
-        public string OurProductsMeta { get; set; }
+        public string OurProductsTitle { get; set; }
+        public string OurProductsDesc { get; set; }
 
-        public string NewsMeta { get; set; }
+        public string NewsTitle { get; set; }
+        public string NewsDesc { get; set; }
 
-        public string MicroservicesMeta { get; set; }
+        public string MicroservicesTitle { get; set; }
+        public string MicroservicesDesc { get; set; }
 
-        public string PWAAppsMeta { get; set; }
+        public string PWAAppsTitle { get; set; }
+        public string PWAAppsDesc { get; set; }
 
-        public string SPAAppsMeta { get; set; }
+        public string SPAAppsTitle { get; set; }
+        public string SPAAppsDesc { get; set; }
 
-        public string AboutUsMeta { get; set; }
+        public string AboutUsTitle { get; set; }
+        public string AboutUsDesc { get; set; }
 
-        public string ContactDataMeta { get; set; }
+        public string ContactDataTitle { get; set; }
+        public string ContactDataDesc { get; set; }
     }
 }

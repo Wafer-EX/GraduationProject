@@ -6,6 +6,8 @@
 
         public string? PageName { get; set; }
 
-        public string? MetaTags { get; set; }
+        public string? Title { get; set; }
+
+        public string? Description { get; set; }
     }
 }

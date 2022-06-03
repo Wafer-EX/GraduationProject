@@ -2,8 +2,14 @@
 
 @using CoderWebsite.Components
 @using CoderWebsite.Components.BlockContent
+@using CoderWebsite.Models
 
-<PageTitle>Прогрессивное веб-приложение (PWA) | Кодер</PageTitle>
+@inject ApplicationContext DbContext
+
+<PageTitle>@(string.IsNullOrEmpty(metaTitle) ? "Прогрессивное веб-приложение (PWA) | Кодер" : $"{metaTitle} | Кодер")</PageTitle>
+<HeadContent>
+    @if (!string.IsNullOrEmpty(metaDesc)) { <meta name="description" content="@metaDesc"> }
+</HeadContent>
 
 <PageBlock>
     <CallText Title="Прогрессивное веб-приложение (PWA)" ButtonText="Заказать PWA-приложение" ButtonRedirect="/ordering">
@@ -48,3 +54,19 @@
         </ul>
     </CallText>
 </PageBlock>
+
+@code {
+    private string metaTitle;
+
+    private string metaDesc;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var elements = DbContext.MetaPageDescriptions.Where(meta => meta.PageName == "PWAAppsPage");
+        if (elements.Count() > 0)
+        {
+            metaTitle = elements.First().Title;
+            metaDesc = elements.First().Description;
+        }
+    }
+}

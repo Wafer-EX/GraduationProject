@@ -17,12 +17,23 @@
     margin-bottom: 24px;
     overflow: hidden;
     border-radius: 16px;
+    animation-name: slidein;
+    animation-duration: .75s;
+    animation-fill-mode: backwards;
 }
 
 .our-products-product-image {
+    position: relative;
     width: 100%;
     height: auto;
+    transition: .3s;
 }
+
+    .our-products-product-image:hover {
+        transform: scale(1.025);
+        filter: blur(4px);
+        transition: .3s;
+    }
 
 .our-products-product-text {
     position: absolute;
@@ -31,6 +42,7 @@
     background-color: rgba(0, 0, 0, .8);
     backdrop-filter: blur(32px);
     max-width: 520px;
+    z-index: 1;
 }
 
 .our-products-product-text-title {

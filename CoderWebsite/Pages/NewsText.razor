@@ -6,12 +6,19 @@
 
 @inject ApplicationContext DbContext
 
-<PageTitle>@(news != null ? news.Title : "Новость не найдена") | Кодер</PageTitle>
 @if (news != null)
 {
+    <PageTitle>
+        @(!string.IsNullOrEmpty(news.SEOTitle) ? $"{news.SEOTitle} | Кодер" : $"{news.Title} | Кодер")
+    </PageTitle>
     <HeadContent>
-        <meta name="description" content="@news.Text" />
-    </HeadContent>   
+        @if (!string.IsNullOrEmpty(news.SEODescription)) { <meta name="description" content="@news.SEODescription"> }
+        @if (!string.IsNullOrEmpty(news.SEOKeywords)) { <meta name="keywords" content="@news.SEOKeywords"> }
+    </HeadContent>
+}
+else
+{
+    <PageTitle>Новость не найдена | Кодер</PageTitle>
 }
 
 <PageBlock>

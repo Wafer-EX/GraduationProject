@@ -33,6 +33,16 @@
                             <span class="add-news-form-input-title">Текст новости</span>
                             <InputTextArea class="add-news-form-inputtextarea" @bind-Value="model.Text" />
 
+                            <div class="add-news-seo-title">Поисковая оптимизация (SEO)</div>
+                            <span class="add-news-form-input-title">Заголовок</span>
+                            <InputText @bind-Value="model.SEOTitle" class="add-news-form-input" />
+
+                            <span class="add-news-form-input-title">Описание</span>
+                            <InputTextArea @bind-Value="model.SEODescription" class="add-news-form-input add-news-form-seo-desc"></InputTextArea>
+
+                            <span class="add-news-form-input-title">Ключевые слова</span>
+                            <InputText @bind-Value="model.SEOKeywords" class="add-news-form-input" />
+
                             <div class="add-news-form-button-container">
                                 <button type="submit" class="add-news-form-button">Добавить новость</button>
                             </div>
@@ -65,7 +75,10 @@
         {
             Title = model.Title,
             Text = model.Text,
-            Date = $"{DateTime.Today.Day}.{DateTime.Today.Month}.{DateTime.Today.Year}"
+            Date = $"{DateTime.Today.Day}.{DateTime.Today.Month}.{DateTime.Today.Year}",
+            SEOTitle = model.SEOTitle,
+            SEODescription = model.SEODescription,
+            SEOKeywords = model.SEOKeywords
         };
         DbContext.News.Add(newsModel);
         DbContext.SaveChanges();

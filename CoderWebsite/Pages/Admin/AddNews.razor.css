@@ -87,3 +87,15 @@
 .add-news-validation-errors {
     margin-top: 20px;
 }
+
+.add-news-seo-title {
+    font-size: 16px;
+    color: white;
+    font-family: Micra-Bold;
+    margin-top: 96px;
+}
+
+::deep .add-news-form-seo-desc {
+    min-height: 128px;
+    resize: vertical;
+}

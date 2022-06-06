@@ -10,6 +10,7 @@
                 <span class="seo-control-list-element-title">Мета-теги страницы "Главная страница"</span>
                 <span class="seo-control-list-element-input-cont">
                     <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.MainPageTitle" />
+                    <InputText class="seo-control-list-element-title-keywords" placeholder="Ключевые слова" @bind-Value="model.MainPageKeywords" />
                     <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.MainPageDesc" />
                 </span>
             </div>
@@ -18,6 +19,7 @@
                 <span class="seo-control-list-element-title">Мета-теги страницы "Наши продукты"</span>
                 <span class="seo-control-list-element-input-cont">
                     <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.OurProductsTitle" />
+                    <InputText class="seo-control-list-element-title-keywords" placeholder="Ключевые слова" @bind-Value="model.OurProductsKeywords" />
                     <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.OurProductsDesc" />
                 </span>
             </div>
@@ -26,6 +28,7 @@
                 <span class="seo-control-list-element-title">Мета-теги страницы "Новости"</span>
                 <span class="seo-control-list-element-input-cont">
                     <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.NewsTitle" />
+                    <InputText class="seo-control-list-element-title-keywords" placeholder="Ключевые слова" @bind-Value="model.NewsKeywords" />
                     <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.NewsDesc" />
                 </span>
             </div>
@@ -34,6 +37,7 @@
                 <span class="seo-control-list-element-title">Мета-теги страницы "Микросервисы gRPC и ZeroC Ice"</span>
                 <span class="seo-control-list-element-input-cont">
                     <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.MicroservicesTitle" />
+                    <InputText class="seo-control-list-element-title-keywords" placeholder="Ключевые слова" @bind-Value="model.MicroservicesKeywords" />
                     <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.MicroservicesDesc" />
                 </span>
             </div>
@@ -42,6 +46,7 @@
                 <span class="seo-control-list-element-title">Мета-теги страницы "PWA-приложения"</span>
                 <span class="seo-control-list-element-input-cont">
                     <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.PWAAppsTitle" />
+                    <InputText class="seo-control-list-element-title-keywords" placeholder="Ключевые слова" @bind-Value="model.PWAAppsKeywords" />
                     <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.PWAAppsDesc" />
                 </span>
             </div>
@@ -50,6 +55,7 @@
                 <span class="seo-control-list-element-title">Мета-теги страницы "SPA-приложения"</span>
                 <span class="seo-control-list-element-input-cont">
                     <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.SPAAppsTitle" />
+                    <InputText class="seo-control-list-element-title-keywords" placeholder="Ключевые слова" @bind-Value="model.SPAAppsKeywords" />
                     <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.SPAAppsDesc" />
                 </span>
             </div>
@@ -58,6 +64,7 @@
                 <span class="seo-control-list-element-title">Мета-теги страницы "О нас"</span>
                 <span class="seo-control-list-element-input-cont">
                     <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.AboutUsTitle" />
+                    <InputText class="seo-control-list-element-title-keywords" placeholder="Ключевые слова" @bind-Value="model.AboutUsKeywords" />
                     <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.AboutUsDesc" />
                 </span>
             </div>
@@ -66,6 +73,7 @@
                 <span class="seo-control-list-element-title">Мета-теги страницы "Контактная информация"</span>
                 <span class="seo-control-list-element-input-cont">
                     <InputText class="seo-control-list-element-title-input" placeholder="Заголовок" @bind-Value="model.ContactDataTitle" />
+                    <InputText class="seo-control-list-element-title-keywords" placeholder="Ключевые слова" @bind-Value="model.ContactDataKeywords" />
                     <InputTextArea class="seo-control-list-element-textarea" placeholder="Описание" @bind-Value="model.ContactDataDesc" />
                 </span>
             </div>
@@ -101,6 +109,15 @@
         model.AboutUsTitle = GetTitle("AboutUsPage");
         model.ContactDataTitle = GetTitle("ContactDataPage");
 
+        model.MainPageKeywords = GetKeywords("MainPage");
+        model.OurProductsKeywords = GetKeywords("OurProductsPage");
+        model.NewsKeywords = GetKeywords("NewsPage");
+        model.MicroservicesKeywords = GetKeywords("MicroservicesPage");
+        model.PWAAppsKeywords = GetKeywords("PWAAppsPage");
+        model.SPAAppsKeywords = GetKeywords("SPAAppsPage");
+        model.AboutUsKeywords = GetKeywords("AboutUsPage");
+        model.ContactDataKeywords = GetKeywords("ContactDataPage");
+
         model.MainPageDesc = GetDesc("MainPage");
         model.OurProductsDesc = GetDesc("OurProductsPage");
         model.NewsDesc = GetDesc("NewsPage");
@@ -113,29 +130,31 @@
 
     private void UpdateData()
     {
-        UpdateField("MainPage", model.MainPageTitle, model.MainPageDesc);
-        UpdateField("OurProductsPage", model.OurProductsTitle, model.OurProductsDesc);
-        UpdateField("NewsPage", model.NewsTitle, model.NewsDesc);
-        UpdateField("MicroservicesPage", model.MicroservicesTitle, model.MicroservicesDesc);
-        UpdateField("PWAAppsPage", model.PWAAppsTitle, model.PWAAppsDesc);
-        UpdateField("SPAAppsPage", model.SPAAppsTitle, model.SPAAppsDesc);
-        UpdateField("AboutUsPage", model.AboutUsTitle, model.AboutUsDesc);
-        UpdateField("ContactDataPage", model.ContactDataTitle, model.ContactDataDesc);
+        UpdateField("MainPage", model.MainPageTitle, model.MainPageKeywords, model.MainPageDesc);
+        UpdateField("OurProductsPage", model.OurProductsTitle, model.OurProductsKeywords, model.OurProductsDesc);
+        UpdateField("NewsPage", model.NewsTitle, model.NewsKeywords, model.NewsDesc);
+        UpdateField("MicroservicesPage", model.MicroservicesTitle, model.MicroservicesKeywords, model.MicroservicesDesc);
+        UpdateField("PWAAppsPage", model.PWAAppsTitle, model.PWAAppsKeywords, model.PWAAppsDesc);
+        UpdateField("SPAAppsPage", model.SPAAppsTitle, model.SPAAppsKeywords, model.SPAAppsDesc);
+        UpdateField("AboutUsPage", model.AboutUsTitle, model.AboutUsKeywords, model.AboutUsDesc);
+        UpdateField("ContactDataPage", model.ContactDataTitle, model.ContactDataKeywords, model.ContactDataDesc);
         saved = true;
     }
 
-    private void UpdateField(string pageName, string title, string desc)
+    private void UpdateField(string pageName, string title, string keywords, string desc)
     {
         var result = DbContext.MetaPageDescriptions.Where(data => data.PageName == pageName);
         if (result.Count() > 0)
         {
             result.First().Title = title;
+            result.First().Keywords = keywords;
             result.First().Description = desc;
         }
         else DbContext.MetaPageDescriptions.Add(new MetaPageDescription
             {
                 PageName = pageName,
                 Title = title,
+                Keywords = keywords,
                 Description = desc
             }
         );
@@ -151,6 +170,14 @@
         else return "";
     }
 
+    private string GetKeywords(string pageName)
+    {
+        var result = DbContext.MetaPageDescriptions.Where(data => data.PageName == pageName);
+        if (result.Count() > 0)
+            return result.First().Keywords;
+        else return "";
+    }
+
     private string GetDesc(string pageName)
     {
         var result = DbContext.MetaPageDescriptions.Where(data => data.PageName == pageName);
@@ -162,27 +189,35 @@
     private class SEOControlModel
     {
         public string MainPageTitle { get; set; }
+        public string MainPageKeywords { get; set; }
         public string MainPageDesc { get; set; }
         
         public string OurProductsTitle { get; set; }
+        public string OurProductsKeywords { get; set; }
         public string OurProductsDesc { get; set; }
 
         public string NewsTitle { get; set; }
+        public string NewsKeywords { get; set; }
         public string NewsDesc { get; set; }
 
         public string MicroservicesTitle { get; set; }
+        public string MicroservicesKeywords { get; set; }
         public string MicroservicesDesc { get; set; }
 
         public string PWAAppsTitle { get; set; }
+        public string PWAAppsKeywords { get; set; }
         public string PWAAppsDesc { get; set; }
 
         public string SPAAppsTitle { get; set; }
+        public string SPAAppsKeywords { get; set; }
         public string SPAAppsDesc { get; set; }
 
         public string AboutUsTitle { get; set; }
+        public string AboutUsKeywords { get; set; }
         public string AboutUsDesc { get; set; }
 
         public string ContactDataTitle { get; set; }
+        public string ContactDataKeywords { get; set; }
         public string ContactDataDesc { get; set; }
     }
 }

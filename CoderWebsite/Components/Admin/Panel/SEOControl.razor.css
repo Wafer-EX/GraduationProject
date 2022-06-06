@@ -94,6 +94,24 @@
         transition: .3s;
     }
 
+::deep .seo-control-list-element-title-keywords {
+    color: white;
+    background-color: #121212;
+    padding: 12px;
+    font-family: NeueMachina-Medium;
+    font-size: 16px;
+    border: none;
+    border-top: 2px solid #0e0e0e;
+    outline: none;
+    transition: .3s;
+}
+
+    ::deep .seo-control-list-element-title-keywords:focus {
+        padding: 10px;
+        border: 2px solid #7575ff;
+        transition: .3s;
+    }
+
 ::deep .seo-control-list-element-textarea {
     color: white;
     background-color: #121212;

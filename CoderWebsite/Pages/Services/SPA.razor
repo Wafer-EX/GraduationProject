@@ -9,6 +9,7 @@
 <PageTitle>@(string.IsNullOrEmpty(metaTitle) ? "Одностраничное приложение (SPA) | Кодер" : $"{metaTitle} | Кодер")</PageTitle>
 <HeadContent>
     @if (!string.IsNullOrEmpty(metaDesc)) { <meta name="description" content="@metaDesc"> }
+    @if (!string.IsNullOrEmpty(metaDesc)) { <meta name="keywords" content="@metaKeywords"> }
 </HeadContent>
 
 <PageBlock>
@@ -56,6 +57,8 @@
 
     private string? metaDesc;
 
+    private string? metaKeywords;
+
     protected override async Task OnInitializedAsync()
     {
         var elements = DbContext.MetaPageDescriptions.Where(meta => meta.PageName == "SPAAppsPage");
@@ -63,6 +66,7 @@
         {
             metaTitle = elements.First().Title;
             metaDesc = elements.First().Description;
+            metaKeywords = elements.First().Keywords;
         }
     }
 }

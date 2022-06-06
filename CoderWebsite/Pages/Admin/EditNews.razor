@@ -35,6 +35,16 @@
                                 <span class="edit-news-form-input-title">Текст новости</span>
                                 <InputTextArea class="edit-news-form-inputtextarea" @bind-Value="model.Text" />
 
+                                <div class="edit-news-seo-title">Поисковая оптимизация (SEO)</div>
+                                <span class="edit-news-form-input-title">Заголовок</span>
+                                <InputText @bind-Value="model.SEOTitle" class="edit-news-form-input" />
+
+                                <span class="edit-news-form-input-title">Описание</span>
+                                <InputTextArea @bind-Value="model.SEODescription" class="edit-news-form-input edit-news-form-seo-desc"></InputTextArea>
+
+                                <span class="edit-news-form-input-title">Ключевые слова</span>
+                                <InputText @bind-Value="model.SEOKeywords" class="edit-news-form-input" />
+
                                 <div class="edit-news-form-button-container">
                                     <button type="submit" class="edit-news-form-button">Изменить новость</button>
                                 </div>
@@ -75,6 +85,9 @@
             news = dbNews.First();
             model.Title = news.Title;
             model.Text = news.Text;
+            model.SEOTitle = news.SEOTitle;
+            model.SEODescription = news.SEODescription;
+            model.SEOKeywords = news.SEOKeywords;
         }
     }
 
@@ -82,6 +95,9 @@
     {
         news.Title = model.Title;
         news.Text = model.Text;
+        news.SEOTitle = model.SEOTitle;
+        news.SEODescription = model.SEODescription;
+        news.SEOKeywords = model.SEOKeywords;
         DbContext.SaveChanges();
         NavigationManager.NavigateTo($"/news/{Id}", true, true);
     }

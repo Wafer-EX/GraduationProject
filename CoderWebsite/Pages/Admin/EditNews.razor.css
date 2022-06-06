@@ -96,3 +96,15 @@
 .edit-news-validation-errors {
     margin-top: 20px;
 }
+
+.edit-news-seo-title {
+    font-size: 16px;
+    color: white;
+    font-family: Micra-Bold;
+    margin-top: 96px;
+}
+
+::deep .edit-news-form-seo-desc {
+    min-height: 128px;
+    resize: vertical;
+}
